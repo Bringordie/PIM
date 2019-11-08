@@ -49,6 +49,7 @@ nbdist/
 .nb-gradle/
 PIM/src/main/java/logic/db.properties
 PIM/src/main/java/persistence/DBConnection.java
+PIM/src/main/resources/db.properties
 
 ### Windows ###
 # Windows thumbnail cache files
