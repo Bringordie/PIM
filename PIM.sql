@@ -30,10 +30,10 @@ insert into minorCategories (minorCategoryName) values ("Øl");
 insert into minorCategories (minorCategoryName) values ("Sodavand");
 
 CREATE TABLE products (
-    producid INTEGER not null unique,
+    productid INTEGER not null unique,
     name VARCHAR(45) not null,
     nameDescription VARCHAR(45),
-    description VARCHAR(200),
+    description VARCHAR(2000),
     companyName VARCHAR(45),
     price DOUBLE,
     quantity INTEGER,
@@ -45,3 +45,4 @@ CREATE TABLE products (
     FOREIGN KEY (minorCategory) REFERENCES minorCategories(categoryid)
 );
 
+select * from products;
