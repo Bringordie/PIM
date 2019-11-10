@@ -7,21 +7,20 @@ import java.io.Serializable;
 import java.io.StringReader;
 import java.util.ArrayList;
 
-import logic.JsonHandler;
 
 public class Products {
 
-    private int ProductID;
-    private String ProductName;
-    private String ProductNameDescription;
-    private String ProductDescription;
-    private String companyName;
-    private double Price;
-    private int Quantity;
-    private String PictureName;
-    private boolean PublishedStatus;
-    private int MinorCategory;
-    private int MainCategory;
+    private final int ProductID;
+    private final String ProductName;
+    private final String ProductNameDescription;
+    private final String ProductDescription;
+    private final String CompanyName;
+    private final double Price;
+    private final int Quantity;
+    private final String PictureName;
+    private final boolean PublishedStatus;
+    private final int MinorCategory;
+    private final int MainCategory;
     private static ArrayList<Products> productTempHolder;
 
     public static void setProductsTempHolder(ArrayList<Products> products) {
@@ -33,13 +32,13 @@ public class Products {
     }
 
     public Products(int ProductID, String ProductName, String ProductNameDescription, 
-             String ProductDescription, String companyName, double Price, int Quantity, 
+             String ProductDescription, String CompanyName, double Price, int Quantity, 
              String PictureName, boolean PublishedStatus, int MinorCategory, int MainCategory) {
         this.ProductID = ProductID;
         this.ProductName = ProductName;
         this.ProductNameDescription = ProductNameDescription;
         this.ProductDescription = ProductDescription;
-        this.companyName = companyName;
+        this.CompanyName = CompanyName;
         this.Price = Price;
         this.Quantity = Quantity;
         this.PictureName = PictureName;
@@ -61,7 +60,7 @@ public class Products {
     }
 
     public String getCompanyName() {
-        return companyName;
+        return CompanyName;
     }
 
     public String getPictureName() {
