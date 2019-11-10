@@ -11,6 +11,12 @@ import static persistence.DBConnection.getConnection;
 
 public class DBFacade implements Facade {
 
+    
+    /**
+     * @author Bringordie - Frederik Braagaard
+     * @param products - Takes an ArrayList of products which is then added to DB.
+     * 
+     */
     @Override
     public void reqisterProductsJson(ArrayList<Products> products) throws SQLException, ClassNotFoundException {
 
@@ -25,7 +31,7 @@ public class DBFacade implements Facade {
                 statement.setString(2, product.getName());
                 statement.setString(3, product.getDescription());
                 statement.setString(4, product.getNameDescription());
-                statement.setString(5, product.getCompanyName());
+                    statement.setString(5, product.getCompanyName());
                 statement.setDouble(6, product.getPrice());
                 statement.setInt(7, product.getQty());
                 statement.setString(8, product.getPictureName());
@@ -40,19 +46,25 @@ public class DBFacade implements Facade {
 
     }
 
+    /**
+     * @author Bringordie - Frederik Braagaard
+     * @param dataHolder - takes a Vector and reads a file.
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     @Override
     public void saveToDatabaseExcel(Vector dataHolder) throws SQLException, ClassNotFoundException {
-        String ProductID ="";
-        String ProductName ="";
-        String ProductNameDescription ="";
-        String ProductDescription ="";
-        String CompanyName ="";
-        String Price ="";
-        String Quantity ="";
-        String PictureName ="";
-        String PublishedStatus ="";
-        String MinorCategory ="";
-        String MainCategory ="";
+        String ProductID;
+        String ProductName;
+        String ProductNameDescription;
+        String ProductDescription;
+        String CompanyName;
+        String Price;
+        String Quantity;
+        String PictureName;
+        String PublishedStatus;
+        String MinorCategory;
+        String MainCategory;
 
         for (Iterator iterator = dataHolder.iterator(); iterator.hasNext();) {
             List list = (List) iterator.next();
@@ -85,7 +97,6 @@ public class DBFacade implements Facade {
             
             Quantity = list.get(6).toString();
             PictureName = list.get(7).toString();
-            //Something wrong here.
             PublishedStatus = list.get(8).toString();
             MinorCategory = list.get(9).toString();
             MainCategory = list.get(10).toString();            
@@ -104,7 +115,7 @@ public class DBFacade implements Facade {
                 statement.setDouble(6, Double.parseDouble(Price));
                 statement.setString(7, Quantity);
                 statement.setString(8, PictureName);
-                statement.setBoolean(9, Boolean.parseBoolean(PublishedStatus));
+                statement.setString(9, PublishedStatus);
                 statement.setString(10, MinorCategory);
                 statement.setString(11, MainCategory);
                 statement.executeUpdate();

@@ -7,14 +7,18 @@ import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import persistence.DBFacade;
 
 
 public abstract class Command{
+    DBFacade db = new DBFacade();
 
     private static HashMap<String, Command> commands;
 
     private static void initCommands() {
         commands = new HashMap<>();
+        commands.put("json", new UploadJSONCommand());
+        commands.put("excel", new UploadEXCELCommand());
     }
 
     static Command from(HttpServletRequest request) {
