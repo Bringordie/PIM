@@ -66,7 +66,6 @@ public class DBFacade implements Facade {
         String MinorCategory;
         String MainCategory;
 
-        //for (Iterator iterator = dataHolder.iterator(); iterator.hasNext();) {
         Iterator iterator = dataHolder.iterator();
         if (iterator.hasNext()) {
             iterator.next();

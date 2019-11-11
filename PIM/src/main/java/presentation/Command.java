@@ -20,8 +20,11 @@ public abstract class Command{
 
     private static void initCommands() {
         commands = new HashMap<>();
-        commands.put("json", new UploadJSONCommand());
-        commands.put("excel", new UploadEXCELCommand());
+        //Not in use
+        //commands.put("json", new UploadJSONCommand());
+        //Not in use
+        //commands.put("excel", new UploadEXCELCommand());
+        commands.put("gotoUploadFile", new GoToUploadFileCommand());
         commands.put("addCategory", new GoToAddMainCategoryCommand());
         commands.put("addMainCategory", new AddMainCategoryCommand());
     }
