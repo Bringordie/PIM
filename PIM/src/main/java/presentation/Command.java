@@ -7,11 +7,14 @@ import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import persistence.CategoryMapper;
+import persistence.CategoryMapperInterface;
 import persistence.DBFacade;
 
 
 public abstract class Command{
     DBFacade db = new DBFacade();
+    CategoryMapper category = new CategoryMapper();
 
     private static HashMap<String, Command> commands;
 
@@ -19,6 +22,8 @@ public abstract class Command{
         commands = new HashMap<>();
         commands.put("json", new UploadJSONCommand());
         commands.put("excel", new UploadEXCELCommand());
+        commands.put("addCategory", new GoToAddMainCategoryCommand());
+        commands.put("addMainCategory", new AddMainCategoryCommand());
     }
 
     static Command from(HttpServletRequest request) {
