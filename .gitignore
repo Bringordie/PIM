@@ -74,3 +74,5 @@ $RECYCLE.BIN/
 
 # End of https://www.gitignore.io/api/macos,maven,windows,netbeans
 /PIM/nbproject/
+/PIM/target/
+/PIM/src/main/java/logic/TestMain.java

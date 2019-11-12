@@ -51,4 +51,24 @@ public class CategoryMapper implements CategoryMapperInterface {
 
     }
 
+    @Override
+    public void deleteMainCategory(int category) throws ClassNotFoundException, SQLException {
+        String sql1 = "DELETE FROM linkminormain WHERE mainid=" + category;
+        String sql2 = "DELETE FROM mainCategories WHERE categoryid=" + category;
+        
+        getConnection().prepareStatement(sql1).executeUpdate();
+        getConnection().prepareStatement(sql2).executeUpdate();
+        
+    }
+
+    @Override
+    public void deleteMinorCategory(int category) throws ClassNotFoundException, SQLException {
+        String sql1 = "DELETE FROM linkminormain WHERE minorid=" + category;
+        String sql2 = "DELETE FROM minorCategories WHERE categoryid=" + category;
+        
+        getConnection().prepareStatement(sql1).executeUpdate();
+        getConnection().prepareStatement(sql2).executeUpdate();
+        
+    }
+
 }

@@ -27,6 +27,9 @@ public abstract class Command{
         commands.put("gotoUploadFile", new GoToUploadFileCommand());
         commands.put("addCategory", new GoToAddMainCategoryCommand());
         commands.put("addMainCategory", new AddMainCategoryCommand());
+        commands.put("gotoDeleteMainCategory", new GoToDeleteCategoryCommand());
+        commands.put("deleteMainCategory", new DeleteMainCategoryCommand());
+        commands.put("deleteMinorCategory", new DeleteMinorCategoryCommand());
     }
 
     static Command from(HttpServletRequest request) {
