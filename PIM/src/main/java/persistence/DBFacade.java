@@ -1,11 +1,15 @@
 package persistence;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import logic.Products;
 import static persistence.DBConnection.getConnection;
 
@@ -134,4 +138,89 @@ public class DBFacade implements Facade {
         }
 
     }
+    
+    @Override
+    public void getUniqueMainValuesFromExcel(Vector dataHolder) throws SQLException, ClassNotFoundException{
+        String mainValues = "";
+        HashSet<String> hashmajor = new HashSet();
+        Iterator iterator = dataHolder.iterator();
+        if (iterator.hasNext()) {
+            iterator.next();
+        }
+
+        while (iterator.hasNext()) {
+            List list = (List) iterator.next();
+            iterator.hasNext();
+            mainValues = list.get(10).toString();
+            hashmajor.add(mainValues);
+    }
+        System.out.println(hashmajor);
+        }
+    
+    @Override
+    public void getUniqueMinorValuesFromExcel(Vector dataHolder) throws SQLException, ClassNotFoundException{
+        String minor = "";
+        HashSet<String> hashminor = new HashSet();
+        Iterator iterator = dataHolder.iterator();
+        if (iterator.hasNext()) {
+            iterator.next();
+        }
+
+        while (iterator.hasNext()) {
+            List list = (List) iterator.next();
+            iterator.hasNext();
+            minor = list.get(9).toString();
+            hashminor.add(minor);
+    }
+        System.out.println(hashminor);
+    }
+    
+    public void getUniqueMainValuesFromJson(ArrayList<Products> products) throws SQLException, ClassNotFoundException{
+        
+    }
+    
+    public void getUniqueMinorValuesFromJSON(ArrayList<Products> products) throws SQLException, ClassNotFoundException{
+        
+    }
+    
+    @Override
+    public HashSet<String> getMinorValuesFromDB() throws SQLException, ClassNotFoundException{
+        String minorName = "";
+        HashSet<String> hashminor = new HashSet();
+        String sql = "select minorCategoryName from minorCategories";
+        ResultSet result = getConnection().prepareStatement(sql).executeQuery();
+        
+        try {
+            while (result.next()) {
+                minorName = result.getString(1);
+                hashminor.add(minorName);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return hashminor;
+    }
+    
+    @Override
+    public HashSet<String> getMainValuesFromDB() throws SQLException, ClassNotFoundException{
+        String mainName = "";
+        HashSet<String> hashmain = new HashSet();
+        String sql = "select mainCategoryName from mainCategories";
+        ResultSet result = getConnection().prepareStatement(sql).executeQuery();
+        
+        try {
+            while (result.next()) {
+                mainName = result.getString(1);
+                hashmain.add(mainName);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return hashmain;
+    }
+
+        
+    
 }
