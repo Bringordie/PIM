@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Vector;
+import logic.Categories;
 import logic.Products;
 
 
@@ -21,8 +22,8 @@ public interface Facade {
     
     public void getUniqueMinorValuesFromJSON(ArrayList<Products> products) throws SQLException, ClassNotFoundException;
     
-    public HashSet<String> getMinorValuesFromDB() throws SQLException, ClassNotFoundException;
+    public HashSet<Categories> getMinorValuesFromDB() throws SQLException, ClassNotFoundException;
     
-    public HashSet<String> getMainValuesFromDB() throws SQLException, ClassNotFoundException;
+    public HashSet<Categories> getMainValuesFromDB() throws SQLException, ClassNotFoundException;
     
 }

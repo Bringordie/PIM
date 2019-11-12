@@ -19,8 +19,10 @@ public class Products {
     private final int Quantity;
     private final String PictureName;
     private final boolean PublishedStatus;
-    private final int MinorCategory;
-    private final int MainCategory;
+    //private final int MinorCategory;
+    private final String MinorCategory;
+    //private final int MainCategory;
+    private final String MainCategory;
     private static ArrayList<Products> productTempHolder;
 
     public static void setProductsTempHolder(ArrayList<Products> products) {
@@ -33,7 +35,7 @@ public class Products {
 
     public Products(int ProductID, String ProductName, String ProductNameDescription, 
              String ProductDescription, String CompanyName, double Price, int Quantity, 
-             String PictureName, boolean PublishedStatus, int MinorCategory, int MainCategory) {
+             String PictureName, boolean PublishedStatus, String MinorCategory, String MainCategory) {
         this.ProductID = ProductID;
         this.ProductName = ProductName;
         this.ProductNameDescription = ProductNameDescription;
@@ -71,11 +73,11 @@ public class Products {
         return PublishedStatus;
     }
 
-    public int getMinorCategory() {
+    public String getMinorCategory() {
         return MinorCategory;
     }
 
-    public int getMainCategory() {
+    public String getMainCategory() {
         return MainCategory;
     }
 

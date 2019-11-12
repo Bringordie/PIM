@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import logic.MainCategories;
 import persistence.DBConnection;
 import static persistence.DBConnection.getConnection;
 

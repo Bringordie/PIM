@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import logic.Categories;
 import logic.Products;
 import static persistence.DBConnection.getConnection;
 
@@ -40,8 +41,10 @@ public class DBFacade implements Facade {
                 statement.setInt(7, product.getQty());
                 statement.setString(8, product.getPictureName());
                 statement.setBoolean(9, product.getPublishedStatus());
-                statement.setInt(10, product.getMinorCategory());
-                statement.setInt(11, product.getMainCategory());
+                //TODO / REDO
+                //statement.setInt(10, product.getMinorCategory());
+                //statement.setInt(11, product.getMainCategory());
+                //
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -176,25 +179,36 @@ public class DBFacade implements Facade {
     }
     
     public void getUniqueMainValuesFromJson(ArrayList<Products> products) throws SQLException, ClassNotFoundException{
+        ArrayList<String> mainName = new ArrayList();
         
+        try {
+            for (Products product : products) {
+                mainName.add(product.getMainCategory());
+            } 
+        } catch (NullPointerException e) {
+            System.out.println(e);
     }
+        }
     
     public void getUniqueMinorValuesFromJSON(ArrayList<Products> products) throws SQLException, ClassNotFoundException{
         
     }
     
     @Override
-    public HashSet<String> getMinorValuesFromDB() throws SQLException, ClassNotFoundException{
+    public HashSet<Categories> getMinorValuesFromDB() throws SQLException, ClassNotFoundException{
         String minorName = "";
-        HashSet<String> hashminor = new HashSet();
-        String sql = "select minorCategoryName from minorCategories";
+        int minorID;
+        HashSet<Categories> hashminor = new HashSet();
+        String sql = "select * from minorCategories";
         ResultSet result = getConnection().prepareStatement(sql).executeQuery();
         
         try {
             while (result.next()) {
-                minorName = result.getString(1);
-                hashminor.add(minorName);
-                
+                minorID = result.getInt(1);
+                //hashminor.add(minorName);
+                minorName = result.getString(2);
+                Categories test = new Categories(minorID, minorName);
+                hashminor.add(test);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
@@ -203,16 +217,20 @@ public class DBFacade implements Facade {
     }
     
     @Override
-    public HashSet<String> getMainValuesFromDB() throws SQLException, ClassNotFoundException{
+    public HashSet<Categories> getMainValuesFromDB() throws SQLException, ClassNotFoundException{
         String mainName = "";
-        HashSet<String> hashmain = new HashSet();
-        String sql = "select mainCategoryName from mainCategories";
+        int mainID;
+        //HashSet<String> hashmain = new HashSet();
+        HashSet<Categories> hashmain = new HashSet();
+        String sql = "select * from mainCategories";
         ResultSet result = getConnection().prepareStatement(sql).executeQuery();
         
         try {
             while (result.next()) {
-                mainName = result.getString(1);
-                hashmain.add(mainName);
+                mainID = result.getInt(1);
+                mainName = result.getString(2);
+                Categories test = new Categories(mainID, mainName);
+                hashmain.add(test);
                 
             }
         } catch (SQLException ex) {

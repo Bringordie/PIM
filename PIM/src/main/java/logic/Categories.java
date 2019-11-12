@@ -1,15 +1,20 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package logic;
 
 /**
  *
  * @author Malthe
  */
-public class MainCategories {
+public class Categories {
     
     private int ID;
     private String name;
 
-    public MainCategories(int ID, String name) {
+    public Categories(int ID, String name) {
         this.ID = ID;
         this.name = name;
     }
@@ -29,6 +34,12 @@ public class MainCategories {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return getID() + getName();
+    }
+    
     
     
     
