@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.Categories;
 import logic.Products;
+//import logic.Productsint;
 import static persistence.DBConnection.getConnection;
 
 public class DBFacade implements Facade {
@@ -25,6 +26,7 @@ public class DBFacade implements Facade {
     @Override
     public void reqisterProductsJson(ArrayList<Products> products) throws SQLException, ClassNotFoundException {
 
+        //TO DO
         try {
             for (Products product : products) {
                 String sql = "INSERT INTO products(productid, name, nameDescription, "
@@ -41,7 +43,7 @@ public class DBFacade implements Facade {
                 statement.setInt(7, product.getQty());
                 statement.setString(8, product.getPictureName());
                 statement.setBoolean(9, product.getPublishedStatus());
-                //TODO / REDO
+                //TODO / FIX
                 //statement.setInt(10, product.getMinorCategory());
                 //statement.setInt(11, product.getMainCategory());
                 //
@@ -69,9 +71,12 @@ public class DBFacade implements Facade {
         String Price;
         String Quantity;
         String PictureName;
-        String PublishedStatus;
-        String MinorCategory;
-        String MainCategory;
+        Boolean PublishedStatus;
+        //String MinorCategory = "";
+        //String MainCategory = "";
+        int MinorCategory = 0;
+        int MainCategory = 0;
+        
 
         Iterator iterator = dataHolder.iterator();
         if (iterator.hasNext()) {
@@ -107,12 +112,34 @@ public class DBFacade implements Facade {
             } else {
                 Price = list.get(5).toString();
             }
-
+            
             Quantity = list.get(6).toString();
             PictureName = list.get(7).toString();
-            PublishedStatus = list.get(8).toString();
-            MinorCategory = list.get(9).toString();
-            MainCategory = list.get(10).toString();
+            
+            //Checking minorvalue
+            if (getMinorValuesFromDB(list.get(8).toString()) == 0) {
+            int minorIDCreated = createMinorIDInDB(list.get(8).toString());
+            MinorCategory = minorIDCreated;
+            } else if (getMinorValuesFromDB(list.get(8).toString()) > 0){
+            int reuseIDCreated = getMinorValuesFromDB(list.get(8).toString());
+            MinorCategory = reuseIDCreated;
+            }
+            
+            //Checking mainvalue
+            if (getMainValuesFromDB(list.get(9).toString()) == 0) {
+            int mainIDCreated = createMainIDInDB(list.get(9).toString());
+            MainCategory = mainIDCreated;
+            } else if (getMainValuesFromDB(list.get(9).toString()) > 0){
+            int reuseIDCreated = getMainValuesFromDB(list.get(9).toString());
+            MainCategory = reuseIDCreated;
+            }
+
+            //Requirements for publishing
+            if (ProductID == null || ProductName == null || ProductNameDescription == null || ProductDescription == null ) {
+                PublishedStatus = false;
+            } else {
+                PublishedStatus = true;
+            }
 
             try {
                 String sql = "INSERT INTO products(productid, name, nameDescription, "
@@ -128,9 +155,9 @@ public class DBFacade implements Facade {
                 statement.setDouble(6, Double.parseDouble(Price));
                 statement.setString(7, Quantity);
                 statement.setString(8, PictureName);
-                statement.setString(9, PublishedStatus);
-                statement.setString(10, MinorCategory);
-                statement.setString(11, MainCategory);
+                statement.setBoolean(9, PublishedStatus);
+                statement.setInt(10, MinorCategory);
+                statement.setInt(11, MainCategory);
                 statement.executeUpdate();
 
             } catch (ClassNotFoundException e) {
@@ -142,103 +169,107 @@ public class DBFacade implements Facade {
 
     }
     
-    @Override
-    public void getUniqueMainValuesFromExcel(Vector dataHolder) throws SQLException, ClassNotFoundException{
-        String mainValues = "";
-        HashSet<String> hashmajor = new HashSet();
-        Iterator iterator = dataHolder.iterator();
-        if (iterator.hasNext()) {
-            iterator.next();
-        }
-
-        while (iterator.hasNext()) {
-            List list = (List) iterator.next();
-            iterator.hasNext();
-            mainValues = list.get(10).toString();
-            hashmajor.add(mainValues);
-    }
-        System.out.println(hashmajor);
-        }
+   
     
     @Override
-    public void getUniqueMinorValuesFromExcel(Vector dataHolder) throws SQLException, ClassNotFoundException{
-        String minor = "";
-        HashSet<String> hashminor = new HashSet();
-        Iterator iterator = dataHolder.iterator();
-        if (iterator.hasNext()) {
-            iterator.next();
-        }
-
-        while (iterator.hasNext()) {
-            List list = (List) iterator.next();
-            iterator.hasNext();
-            minor = list.get(9).toString();
-            hashminor.add(minor);
-    }
-        System.out.println(hashminor);
-    }
-    
-    public void getUniqueMainValuesFromJson(ArrayList<Products> products) throws SQLException, ClassNotFoundException{
-        ArrayList<String> mainName = new ArrayList();
-        
-        try {
-            for (Products product : products) {
-                mainName.add(product.getMainCategory());
-            } 
-        } catch (NullPointerException e) {
-            System.out.println(e);
-    }
-        }
-    
-    public void getUniqueMinorValuesFromJSON(ArrayList<Products> products) throws SQLException, ClassNotFoundException{
-        
-    }
-    
-    @Override
-    public HashSet<Categories> getMinorValuesFromDB() throws SQLException, ClassNotFoundException{
+    public int getMinorValuesFromDB(String s) throws SQLException, ClassNotFoundException{
         String minorName = "";
         int minorID;
-        HashSet<Categories> hashminor = new HashSet();
-        String sql = "select * from minorCategories";
+        int resturnMinorID = 0;
+        String sql = "select * from minorCategories where minorCategoryName = '"+s+"'";
         ResultSet result = getConnection().prepareStatement(sql).executeQuery();
         
         try {
             while (result.next()) {
                 minorID = result.getInt(1);
-                //hashminor.add(minorName);
                 minorName = result.getString(2);
-                Categories test = new Categories(minorID, minorName);
-                hashminor.add(test);
+                if(minorName.contains(s)){
+                    resturnMinorID = minorID;
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return hashminor;
+        return resturnMinorID;
     }
     
     @Override
-    public HashSet<Categories> getMainValuesFromDB() throws SQLException, ClassNotFoundException{
+    public int getMainValuesFromDB(String s) throws SQLException, ClassNotFoundException{
         String mainName = "";
         int mainID;
-        //HashSet<String> hashmain = new HashSet();
-        HashSet<Categories> hashmain = new HashSet();
-        String sql = "select * from mainCategories";
+        int resturnMainID = 0;
+        String sql = "select * from maincategories where mainCategoryName ='"+s+"'";
         ResultSet result = getConnection().prepareStatement(sql).executeQuery();
         
         try {
             while (result.next()) {
                 mainID = result.getInt(1);
                 mainName = result.getString(2);
-                Categories test = new Categories(mainID, mainName);
-                hashmain.add(test);
-                
+                if(mainName.contains(s)){
+                    resturnMainID = mainID;
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return hashmain;
+        return resturnMainID;
     }
 
+
+
+    @Override
+    public int createMainIDInDB(String s) throws SQLException, ClassNotFoundException {
         
-    
-}
+        int newlycreatedID = 0;
+        String sqlGetID = "select COUNT(mainCategoryName) from mainCategories";
+        ResultSet result = getConnection().prepareStatement(sqlGetID).executeQuery();
+        
+        try {
+            while (result.next()) {
+                newlycreatedID = result.getInt(1);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        
+        
+        try {
+                String sql = "INSERT INTO mainCategories(mainCategoryName)"
+                        + "VALUES(?)";
+                PreparedStatement statement = getConnection().prepareStatement(sql);
+                statement.setString(1, s);
+                statement.executeUpdate();
+            } catch (ClassNotFoundException | SQLException e) {
+                e.printStackTrace();
+            }
+        return ++newlycreatedID;
+        }
+
+    @Override
+    public int createMinorIDInDB(String s) throws SQLException, ClassNotFoundException {
+        int newlycreatedID = 0;
+        String sqlGetID = "select COUNT(minorCategoryName) from minorCategories";
+        ResultSet result = getConnection().prepareStatement(sqlGetID).executeQuery();
+        
+        try {
+            while (result.next()) {
+                newlycreatedID = result.getInt(1);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        
+        
+        try {
+                String sql = "INSERT INTO minorCategories(minorCategoryName)"
+                        + "VALUES(?)";
+                PreparedStatement statement = getConnection().prepareStatement(sql);
+                statement.setString(1, s);
+                statement.executeUpdate();
+            } catch (ClassNotFoundException | SQLException e) {
+                e.printStackTrace();
+            }
+        return ++newlycreatedID;
+    }
+    }
+

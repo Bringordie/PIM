@@ -13,18 +13,9 @@
     </head>
     <body>
         <h3>File Upload:</h3>
-        Select a <b>JSON</b> file to upload: 
+        Select a <b>JSON</b> or <b>EXCEL</b> file to upload: 
         <br />
         <form action = "Upload" method = "POST" enctype = "multipart/form-data">
-          <input type="hidden" name="cmd" value="gotoUploadFile" />
-         <input type = "file" name = "file" size = "50" required/>
-         <br />
-         <input type = "submit" value = "Upload File to Website" />
-      </form>
-        <br />
-        Select a <b>EXCEL</b> file to upload: 
-        <br />
-      <form action = "Upload" method = "POST" enctype = "multipart/form-data">
          <input type = "file" name = "file" size = "50" required/>
          <br />
          <input type = "submit" value = "Upload File to Website" />

@@ -8,22 +8,19 @@ import logic.Categories;
 import logic.Products;
 
 
+
 public interface Facade { 
     
     public void reqisterProductsJson(ArrayList<Products> products) throws SQLException, ClassNotFoundException;
     
     public void saveToDatabaseExcel(Vector dataHolder) throws SQLException, ClassNotFoundException;
     
-    public void getUniqueMainValuesFromExcel(Vector dataHolder) throws SQLException, ClassNotFoundException;
+    public int getMinorValuesFromDB(String s) throws SQLException, ClassNotFoundException;
     
-    public void getUniqueMinorValuesFromExcel(Vector dataHolder) throws SQLException, ClassNotFoundException;
+    public int getMainValuesFromDB(String s) throws SQLException, ClassNotFoundException;
     
-    public void getUniqueMainValuesFromJson(ArrayList<Products> products) throws SQLException, ClassNotFoundException;
+    public int createMainIDInDB(String s) throws SQLException, ClassNotFoundException;
     
-    public void getUniqueMinorValuesFromJSON(ArrayList<Products> products) throws SQLException, ClassNotFoundException;
-    
-    public HashSet<Categories> getMinorValuesFromDB() throws SQLException, ClassNotFoundException;
-    
-    public HashSet<Categories> getMainValuesFromDB() throws SQLException, ClassNotFoundException;
+    public int createMinorIDInDB(String s) throws SQLException, ClassNotFoundException;
     
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentation;
 
 import java.io.File;
@@ -127,35 +122,35 @@ public class UploadFiles extends HttpServlet {
                     //TEST
                     InputStream sa = UploadFiles.class.getResourceAsStream("/filepath.properties");
 
-                // load the properties file
-                Properties properties = new Properties();
-                properties.load(sa);
-                // assign db parameters
-                String path = properties.getProperty("filepath"); 
-                
-                    //TEST
-                    //DB call depending on file type.
-                    //String fileNametest = "C:\\Users\\Frederik\\Desktop\\apache-tomcat-8.5.47\\webapps\\data\\" + fi.getName();
+                    // load the properties file
+                    Properties properties = new Properties();
+                    properties.load(sa);
+                    // assign db parameters
+                    String path = properties.getProperty("filepath");
+
                     String fileNametest = path + fi.getName();
-                    DBFacade db = new DBFacade();
-                    if (fileNametest.contains(".json")) {
-                        JsonHandler handler = new JsonHandler();
-
-                        ArrayList<Products> s = handler.makeJSonFileIntoArray(fileNametest);
-                        db.reqisterProductsJson(s);
-                    } else {
-                        Vector dataHolder = read(fileNametest);
-                        db.saveToDatabaseExcel(dataHolder);
-                    }
-                    //end of DB call.
-
-                    out.println("Uploaded Filename: " + fileName + " has been uploaded to the server" +"<br>");
+                    uploadToDB(fileNametest);
+                    
+                    
+                    out.println("Uploaded Filename: " + fileName + " has been uploaded to the server" + "<br>");
                 }
             }
             out.println("</body>");
             out.println("</html>");
         } catch (Exception ex) {
             System.out.println(ex);
+        }
+    }
+
+    public void uploadToDB(String fileNametest) throws ClassNotFoundException, FileNotFoundException, SQLException {
+        DBFacade db = new DBFacade();
+        if (fileNametest.contains(".json")) {
+            JsonHandler handler = new JsonHandler();
+            ArrayList<Products> s = handler.makeJSonFileIntoArray(fileNametest);
+            db.reqisterProductsJson(s);
+        } else {
+            Vector dataHolder = read(fileNametest);
+            db.saveToDatabaseExcel(dataHolder);
         }
     }
 

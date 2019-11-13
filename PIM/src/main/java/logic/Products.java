@@ -19,9 +19,7 @@ public class Products {
     private final int Quantity;
     private final String PictureName;
     private final boolean PublishedStatus;
-    //private final int MinorCategory;
     private final String MinorCategory;
-    //private final int MainCategory;
     private final String MainCategory;
     private static ArrayList<Products> productTempHolder;
 
