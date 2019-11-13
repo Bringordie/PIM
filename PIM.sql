@@ -1,4 +1,5 @@
 DROP TABLE if exists products;
+DROP TABLE if exists linkMinorMain;
 DROP TABLE if exists minorCategories;
 DROP TABLE if exists mainCategories;
 
@@ -29,6 +30,22 @@ insert into minorCategories (minorCategoryName) values ("Is");
 insert into minorCategories (minorCategoryName) values ("Øl");
 insert into minorCategories (minorCategoryName) values ("Sodavand");
 
+CREATE TABLE linkMinorMain (
+	mainid INT NOT NULL,
+    minorid INT NOT NULL UNIQUE,
+    FOREIGN KEY (mainid) REFERENCES mainCategories(categoryid),
+    FOREIGN KEY (minorid) REFERENCES minorCategories(categoryid)
+);
+
+insert into linkMinorMain (mainid, minorid) values (1, 1);
+insert into linkMinorMain (mainid, minorid) values (1, 2);
+insert into linkMinorMain (mainid, minorid) values (2, 3);
+insert into linkMinorMain (mainid, minorid) values (2, 4);
+insert into linkMinorMain (mainid, minorid) values (3, 5);
+insert into linkMinorMain (mainid, minorid) values (3, 6);
+insert into linkMinorMain (mainid, minorid) values (4, 7);
+insert into linkMinorMain (mainid, minorid) values (4, 8);
+
 CREATE TABLE products (
     productid INTEGER not null unique,
     name VARCHAR(45) not null,
@@ -44,5 +61,3 @@ CREATE TABLE products (
     FOREIGN KEY (mainCategory) REFERENCES mainCategories(categoryid),
     FOREIGN KEY (minorCategory) REFERENCES minorCategories(categoryid)
 );
-
-select * from products;
