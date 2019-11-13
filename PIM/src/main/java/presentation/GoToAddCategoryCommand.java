@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Malthe
  */
-public class GoToAddMainCategoryCommand extends Command {
+public class GoToAddCategoryCommand extends Command {
     
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) {
         
-        return "AddMainCategory";
+        return "AddCategory";
     }
     
 }

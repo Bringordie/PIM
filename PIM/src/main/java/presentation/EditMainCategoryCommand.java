@@ -12,25 +12,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.Categories;
+import presentation.GoToDeleteCategoryCommand;
 
 /**
  *
  * @author Malthe
  */
-public class GoToDeleteCategoryCommand extends Command {
+public class EditMainCategoryCommand extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, SQLException, ClassNotFoundException {
-        HashSet<Categories> mainCategories = new HashSet();
-        mainCategories = category.getMainValuesFromDB();
-        request.getSession().setAttribute("mainCategories", mainCategories);
-        
-        HashSet<Categories> minorCategories = new HashSet();
-        minorCategories = category.getMinorValuesFromDB();
-        request.getSession().setAttribute("minorCategories", minorCategories);
-        
-        return "DeleteCategory";
+        int id = Integer.parseInt(request.getParameter("id"));
+        String MainName = request.getParameter("MainName");
+        category.editMainCategory(id, MainName);
+        //Command Command = new Comand();
+        return "EditCategory";
     }
     
 }

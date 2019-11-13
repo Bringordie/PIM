@@ -25,11 +25,15 @@ public abstract class Command{
         //Not in use
         //commands.put("excel", new UploadEXCELCommand());
         commands.put("gotoUploadFile", new GoToUploadFileCommand());
-        commands.put("addCategory", new GoToAddMainCategoryCommand());
+        commands.put("addCategory", new GoToAddCategoryCommand());
         commands.put("addMainCategory", new AddMainCategoryCommand());
+        commands.put("addMinorCategory", new AddMinorCategoryCommand());
         commands.put("gotoDeleteMainCategory", new GoToDeleteCategoryCommand());
         commands.put("deleteMainCategory", new DeleteMainCategoryCommand());
         commands.put("deleteMinorCategory", new DeleteMinorCategoryCommand());
+        commands.put("editCategory", new GoToEditCategoryCommand());
+        commands.put("editMainCategory", new EditMainCategoryCommand());
+        commands.put("editMinorCategory", new EditMinorCategoryCommand());
     }
 
     static Command from(HttpServletRequest request) {

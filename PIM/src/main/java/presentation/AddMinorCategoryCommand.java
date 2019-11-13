@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Malthe
  */
-public class AddMainCategoryCommand extends Command {
+public class AddMinorCategoryCommand extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         
-        String mainCatName = request.getParameter("MainName");
-        category.addMainCategory(mainCatName);
+        String minorCatName = request.getParameter("MinorName");
+        category.addMinorCategory(minorCatName);
         
         return "AddCategory";
     }

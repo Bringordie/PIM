@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Product Information Management Page</h1>
         <form action="FrontController" method="POST" >
             <input type="hidden" name="cmd" value="gotoUploadFile" />
             <input type="submit" value="Go to Upload file" align="right"/>
@@ -13,7 +13,12 @@
         <br>
         <form action="FrontController" method="POST" >
             <input type="hidden" name="cmd" value="addCategory" />
-            <input type="submit" value="Add main command" align="right"/>
+            <input type="submit" value="Add Category" align="right"/>
+        </form>
+        <br>
+        <form action="FrontController" method="POST" >
+            <input type="hidden" name="cmd" value="editCategory" />
+            <input type="submit" value="Edit Category" align="right"/>
         </form>
         <br>
         <form action="FrontController" method="POST" >

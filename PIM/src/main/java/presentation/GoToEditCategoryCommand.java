@@ -17,11 +17,12 @@ import logic.Categories;
  *
  * @author Malthe
  */
-public class GoToDeleteCategoryCommand extends Command {
-
+public class GoToEditCategoryCommand extends Command {
+    
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, SQLException, ClassNotFoundException {
+        
         HashSet<Categories> mainCategories = new HashSet();
         mainCategories = category.getMainValuesFromDB();
         request.getSession().setAttribute("mainCategories", mainCategories);
@@ -30,7 +31,7 @@ public class GoToDeleteCategoryCommand extends Command {
         minorCategories = category.getMinorValuesFromDB();
         request.getSession().setAttribute("minorCategories", minorCategories);
         
-        return "DeleteCategory";
+        return "EditCategory";
     }
     
 }
