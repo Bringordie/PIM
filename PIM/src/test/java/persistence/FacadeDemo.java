@@ -1,5 +1,6 @@
 package persistence;
 
+import persistence.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,7 +11,7 @@ import logic.Products;
 
 
 
-public interface Facade { 
+public interface FacadeDemo { 
     
     public void reqisterProductsJson(ArrayList<Products> products) throws SQLException, ClassNotFoundException;
     
@@ -29,4 +30,5 @@ public interface Facade {
     public void excelInsertToDB(List list) throws ClassNotFoundException, NumberFormatException, SQLException;
     
     public void excelUpdateToDB(List list, String productid) throws ClassNotFoundException, NumberFormatException, SQLException;
+    
 }

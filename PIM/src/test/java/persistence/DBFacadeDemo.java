@@ -1,5 +1,6 @@
 package persistence;
 
+import persistence.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,9 +14,9 @@ import java.util.logging.Logger;
 import logic.Categories;
 import logic.Products;
 //import logic.Productsint;
-import static persistence.DBConnection.getConnection;
+import persistence.DBConnectionDemo;
 
-public class DBFacade implements Facade {
+public class DBFacadeDemo implements FacadeDemo {
 
     /**
      * @author Bringordie - Frederik Braagaard
@@ -23,7 +24,7 @@ public class DBFacade implements Facade {
      * DB.
      *
      */
-    @Override
+        @Override
     public void reqisterProductsJson(ArrayList<Products> products) throws SQLException, ClassNotFoundException {
 
         //TO DO
@@ -33,7 +34,7 @@ public class DBFacade implements Facade {
                         + "description, companyName, price, quantity, pictureName, "
                         + "publishedStatus, minorCategory, mainCategory)"
                         + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-                PreparedStatement statement = getConnection().prepareStatement(sql);
+                PreparedStatement statement = DBConnectionDemo.getConnection().prepareStatement(sql);
                 statement.setInt(1, product.getId());
                 statement.setString(2, product.getName());
                 statement.setString(3, product.getDescription());
@@ -154,7 +155,7 @@ public class DBFacade implements Facade {
                     + "description, companyName, price, quantity, pictureName, "
                     + "publishedStatus, minorCategory, mainCategory)"
                     + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-            PreparedStatement statement = getConnection().prepareStatement(sql);
+            PreparedStatement statement = DBConnectionDemo.getConnection().prepareStatement(sql);
             statement.setString(1, ProductID);
             statement.setString(2, ProductName);
             statement.setString(3, ProductNameDescription);
@@ -245,7 +246,7 @@ public class DBFacade implements Facade {
                     + "price= ?, quantity= ?, pictureName = ?, "
                     + "publishedStatus= ?, minorCategory= ?, mainCategory= ? "
                     + "where productid ='"+ productid +"'";
-            PreparedStatement statement = getConnection().prepareStatement(sql);
+            PreparedStatement statement = DBConnectionDemo.getConnection().prepareStatement(sql);
             statement.setString(1, ProductID);
             statement.setString(2, ProductName);
             statement.setString(3, ProductNameDescription);
@@ -272,7 +273,7 @@ public class DBFacade implements Facade {
         int minorID;
         int resturnMinorID = 0;
         String sql = "select * from minorCategories where minorCategoryName = '" + s + "'";
-        ResultSet result = getConnection().prepareStatement(sql).executeQuery();
+        ResultSet result = DBConnectionDemo.getConnection().prepareStatement(sql).executeQuery();
 
         try {
             while (result.next()) {
@@ -294,7 +295,7 @@ public class DBFacade implements Facade {
         int mainID;
         int resturnMainID = 0;
         String sql = "select * from maincategories where mainCategoryName ='" + s + "'";
-        ResultSet result = getConnection().prepareStatement(sql).executeQuery();
+        ResultSet result = DBConnectionDemo.getConnection().prepareStatement(sql).executeQuery();
 
         try {
             while (result.next()) {
@@ -315,7 +316,7 @@ public class DBFacade implements Facade {
 
         int newlycreatedID = 0;
         String sqlGetID = "select COUNT(mainCategoryName) from mainCategories";
-        ResultSet result = getConnection().prepareStatement(sqlGetID).executeQuery();
+        ResultSet result = DBConnectionDemo.getConnection().prepareStatement(sqlGetID).executeQuery();
 
         try {
             while (result.next()) {
@@ -328,7 +329,7 @@ public class DBFacade implements Facade {
         try {
             String sql = "INSERT INTO mainCategories(mainCategoryName)"
                     + "VALUES(?)";
-            PreparedStatement statement = getConnection().prepareStatement(sql);
+            PreparedStatement statement = DBConnectionDemo.getConnection().prepareStatement(sql);
             statement.setString(1, s);
             statement.executeUpdate();
         } catch (ClassNotFoundException | SQLException e) {
@@ -341,7 +342,7 @@ public class DBFacade implements Facade {
     public int createMinorIDInDB(String s) throws SQLException, ClassNotFoundException {
         int newlycreatedID = 0;
         String sqlGetID = "select COUNT(minorCategoryName) from minorCategories";
-        ResultSet result = getConnection().prepareStatement(sqlGetID).executeQuery();
+        ResultSet result = DBConnectionDemo.getConnection().prepareStatement(sqlGetID).executeQuery();
 
         try {
             while (result.next()) {
@@ -354,7 +355,7 @@ public class DBFacade implements Facade {
         try {
             String sql = "INSERT INTO minorCategories(minorCategoryName)"
                     + "VALUES(?)";
-            PreparedStatement statement = getConnection().prepareStatement(sql);
+            PreparedStatement statement = DBConnectionDemo.getConnection().prepareStatement(sql);
             statement.setString(1, s);
             statement.executeUpdate();
         } catch (ClassNotFoundException | SQLException e) {
@@ -368,7 +369,7 @@ public class DBFacade implements Facade {
         Boolean returnvalue = false;
         int tempholder;
         String sql = "select COUNT(productid) from products where productid = '" + s + "'";
-        ResultSet result = getConnection().prepareStatement(sql).executeQuery();
+        ResultSet result = DBConnectionDemo.getConnection().prepareStatement(sql).executeQuery();
 
         try {
             while (result.next()) {
@@ -384,5 +385,5 @@ public class DBFacade implements Facade {
         }
         return returnvalue;
     }
+    }
 
-}

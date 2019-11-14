@@ -21,12 +21,20 @@ import presentation.GoToDeleteCategoryCommand;
 public class DeleteMinorCategoryCommand extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) 
+    String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("id"));
         category.deleteMinorCategory(id);
-        
+
+        HashSet<Categories> mainCategories = new HashSet();
+        mainCategories = category.getMainValuesFromDB();
+        request.getSession().setAttribute("mainCategories", mainCategories);
+
+        HashSet<Categories> minorCategories = new HashSet();
+        minorCategories = category.getMinorValuesFromDB();
+        request.getSession().setAttribute("minorCategories", minorCategories);
+
         return "DeleteCategory";
     }
-    
+
 }
