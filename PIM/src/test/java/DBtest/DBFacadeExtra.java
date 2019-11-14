@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static persistence.DBConnection.getConnection;
 import persistence.DBConnectionDemo;
-import persistence.DBFacadeDemo;
 
 /**
  *
@@ -23,14 +22,14 @@ public class DBFacadeExtra {
     public String getCustomDataFromDB(String s) throws SQLException, ClassNotFoundException {
         String output = "";
         String sql = s;
-        ResultSet result = getConnection().prepareStatement(sql).executeQuery();
+        ResultSet result = getConnection("/dbtest.properties").prepareStatement(sql).executeQuery();
 
         try {
             while (result.next()) {
                 output = result.getString(1);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DBFacadeDemo.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
         return output;
     }

@@ -12,21 +12,21 @@ import logic.Products;
 
 public interface Facade { 
     
-    public void reqisterProductsJson(ArrayList<Products> products) throws SQLException, ClassNotFoundException;
+    public void reqisterProductsJson(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public void saveToDatabaseExcel(Vector dataHolder) throws SQLException, ClassNotFoundException;
+    public void saveToDatabaseExcel(Vector dataHolder, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public int getMinorValuesFromDB(String s) throws SQLException, ClassNotFoundException;
+    public int getMinorValuesFromDB(String s, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public int getMainValuesFromDB(String s) throws SQLException, ClassNotFoundException;
+    public int getMainValuesFromDB(String s, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public int createMainIDInDB(String s) throws SQLException, ClassNotFoundException;
+    public int createMainIDInDB(String s, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public int createMinorIDInDB(String s) throws SQLException, ClassNotFoundException;
+    public int createMinorIDInDB(String s, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public boolean checkIfProductExists(String s) throws SQLException, ClassNotFoundException;
+    public boolean checkIfProductExists(String s, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public void excelInsertToDB(List list) throws ClassNotFoundException, NumberFormatException, SQLException;
+    public void excelInsertToDB(List list, String propertyname) throws ClassNotFoundException, NumberFormatException, SQLException;
     
-    public void excelUpdateToDB(List list, String productid) throws ClassNotFoundException, NumberFormatException, SQLException;
+    public void excelUpdateToDB(List list, String productid, String propertyname) throws ClassNotFoundException, NumberFormatException, SQLException;
 }

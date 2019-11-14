@@ -12,10 +12,12 @@ public class DBConnection {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static Connection singleton;
 
-    public static Connection getConnection() throws ClassNotFoundException, SQLException {
+    public static Connection getConnection(String propertiesfilelink) throws ClassNotFoundException, SQLException {
 
+        String resourcelink = propertiesfilelink;
         if (singleton == null) {
-            try (InputStream sa = DBConnection.class.getResourceAsStream("/db.properties")) {
+            //try (InputStream sa = DBConnection.class.getResourceAsStream("/db.properties")) {
+            try (InputStream sa = DBConnection.class.getResourceAsStream(propertiesfilelink)) {
 
                 // load the properties file
                 Properties properties = new Properties();

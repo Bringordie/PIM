@@ -26,6 +26,11 @@ public class EditMinorCategoryCommand extends Command {
         int id = Integer.parseInt(request.getParameter("id"));
         String MinorName = request.getParameter("MinorName");
         category.editMinorCategory(id, MinorName);
+        
+        HashSet<Categories> minorCategories = new HashSet();
+        minorCategories = category.getMinorValuesFromDB();
+        request.getSession().setAttribute("minorCategories", minorCategories);
+        
         //Command Command = new Comand();
         return "EditCategory";
     }

@@ -26,6 +26,9 @@ public class EditMainCategoryCommand extends Command {
         int id = Integer.parseInt(request.getParameter("id"));
         String MainName = request.getParameter("MainName");
         category.editMainCategory(id, MainName);
+        HashSet<Categories> mainCategories = new HashSet();
+        mainCategories = category.getMainValuesFromDB();
+        request.getSession().setAttribute("mainCategories", mainCategories);
         //Command Command = new Comand();
         return "EditCategory";
     }

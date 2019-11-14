@@ -22,7 +22,7 @@ public class CategoryMapper implements CategoryMapperInterface {
         String sql = "INSERT INTO mainCategories (mainCategoryName) VALUES (?)";
         try {
 
-            PreparedStatement statement = getConnection().prepareStatement(sql);
+            PreparedStatement statement = getConnection("/db.properties").prepareStatement(sql);
             statement.setString(1, category);
             statement.executeUpdate();
             //int id = getMainMaxID();
@@ -37,7 +37,7 @@ public class CategoryMapper implements CategoryMapperInterface {
         String sql = "INSERT INTO minorCategories (minorCategoryName) VALUES (?)";
         try {
 
-            PreparedStatement statement = getConnection().prepareStatement(sql);
+            PreparedStatement statement = getConnection("/db.properties").prepareStatement(sql);
             statement.setString(1, category);
             statement.executeUpdate();
             //int id = getMainMaxID();
@@ -53,7 +53,7 @@ public class CategoryMapper implements CategoryMapperInterface {
         String sql = "SELECT COUNT (categoryid) from mainCategories";
 
         boolean returnAnswer = true;
-        ResultSet result = getConnection().prepareStatement(sql).executeQuery();
+        ResultSet result = getConnection("/db.properties").prepareStatement(sql).executeQuery();
         try {
             while (result.next()) {
                 int getTotal = result.getInt(1);
@@ -73,8 +73,8 @@ public class CategoryMapper implements CategoryMapperInterface {
         String sql1 = "DELETE FROM linkminormain WHERE mainid=" + category;
         String sql2 = "DELETE FROM mainCategories WHERE categoryid=" + category;
         
-        getConnection().prepareStatement(sql1).executeUpdate();
-        getConnection().prepareStatement(sql2).executeUpdate();
+        getConnection("/db.properties").prepareStatement(sql1).executeUpdate();
+        getConnection("/db.properties").prepareStatement(sql2).executeUpdate();
         
     }
 
@@ -83,8 +83,8 @@ public class CategoryMapper implements CategoryMapperInterface {
         String sql1 = "DELETE FROM linkminormain WHERE minorid=" + category;
         String sql2 = "DELETE FROM minorCategories WHERE categoryid=" + category;
         
-        getConnection().prepareStatement(sql1).executeUpdate();
-        getConnection().prepareStatement(sql2).executeUpdate();
+        getConnection("/db.properties").prepareStatement(sql1).executeUpdate();
+        getConnection("/db.properties").prepareStatement(sql2).executeUpdate();
         
     }
 
@@ -92,7 +92,7 @@ public class CategoryMapper implements CategoryMapperInterface {
     public void editMainCategory(int categoryInt, String categoryStr) throws ClassNotFoundException, SQLException {
         String sql = "UPDATE mainCategories SET mainCategoryName = ? WHERE categoryid =" + categoryInt;
         
-        PreparedStatement statement = getConnection().prepareStatement(sql);
+        PreparedStatement statement = getConnection("/db.properties").prepareStatement(sql);
             statement.setString(1, categoryStr);
             statement.executeUpdate();
     }
@@ -102,7 +102,7 @@ public class CategoryMapper implements CategoryMapperInterface {
         
         String sql = "UPDATE minorCategories SET minorCategoryName = ? WHERE categoryid =" + categoryInt;
         
-        PreparedStatement statement = getConnection().prepareStatement(sql);
+        PreparedStatement statement = getConnection("/db.properties").prepareStatement(sql);
             statement.setString(1, categoryStr);
             statement.executeUpdate();
     }
@@ -113,7 +113,7 @@ public class CategoryMapper implements CategoryMapperInterface {
         int minorID;
         HashSet<Categories> hashminor = new HashSet();
         String sql = "select * from minorCategories";
-        ResultSet result = getConnection().prepareStatement(sql).executeQuery();
+        ResultSet result = getConnection("/db.properties").prepareStatement(sql).executeQuery();
         
         try {
             while (result.next()) {
@@ -136,7 +136,7 @@ public class CategoryMapper implements CategoryMapperInterface {
         //HashSet<String> hashmain = new HashSet();
         HashSet<Categories> hashmain = new HashSet();
         String sql = "select * from mainCategories";
-        ResultSet result = getConnection().prepareStatement(sql).executeQuery();
+        ResultSet result = getConnection("/db.properties").prepareStatement(sql).executeQuery();
         
         try {
             while (result.next()) {

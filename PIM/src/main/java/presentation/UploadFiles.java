@@ -147,10 +147,10 @@ public class UploadFiles extends HttpServlet {
         if (fileNametest.contains(".json")) {
             JsonHandler handler = new JsonHandler();
             ArrayList<Products> s = handler.makeJSonFileIntoArray(fileNametest);
-            db.reqisterProductsJson(s);
+            db.reqisterProductsJson(s, "/db.properties");
         } else {
             Vector dataHolder = read(fileNametest);
-            db.saveToDatabaseExcel(dataHolder);
+            db.saveToDatabaseExcel(dataHolder, "/db.properties");
         }
     }
 

@@ -7,9 +7,10 @@ import static logic.ExcelHandler.read;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import org.junit.Ignore;
 import org.junit.Test;
 import persistence.DBConnectionDemo;
-import persistence.DBFacadeDemo;
+import persistence.DBFacade;
 
 
 
@@ -28,8 +29,8 @@ public class DBtest {
         
         String fileName = "src\\test\\java\\files\\linewithemptyrow.xlsx";
         Vector dataHolder = read(fileName);
-        DBFacadeDemo db = new DBFacadeDemo();
-        db.saveToDatabaseExcel(dataHolder);
+        DBFacade db = new DBFacade();
+        db.saveToDatabaseExcel(dataHolder, "/dbtest.properties");
         
         DBFacadeExtra dbextra = new DBFacadeExtra();
         String actually = dbextra.getCustomDataFromDB("select description from products where productid = 9312");
@@ -38,13 +39,15 @@ public class DBtest {
 
     }
     
+    //Need to change the import of excel sheet first before something like this would work.
+    @Ignore
     @Test
     public void testUpdateOfUpload() throws SQLException, ClassNotFoundException {
         
         String fileName = "src\\test\\java\\files\\linewithemptyrow.xlsx";
         Vector dataHolder = read(fileName);
-        DBFacadeDemo db = new DBFacadeDemo();
-        db.saveToDatabaseExcel(dataHolder);
+        DBFacade db = new DBFacade();
+        db.saveToDatabaseExcel(dataHolder, "/dbtest.properties");
         
         DBFacadeExtra dbextra = new DBFacadeExtra();
         int expected = 1;

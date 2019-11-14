@@ -24,7 +24,7 @@ public class DBFacade implements Facade {
      *
      */
     @Override
-    public void reqisterProductsJson(ArrayList<Products> products) throws SQLException, ClassNotFoundException {
+    public void reqisterProductsJson(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException {
 
         //TO DO
         try {
@@ -33,7 +33,7 @@ public class DBFacade implements Facade {
                         + "description, companyName, price, quantity, pictureName, "
                         + "publishedStatus, minorCategory, mainCategory)"
                         + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-                PreparedStatement statement = getConnection().prepareStatement(sql);
+                PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
                 statement.setInt(1, product.getId());
                 statement.setString(2, product.getName());
                 statement.setString(3, product.getDescription());
@@ -62,9 +62,10 @@ public class DBFacade implements Facade {
      * @throws ClassNotFoundException
      */
     @Override
-    public void saveToDatabaseExcel(Vector dataHolder) throws SQLException, ClassNotFoundException {
+    public void saveToDatabaseExcel(Vector dataHolder, String propertyname) throws SQLException, ClassNotFoundException {
         String ProductID;
         Iterator iterator = dataHolder.iterator();
+        String propertyfile = propertyname;
         if (iterator.hasNext()) {
             iterator.next();
         }
@@ -75,18 +76,18 @@ public class DBFacade implements Facade {
             iterator.hasNext();
             ProductID = list.get(0).toString();
 
-            Boolean booleanIDCheck = checkIfProductExists(ProductID);
+            Boolean booleanIDCheck = checkIfProductExists(ProductID, propertyname);
             if (booleanIDCheck != true) {
-                excelInsertToDB(list);
+                excelInsertToDB(list, propertyname);
             } else {
-                excelUpdateToDB(list, ProductID);
+                excelUpdateToDB(list, ProductID, propertyname);
             }
         }
 
     }
 
     @Override
-    public void excelInsertToDB(List list) throws ClassNotFoundException, NumberFormatException, SQLException {
+    public void excelInsertToDB(List list, String propertyname) throws ClassNotFoundException, NumberFormatException, SQLException {
         String ProductID;
         String ProductName;
         String ProductNameDescription;
@@ -128,19 +129,19 @@ public class DBFacade implements Facade {
         Quantity = list.get(6).toString();
         PictureName = list.get(7).toString();
         //Checking minorvalue
-        if (getMinorValuesFromDB(list.get(8).toString()) == 0) {
-            int minorIDCreated = createMinorIDInDB(list.get(8).toString());
+        if (getMinorValuesFromDB(list.get(8).toString(), propertyname) == 0) {
+            int minorIDCreated = createMinorIDInDB(list.get(8).toString(), propertyname);
             MinorCategory = minorIDCreated;
-        } else if (getMinorValuesFromDB(list.get(8).toString()) > 0) {
-            int reuseIDCreated = getMinorValuesFromDB(list.get(8).toString());
+        } else if (getMinorValuesFromDB(list.get(8).toString(), propertyname) > 0) {
+            int reuseIDCreated = getMinorValuesFromDB(list.get(8).toString(), propertyname);
             MinorCategory = reuseIDCreated;
         }
         //Checking mainvalue
-        if (getMainValuesFromDB(list.get(9).toString()) == 0) {
-            int mainIDCreated = createMainIDInDB(list.get(9).toString());
+        if (getMainValuesFromDB(list.get(9).toString(), propertyname) == 0) {
+            int mainIDCreated = createMainIDInDB(list.get(9).toString(), propertyname);
             MainCategory = mainIDCreated;
-        } else if (getMainValuesFromDB(list.get(9).toString()) > 0) {
-            int reuseIDCreated = getMainValuesFromDB(list.get(9).toString());
+        } else if (getMainValuesFromDB(list.get(9).toString(), propertyname) > 0) {
+            int reuseIDCreated = getMainValuesFromDB(list.get(9).toString(), propertyname);
             MainCategory = reuseIDCreated;
         }
         //Requirements for publishing
@@ -154,7 +155,7 @@ public class DBFacade implements Facade {
                     + "description, companyName, price, quantity, pictureName, "
                     + "publishedStatus, minorCategory, mainCategory)"
                     + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-            PreparedStatement statement = getConnection().prepareStatement(sql);
+            PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
             statement.setString(1, ProductID);
             statement.setString(2, ProductName);
             statement.setString(3, ProductNameDescription);
@@ -176,7 +177,7 @@ public class DBFacade implements Facade {
     }
     
     @Override
-    public void excelUpdateToDB(List list, String productid) throws ClassNotFoundException, NumberFormatException, SQLException{
+    public void excelUpdateToDB(List list, String productid, String propertyname) throws ClassNotFoundException, NumberFormatException, SQLException{
         String ProductID;
         String ProductName;
         String ProductNameDescription;
@@ -218,19 +219,19 @@ public class DBFacade implements Facade {
         Quantity = list.get(6).toString();
         PictureName = list.get(7).toString();
         //Checking minorvalue
-        if (getMinorValuesFromDB(list.get(8).toString()) == 0) {
-            int minorIDCreated = createMinorIDInDB(list.get(8).toString());
+        if (getMinorValuesFromDB(list.get(8).toString(), propertyname) == 0) {
+            int minorIDCreated = createMinorIDInDB(list.get(8).toString(), propertyname);
             MinorCategory = minorIDCreated;
-        } else if (getMinorValuesFromDB(list.get(8).toString()) > 0) {
-            int reuseIDCreated = getMinorValuesFromDB(list.get(8).toString());
+        } else if (getMinorValuesFromDB(list.get(8).toString(), propertyname) > 0) {
+            int reuseIDCreated = getMinorValuesFromDB(list.get(8).toString(), propertyname);
             MinorCategory = reuseIDCreated;
         }
         //Checking mainvalue
-        if (getMainValuesFromDB(list.get(9).toString()) == 0) {
-            int mainIDCreated = createMainIDInDB(list.get(9).toString());
+        if (getMainValuesFromDB(list.get(9).toString(), propertyname) == 0) {
+            int mainIDCreated = createMainIDInDB(list.get(9).toString(), propertyname);
             MainCategory = mainIDCreated;
-        } else if (getMainValuesFromDB(list.get(9).toString()) > 0) {
-            int reuseIDCreated = getMainValuesFromDB(list.get(9).toString());
+        } else if (getMainValuesFromDB(list.get(9).toString(), propertyname) > 0) {
+            int reuseIDCreated = getMainValuesFromDB(list.get(9).toString(), propertyname);
             MainCategory = reuseIDCreated;
         }
         //Requirements for publishing
@@ -245,7 +246,7 @@ public class DBFacade implements Facade {
                     + "price= ?, quantity= ?, pictureName = ?, "
                     + "publishedStatus= ?, minorCategory= ?, mainCategory= ? "
                     + "where productid ='"+ productid +"'";
-            PreparedStatement statement = getConnection().prepareStatement(sql);
+            PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
             statement.setString(1, ProductID);
             statement.setString(2, ProductName);
             statement.setString(3, ProductNameDescription);
@@ -267,12 +268,12 @@ public class DBFacade implements Facade {
     }
 
     @Override
-    public int getMinorValuesFromDB(String s) throws SQLException, ClassNotFoundException {
+    public int getMinorValuesFromDB(String s, String propertyname) throws SQLException, ClassNotFoundException {
         String minorName = "";
         int minorID;
         int resturnMinorID = 0;
         String sql = "select * from minorCategories where minorCategoryName = '" + s + "'";
-        ResultSet result = getConnection().prepareStatement(sql).executeQuery();
+        ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
 
         try {
             while (result.next()) {
@@ -289,12 +290,12 @@ public class DBFacade implements Facade {
     }
 
     @Override
-    public int getMainValuesFromDB(String s) throws SQLException, ClassNotFoundException {
+    public int getMainValuesFromDB(String s, String propertyname) throws SQLException, ClassNotFoundException {
         String mainName = "";
         int mainID;
         int resturnMainID = 0;
         String sql = "select * from maincategories where mainCategoryName ='" + s + "'";
-        ResultSet result = getConnection().prepareStatement(sql).executeQuery();
+        ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
 
         try {
             while (result.next()) {
@@ -311,11 +312,11 @@ public class DBFacade implements Facade {
     }
 
     @Override
-    public int createMainIDInDB(String s) throws SQLException, ClassNotFoundException {
+    public int createMainIDInDB(String s, String propertyname) throws SQLException, ClassNotFoundException {
 
         int newlycreatedID = 0;
         String sqlGetID = "select COUNT(mainCategoryName) from mainCategories";
-        ResultSet result = getConnection().prepareStatement(sqlGetID).executeQuery();
+        ResultSet result = getConnection(propertyname).prepareStatement(sqlGetID).executeQuery();
 
         try {
             while (result.next()) {
@@ -328,7 +329,7 @@ public class DBFacade implements Facade {
         try {
             String sql = "INSERT INTO mainCategories(mainCategoryName)"
                     + "VALUES(?)";
-            PreparedStatement statement = getConnection().prepareStatement(sql);
+            PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
             statement.setString(1, s);
             statement.executeUpdate();
         } catch (ClassNotFoundException | SQLException e) {
@@ -338,10 +339,10 @@ public class DBFacade implements Facade {
     }
 
     @Override
-    public int createMinorIDInDB(String s) throws SQLException, ClassNotFoundException {
+    public int createMinorIDInDB(String s, String propertyname) throws SQLException, ClassNotFoundException {
         int newlycreatedID = 0;
         String sqlGetID = "select COUNT(minorCategoryName) from minorCategories";
-        ResultSet result = getConnection().prepareStatement(sqlGetID).executeQuery();
+        ResultSet result = getConnection(propertyname).prepareStatement(sqlGetID).executeQuery();
 
         try {
             while (result.next()) {
@@ -354,7 +355,7 @@ public class DBFacade implements Facade {
         try {
             String sql = "INSERT INTO minorCategories(minorCategoryName)"
                     + "VALUES(?)";
-            PreparedStatement statement = getConnection().prepareStatement(sql);
+            PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
             statement.setString(1, s);
             statement.executeUpdate();
         } catch (ClassNotFoundException | SQLException e) {
@@ -364,11 +365,11 @@ public class DBFacade implements Facade {
     }
 
     @Override
-    public boolean checkIfProductExists(String s) throws SQLException, ClassNotFoundException {
+    public boolean checkIfProductExists(String s, String propertyname) throws SQLException, ClassNotFoundException {
         Boolean returnvalue = false;
         int tempholder;
         String sql = "select COUNT(productid) from products where productid = '" + s + "'";
-        ResultSet result = getConnection().prepareStatement(sql).executeQuery();
+        ResultSet result = getConnection("/db.properties").prepareStatement(sql).executeQuery();
 
         try {
             while (result.next()) {
