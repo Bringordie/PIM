@@ -26,7 +26,7 @@ public class DBtest {
     @Test
     public void testEmptyRowIsNull() throws SQLException, ClassNotFoundException {
         
-        String fileName = "C:\\Users\\Frederik\\Desktop\\PIM\\tests\\linewithemptyrow.xlsx";
+        String fileName = "src\\test\\java\\files\\linewithemptyrow.xlsx";
         Vector dataHolder = read(fileName);
         DBFacadeDemo db = new DBFacadeDemo();
         db.saveToDatabaseExcel(dataHolder);
@@ -41,7 +41,7 @@ public class DBtest {
     @Test
     public void testUpdateOfUpload() throws SQLException, ClassNotFoundException {
         
-        String fileName = "C:\\Users\\Frederik\\Desktop\\PIM\\tests\\linewithemptyrow.xlsx";
+        String fileName = "src\\test\\java\\files\\linewithemptyrow.xlsx";
         Vector dataHolder = read(fileName);
         DBFacadeDemo db = new DBFacadeDemo();
         db.saveToDatabaseExcel(dataHolder);
