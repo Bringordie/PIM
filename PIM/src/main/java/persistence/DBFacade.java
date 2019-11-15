@@ -385,5 +385,58 @@ public class DBFacade implements Facade {
         }
         return returnvalue;
     }
+   
+    
+//    
+//    
+//   public void DeleteProduct(ArrayList<Products> products) throws SQLException, ClassNotFoundException {
+// 
+//        try {  
+//            for (Products product : products) {
+//        String sql = "DELETE FROM products WHERE productid= ?");
+//            PreparedStatement statement = getConnection(("/db.properties")).prepareStatement(sql);
+//            statement.setInt(1, product.getId());
+//            statement.setString(2, product.getName());
+//            statement.setString(3, product.getNameDescription());
+//            statement.setString(4, product.getDescription());
+//            statement.setString(5, product.getCompanyName());
+//            statement.setDouble(6, product.getPrice());
+//            statement.setInt(7, product.getQty());
+//            statement.setString(8, product.getPictureName());
+//            statement.setBoolean(9, product.getPublishedStatus());
+//            statement.setString(10, product.getMinorCategory());
+//            statement.setString(11, product.getMainCategory());
+//            statement.executeUpdate(); }  
+//        } catch (SQLException e) {
+//            System.out.println(e);
+//        }} 
+//
 
-}
+   // * @author ClausFindinge - Claus Mikkelsen Findinge
+    
+    public void AddProduct(ArrayList<Products> products) throws SQLException, ClassNotFoundException {
+ 
+        try {  
+            for (Products product : products) {
+        String sql = "INSERT INTO products(productid, name, nameDescription, "
+                        + "description, companyName, price, quantity, pictureName, "
+                        + "publishedStatus, minorCategory, mainCategory)"
+                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement statement = getConnection(("/db.properties")).prepareStatement(sql);
+            statement.setInt(1, product.getId());
+            statement.setString(2, product.getName());
+            statement.setString(3, product.getNameDescription());
+            statement.setString(4, product.getDescription());
+            statement.setString(5, product.getCompanyName());
+            statement.setDouble(6, product.getPrice());
+            statement.setInt(7, product.getQty());
+            statement.setString(8, product.getPictureName());
+            statement.setBoolean(9, product.getPublishedStatus());
+            statement.setString(10, product.getMinorCategory());
+            statement.setString(11, product.getMainCategory());
+            statement.executeUpdate(); }  
+        } catch (SQLException e) {
+            System.out.println(e);
+        }}}
+
+    

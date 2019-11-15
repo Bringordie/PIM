@@ -34,6 +34,9 @@ public abstract class Command{
         commands.put("editCategory", new GoToEditCategoryCommand());
         commands.put("editMainCategory", new EditMainCategoryCommand());
         commands.put("editMinorCategory", new EditMinorCategoryCommand());
+        commands.put("gotoAddProduct", new GoToAddProductCommand());
+        commands.put("addProduct", new AddProductCommand());
+//        commands.put("deleteProduct", new DeleteProductCommand());
     }
 
     static Command from(HttpServletRequest request) {
