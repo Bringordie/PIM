@@ -7,6 +7,7 @@ package presentation;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,12 +23,14 @@ public class GoToDeleteCategoryCommand extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, SQLException, ClassNotFoundException {
-        HashSet<Categories> mainCategories = new HashSet();
-        mainCategories = category.getMainValuesFromDB();
+        ArrayList<Categories> mainCategories = new ArrayList();
+        //mainCategories = category.getMainValuesFromDB("/db.properties");
+        mainCategories = db.getMainCategories("/db.properties");
         request.getSession().setAttribute("mainCategories", mainCategories);
         
-        HashSet<Categories> minorCategories = new HashSet();
-        minorCategories = category.getMinorValuesFromDB();
+        ArrayList<Categories> minorCategories = new ArrayList();
+        //minorCategories = category.getMinorValuesFromDB("/db.properties");
+        minorCategories = db.getMinorCategories("/db.properties");
         request.getSession().setAttribute("minorCategories", minorCategories);
         
         return "DeleteCategory";

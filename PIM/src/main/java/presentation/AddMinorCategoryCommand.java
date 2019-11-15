@@ -17,7 +17,8 @@ public class AddMinorCategoryCommand extends Command {
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         
         String minorCatName = request.getParameter("MinorName");
-        category.addMinorCategory(minorCatName);
+        db.addMinorCategory(minorCatName, "/db.properties");
+        //category.addMinorCategory(minorCatName, "/db.properties");
         
         return "AddCategory";
     }

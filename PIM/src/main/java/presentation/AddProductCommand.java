@@ -16,8 +16,6 @@ import presentation.UploadFiles;
  */
 public class AddProductCommand extends Command {
     
-    DBFacade dbfacade = new DBFacade();
-
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) 
        throws ServletException, IOException, SQLException, ClassNotFoundException{
@@ -35,7 +33,7 @@ public class AddProductCommand extends Command {
        String maincategory = "1";
        
        products.add(new Products(id, productname, productnamedescription, productdescription, companyname, price, quantity, picturename, true ,minorcategory, maincategory));
-       dbfacade.AddProduct(products);
+       db.addProduct(products, "/db.properties");
       
       
         return"AddProduct"; 

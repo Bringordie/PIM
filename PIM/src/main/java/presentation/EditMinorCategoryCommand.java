@@ -7,6 +7,7 @@ package presentation;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,10 +26,11 @@ public class EditMinorCategoryCommand extends Command {
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("id"));
         String MinorName = request.getParameter("MinorName");
-        category.editMinorCategory(id, MinorName);
+        //category.editMinorCategory(id, MinorName, "/db.properties");
+        db.editMinorCategory(id, MinorName, "/db.properties");
         
-        HashSet<Categories> minorCategories = new HashSet();
-        minorCategories = category.getMinorValuesFromDB();
+        ArrayList<Categories> minorCategories = new ArrayList();
+        minorCategories = category.getMinorValuesFromDB("/db.properties");
         request.getSession().setAttribute("minorCategories", minorCategories);
         
         //Command Command = new Comand();

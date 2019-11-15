@@ -12,21 +12,26 @@ import logic.Products;
 
 public interface Facade { 
     
-    public void reqisterProductsJson(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
+    public void uploadJsonFileToDB(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public void saveToDatabaseExcel(Vector dataHolder, String propertyname) throws SQLException, ClassNotFoundException;
+    public void uploadExcelFileToDB(Vector dataHolder, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public int getMinorValuesFromDB(String s, String propertyname) throws SQLException, ClassNotFoundException;
+    public void addProduct(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public int getMainValuesFromDB(String s, String propertyname) throws SQLException, ClassNotFoundException;
+    public void addMainCategory (String category, String propertyname);
     
-    public int createMainIDInDB(String s, String propertyname) throws SQLException, ClassNotFoundException;
+    public void addMinorCategory (String category, String propertyname);
     
-    public int createMinorIDInDB(String s, String propertyname) throws SQLException, ClassNotFoundException;
+    public void deleteMainCategory (int category, String propertyname) throws ClassNotFoundException, SQLException;
     
-    public boolean checkIfProductExists(String s, String propertyname) throws SQLException, ClassNotFoundException;
+    public void deleteMinorCategory (int category, String propertyname) throws ClassNotFoundException, SQLException;
     
-    public void excelInsertToDB(List list, String propertyname) throws ClassNotFoundException, NumberFormatException, SQLException;
+    public void editMainCategory (int categoryInt, String categoryStr, String propertyname) throws ClassNotFoundException, SQLException;
     
-    public void excelUpdateToDB(List list, String productid, String propertyname) throws ClassNotFoundException, NumberFormatException, SQLException;
+    public void editMinorCategory (int categoryInt, String categoryStr, String propertyname) throws ClassNotFoundException, SQLException;
+    
+    public ArrayList<Categories> getMainCategories (String propertyname) throws ClassNotFoundException, SQLException;
+    
+    public ArrayList<Categories> getMinorCategories (String propertyname) throws ClassNotFoundException, SQLException;
+    
 }

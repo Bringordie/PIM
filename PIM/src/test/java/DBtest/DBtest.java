@@ -30,7 +30,7 @@ public class DBtest {
         String fileName = "src\\test\\java\\files\\linewithemptyrow.xlsx";
         Vector dataHolder = read(fileName);
         DBFacade db = new DBFacade();
-        db.saveToDatabaseExcel(dataHolder, "/dbtest.properties");
+        db.uploadExcelFileToDB(dataHolder, "/dbtest.properties");
         
         DBFacadeExtra dbextra = new DBFacadeExtra();
         String actually = dbextra.getCustomDataFromDB("select description from products where productid = 9312");
@@ -47,7 +47,7 @@ public class DBtest {
         String fileName = "src\\test\\java\\files\\linewithemptyrow.xlsx";
         Vector dataHolder = read(fileName);
         DBFacade db = new DBFacade();
-        db.saveToDatabaseExcel(dataHolder, "/dbtest.properties");
+        db.uploadExcelFileToDB(dataHolder, "/dbtest.properties");
         
         DBFacadeExtra dbextra = new DBFacadeExtra();
         int expected = 1;
