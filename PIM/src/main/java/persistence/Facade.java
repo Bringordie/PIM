@@ -14,7 +14,7 @@ public interface Facade {
     
     public void uploadJsonFileToDB(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public void uploadExcelFileToDB(Vector dataHolder, String propertyname) throws SQLException, ClassNotFoundException;
+    public void uploadExcelFileToDB(ArrayList<Products> product, String propertyname) throws SQLException, ClassNotFoundException;
     
     public void addProduct(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
     

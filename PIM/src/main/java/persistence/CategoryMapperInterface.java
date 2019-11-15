@@ -14,9 +14,7 @@ public interface CategoryMapperInterface {
     public void addMainCategory (String category, String propertyname);
     
     public void addMinorCategory (String category, String propertyname);
-    
-    //public int getMainMaxID() throws ClassNotFoundException, SQLException;
-    
+        
     public void deleteMainCategory (int category, String propertyname) throws ClassNotFoundException, SQLException;
     
     public void deleteMinorCategory (int category, String propertyname) throws ClassNotFoundException, SQLException;
@@ -31,9 +29,9 @@ public interface CategoryMapperInterface {
     
     //NEW
     
-    public int getMinorValuesFromDB(String s, String propertyname) throws SQLException, ClassNotFoundException;
+    public int getMinorValuesFromDBFile(String s, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public int getMainValuesFromDB(String s, String propertyname) throws SQLException, ClassNotFoundException;
+    public int getMainValuesFromDBFile(String s, String propertyname) throws SQLException, ClassNotFoundException;
     
     public int createMainIDInDB(String s, String propertyname) throws SQLException, ClassNotFoundException;
     

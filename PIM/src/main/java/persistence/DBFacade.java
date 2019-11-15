@@ -25,8 +25,9 @@ public class DBFacade implements Facade {
     }
 
     @Override
-    public void uploadExcelFileToDB(Vector dataHolder, String propertyname) throws SQLException, ClassNotFoundException {
-        productMapper.saveToDatabaseExcel(dataHolder, propertyname);
+    public void uploadExcelFileToDB(ArrayList<Products> product, String propertyname) throws SQLException, ClassNotFoundException {
+        //productMapper.saveToDatabaseExcel(dataHolder, propertyname);
+        productMapper.excelInsertToDB(product, propertyname);
     }
 
     @Override

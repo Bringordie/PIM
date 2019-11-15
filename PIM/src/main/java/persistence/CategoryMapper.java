@@ -48,27 +48,6 @@ public class CategoryMapper implements CategoryMapperInterface {
         }
     }
 
-    //What is this used for?
-    //@Override
-    //public int getMainMaxID() throws ClassNotFoundException, SQLException {
-//        int countTotal = 0;
-//        String sql = "SELECT COUNT (categoryid) from mainCategories";
-//
-//        boolean returnAnswer = true;
-//        ResultSet result = getConnection("/db.properties").prepareStatement(sql).executeQuery();
-//        try {
-//            while (result.next()) {
-//                int getTotal = result.getInt(1);
-//                countTotal = getTotal;
-//                countTotal++;
-//
-//            }
-//        } catch (SQLException ex) {
-//            System.err.println("SQException Error");
-//        }
-//        return countTotal;
-//
-//    }
 
     @Override
     public void deleteMainCategory(int category, String propertyname) throws ClassNotFoundException, SQLException {
@@ -157,7 +136,7 @@ public class CategoryMapper implements CategoryMapperInterface {
     
     //NEW
     @Override
-    public int getMinorValuesFromDB(String s, String propertyname) throws SQLException, ClassNotFoundException {
+    public int getMinorValuesFromDBFile(String s, String propertyname) throws SQLException, ClassNotFoundException {
         String minorName = "";
         int minorID;
         int resturnMinorID = 0;
@@ -179,7 +158,7 @@ public class CategoryMapper implements CategoryMapperInterface {
     }
 
     @Override
-    public int getMainValuesFromDB(String s, String propertyname) throws SQLException, ClassNotFoundException {
+    public int getMainValuesFromDBFile(String s, String propertyname) throws SQLException, ClassNotFoundException {
         String mainName = "";
         int mainID;
         int resturnMainID = 0;

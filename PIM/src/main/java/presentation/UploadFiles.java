@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static logic.ExcelHandler.read;
 import logic.JsonHandler;
+import logic.NewExcelHandler;
 import logic.Products;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -149,8 +150,12 @@ public class UploadFiles extends HttpServlet {
             ArrayList<Products> s = handler.makeJSonFileIntoArray(fileNametest);
             db.uploadJsonFileToDB(s, "/db.properties");
         } else {
-            Vector dataHolder = read(fileNametest);
-            db.uploadExcelFileToDB(dataHolder, "/db.properties");
+            //Vector dataHolder = read(fileNametest);
+            NewExcelHandler excelhandler = new NewExcelHandler();
+            ArrayList<Products> products = new ArrayList();
+            products = excelhandler.extractInfo(fileNametest);
+            db.uploadExcelFileToDB(products, "/db.properties");
+            //db.uploadExcelFileToDB(dataHolder, "/db.properties");
         }
     }
 

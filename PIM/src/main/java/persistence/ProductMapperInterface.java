@@ -14,10 +14,11 @@ public interface ProductMapperInterface {
     public void reqisterProductsJson(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
     
     public void saveToDatabaseExcel(Vector dataHolder, String propertyname) throws SQLException, ClassNotFoundException;
+    public void saveToDatabaseExcelnew(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public void excelInsertToDB(List list, String propertyname) throws ClassNotFoundException, NumberFormatException, SQLException;
+    public void excelInsertToDB(ArrayList<Products> list, String propertyname) throws ClassNotFoundException, NumberFormatException, SQLException;
     
-    public void excelUpdateToDB(List list, String productid, String propertyname) throws ClassNotFoundException, NumberFormatException, SQLException;
+    //public void excelUpdateToDB(ArrayList<Products> list, String productid, String propertyname) throws ClassNotFoundException, NumberFormatException, SQLException;
     
     public boolean checkIfProductExists(String s, String propertyname) throws SQLException, ClassNotFoundException;
     
