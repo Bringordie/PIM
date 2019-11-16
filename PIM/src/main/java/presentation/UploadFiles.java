@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -18,15 +17,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static logic.ExcelHandler.read;
 import logic.JsonHandler;
-import logic.NewExcelHandler;
+import logic.ExcelHandler;
 import logic.Products;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import persistence.DBConnection;
 import persistence.DBFacade;
 
 /**
@@ -148,14 +145,12 @@ public class UploadFiles extends HttpServlet {
         if (fileNametest.contains(".json")) {
             JsonHandler handler = new JsonHandler();
             ArrayList<Products> s = handler.makeJSonFileIntoArray(fileNametest);
-            db.uploadJsonFileToDB(s, "/db.properties");
+            db.jsonInsertOrUpdateToDB(s, "/db.properties");
         } else {
-            //Vector dataHolder = read(fileNametest);
-            NewExcelHandler excelhandler = new NewExcelHandler();
+            ExcelHandler excelhandler = new ExcelHandler();
             ArrayList<Products> products = new ArrayList();
             products = excelhandler.extractInfo(fileNametest);
-            db.uploadExcelFileToDB(products, "/db.properties");
-            //db.uploadExcelFileToDB(dataHolder, "/db.properties");
+            db.excelInsertOrUpdateToDB(products, "/db.properties");
         }
     }
 

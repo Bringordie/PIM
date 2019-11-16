@@ -37,4 +37,6 @@ public interface CategoryMapperInterface {
     
     public int createMinorIDInDB(String s, String propertyname) throws SQLException, ClassNotFoundException;
     
+    public void checkOrCreateLinkminormain(int mainid, int minorid, String propertyname) throws SQLException, ClassNotFoundException;
+    
 }

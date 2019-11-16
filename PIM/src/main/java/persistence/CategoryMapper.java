@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.Categories;
-import persistence.DBConnection;
 import static persistence.DBConnection.getConnection;
 
 /**
@@ -32,7 +31,7 @@ public class CategoryMapper implements CategoryMapperInterface {
             Logger.getLogger(CategoryMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public void addMinorCategory(String category, String propertyname) {
         String sql = "INSERT INTO minorCategories (minorCategoryName) VALUES (?)";
@@ -48,54 +47,53 @@ public class CategoryMapper implements CategoryMapperInterface {
         }
     }
 
-
     @Override
     public void deleteMainCategory(int category, String propertyname) throws ClassNotFoundException, SQLException {
         String sql1 = "DELETE FROM linkminormain WHERE mainid=" + category;
         String sql2 = "DELETE FROM mainCategories WHERE categoryid=" + category;
-        
+
         getConnection(propertyname).prepareStatement(sql1).executeUpdate();
         getConnection(propertyname).prepareStatement(sql2).executeUpdate();
-        
+
     }
 
     @Override
     public void deleteMinorCategory(int category, String propertyname) throws ClassNotFoundException, SQLException {
         String sql1 = "DELETE FROM linkminormain WHERE minorid=" + category;
         String sql2 = "DELETE FROM minorCategories WHERE categoryid=" + category;
-        
+
         getConnection(propertyname).prepareStatement(sql1).executeUpdate();
         getConnection(propertyname).prepareStatement(sql2).executeUpdate();
-        
+
     }
 
     @Override
     public void editMainCategory(int categoryInt, String categoryStr, String propertyname) throws ClassNotFoundException, SQLException {
         String sql = "UPDATE mainCategories SET mainCategoryName = ? WHERE categoryid =" + categoryInt;
-        
+
         PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
-            statement.setString(1, categoryStr);
-            statement.executeUpdate();
+        statement.setString(1, categoryStr);
+        statement.executeUpdate();
     }
 
     @Override
     public void editMinorCategory(int categoryInt, String categoryStr, String propertyname) throws ClassNotFoundException, SQLException {
-        
+
         String sql = "UPDATE minorCategories SET minorCategoryName = ? WHERE categoryid =" + categoryInt;
-        
+
         PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
-            statement.setString(1, categoryStr);
-            statement.executeUpdate();
+        statement.setString(1, categoryStr);
+        statement.executeUpdate();
     }
-    
+
     @Override
-    public ArrayList<Categories> getMinorValuesFromDB(String propertyname) throws SQLException, ClassNotFoundException{
+    public ArrayList<Categories> getMinorValuesFromDB(String propertyname) throws SQLException, ClassNotFoundException {
         String minorName = "";
         int minorID;
         ArrayList<Categories> hashminor = new ArrayList();
         String sql = "select * from minorCategories ORDER BY minorCategoryName ASC";
         ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
-        
+
         try {
             while (result.next()) {
                 minorID = result.getInt(1);
@@ -109,23 +107,23 @@ public class CategoryMapper implements CategoryMapperInterface {
         }
         return hashminor;
     }
-    
+
     @Override
-    public ArrayList<Categories> getMainValuesFromDB(String propertyname) throws SQLException, ClassNotFoundException{
+    public ArrayList<Categories> getMainValuesFromDB(String propertyname) throws SQLException, ClassNotFoundException {
         String mainName = "";
         int mainID;
         //HashSet<String> hashmain = new HashSet();
         ArrayList<Categories> hashmain = new ArrayList();
         String sql = "select * from mainCategories ORDER BY mainCategoryName ASC";
         ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
-        
+
         try {
             while (result.next()) {
                 mainID = result.getInt(1);
                 mainName = result.getString(2);
                 Categories test = new Categories(mainID, mainName);
                 hashmain.add(test);
-                
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(DBFacade.class.getName()).log(Level.SEVERE, null, ex);
@@ -133,8 +131,12 @@ public class CategoryMapper implements CategoryMapperInterface {
         return hashmain;
     }
 
-    
     //NEW
+    
+    /**
+     *
+     * @author - Bringordie - Frederik Braagaard
+     */
     @Override
     public int getMinorValuesFromDBFile(String s, String propertyname) throws SQLException, ClassNotFoundException {
         String minorName = "";
@@ -157,6 +159,10 @@ public class CategoryMapper implements CategoryMapperInterface {
         return resturnMinorID;
     }
 
+    /**
+     *
+     * @author - Bringordie - Frederik Braagaard
+     */
     @Override
     public int getMainValuesFromDBFile(String s, String propertyname) throws SQLException, ClassNotFoundException {
         String mainName = "";
@@ -179,6 +185,10 @@ public class CategoryMapper implements CategoryMapperInterface {
         return resturnMainID;
     }
 
+    /**
+     *
+     * @author - Bringordie - Frederik Braagaard
+     */
     @Override
     public int createMainIDInDB(String s, String propertyname) throws SQLException, ClassNotFoundException {
         int newlycreatedID = 0;
@@ -205,6 +215,10 @@ public class CategoryMapper implements CategoryMapperInterface {
         return ++newlycreatedID;
     }
 
+    /**
+     *
+     * @author - Bringordie - Frederik Braagaard
+     */
     @Override
     public int createMinorIDInDB(String s, String propertyname) throws SQLException, ClassNotFoundException {
         int newlycreatedID = 0;
@@ -231,5 +245,35 @@ public class CategoryMapper implements CategoryMapperInterface {
         return ++newlycreatedID;
     }
 
+    /**
+     *
+     * @author - Bringordie - Frederik Braagaard
+     */
+    @Override
+    public void checkOrCreateLinkminormain(int mainid, int minorid, String propertyname) throws SQLException, ClassNotFoundException {
+        int returncall = 0;
+        String sqlGetID = "SELECT COUNT(mainid) FROM linkminormain WHERE mainid = " + mainid + " AND minorid = " + minorid;
+        ResultSet result = getConnection(propertyname).prepareStatement(sqlGetID).executeQuery();
+
+        try {
+            while (result.next()) {
+                returncall = result.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (returncall == 0) {
+
+            try {
+                String sql = "insert into linkMinorMain (mainid, minorid) values (?, ?)";
+                PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
+                statement.setInt(1, mainid);
+                statement.setInt(2, minorid);
+                statement.executeUpdate();
+            } catch (ClassNotFoundException | SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 }

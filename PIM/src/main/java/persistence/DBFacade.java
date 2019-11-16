@@ -20,14 +20,14 @@ public class DBFacade implements Facade {
     CategoryMapper categoryMapper = new CategoryMapper();
 
     @Override
-    public void uploadJsonFileToDB(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException {
-        productMapper.reqisterProductsJson(products, propertyname);
+    public void jsonInsertOrUpdateToDB(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException {
+        productMapper.jsonInsertOrUpdateToDB(products, propertyname);
     }
 
     @Override
-    public void uploadExcelFileToDB(ArrayList<Products> product, String propertyname) throws SQLException, ClassNotFoundException {
+    public void excelInsertOrUpdateToDB(ArrayList<Products> product, String propertyname) throws SQLException, ClassNotFoundException {
         //productMapper.saveToDatabaseExcel(dataHolder, propertyname);
-        productMapper.excelInsertToDB(product, propertyname);
+        productMapper.excelInsertOrUpdateToDB(product, propertyname);
     }
 
     @Override

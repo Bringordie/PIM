@@ -12,9 +12,9 @@ import logic.Products;
 
 public interface Facade { 
     
-    public void uploadJsonFileToDB(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
+    public void jsonInsertOrUpdateToDB(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public void uploadExcelFileToDB(ArrayList<Products> product, String propertyname) throws SQLException, ClassNotFoundException;
+    public void excelInsertOrUpdateToDB(ArrayList<Products> product, String propertyname) throws SQLException, ClassNotFoundException;
     
     public void addProduct(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
     

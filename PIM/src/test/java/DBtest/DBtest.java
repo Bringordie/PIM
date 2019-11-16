@@ -2,8 +2,6 @@ package DBtest;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Vector;
-import static logic.ExcelHandler.read;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -28,7 +26,7 @@ public class DBtest {
     public void testEmptyRowIsNull() throws SQLException, ClassNotFoundException {
         
         String fileName = "src\\test\\java\\files\\linewithemptyrow.xlsx";
-        Vector dataHolder = read(fileName);
+        //Vector dataHolder = read(fileName);
         DBFacade db = new DBFacade();
         //db.uploadExcelFileToDB(dataHolder, "/dbtest.properties");
         
@@ -45,7 +43,7 @@ public class DBtest {
     public void testUpdateOfUpload() throws SQLException, ClassNotFoundException {
         
         String fileName = "src\\test\\java\\files\\linewithemptyrow.xlsx";
-        Vector dataHolder = read(fileName);
+        //Vector dataHolder = read(fileName);
         DBFacade db = new DBFacade();
         //db.uploadExcelFileToDB(dataHolder, "/dbtest.properties");
         
