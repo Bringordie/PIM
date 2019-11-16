@@ -52,11 +52,11 @@ public class Products {
     }
 
     public String getDescription() {
-        return ProductNameDescription;
+        return ProductDescription;
     }
 
     public String getNameDescription() {
-        return ProductDescription;
+        return ProductNameDescription;
     }
 
     public String getCompanyName() {

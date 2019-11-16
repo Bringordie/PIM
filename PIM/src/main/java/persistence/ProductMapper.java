@@ -365,7 +365,7 @@ public class ProductMapper implements ProductMapperInterface {
         Boolean returnvalue = false;
         int tempholder;
         String sql = "select COUNT(productid) from products where productid = '" + s + "'";
-        ResultSet result = getConnection("/db.properties").prepareStatement(sql).executeQuery();
+        ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
 
         try {
             while (result.next()) {
