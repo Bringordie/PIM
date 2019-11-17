@@ -29,13 +29,13 @@ public class AddProductCommand extends Command {
        double price = Integer.parseInt(request.getParameter("Price"));
        int quantity = Integer.parseInt(request.getParameter("Quantity"));
        String picturename = (request.getParameter("PictureName"));
-       String minorcategory = "1";
-       String maincategory = "1";
-       
+       String minorcategory = request.getParameter("mainid");
+       String maincategory = request.getParameter("minorid");
+             
        products.add(new Products(id, productname, productnamedescription, productdescription, companyname, price, quantity, picturename, true ,minorcategory, maincategory));
        db.addProduct(products, "/db.properties");
       
-      
+       
         return"AddProduct"; 
     }
     

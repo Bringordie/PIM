@@ -161,5 +161,5 @@ public class DBtest {
         String expectednow = "Frugt";
         assertEquals(dbcall2, expectednow);
     }
-
+    
 }

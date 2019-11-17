@@ -16,6 +16,8 @@ public class ProductMapper implements ProductMapperInterface {
     /**
      *
      * @author - Bringordie - Frederik Braagaard
+     * @param list holds all the values of the products
+     * @param propertyname used for checking to execute in production or test.
      */
     @Override
     public void jsonInsertOrUpdateToDB(ArrayList<Products> list, String propertyname) throws SQLException, ClassNotFoundException {
@@ -37,31 +39,15 @@ public class ProductMapper implements ProductMapperInterface {
             Boolean booleanIDCheck = checkIfProductExists(String.valueOf(ProductID), propertyname);
             if (booleanIDCheck == false) {
 
-                //
                 ProductName = products.getName();
-                //Might want to consider making an extra method to make it nicer.
-                if (products.getNameDescription() == "") {
-                    ProductNameDescription = null;
-                } else {
-                    ProductNameDescription = products.getNameDescription();
-                }
-                //Might want to consider making an extra method to make it nicer.
-
-                if (products.getDescription() == "") {
-                    ProductDescription = null;
-                } else {
-                    ProductDescription = products.getDescription();
-                }
-                //Might want to consider making an extra method to make it nicer.
-                if (products.getCompanyName() == "") {
-                    CompanyName = null;
-                } else {
-                    CompanyName = products.getCompanyName();
-                }
+                ProductNameDescription = ifElseString(products.getNameDescription());
+                ProductDescription = ifElseString(products.getDescription());
+                CompanyName = ifElseString(products.getCompanyName());
                 Price = products.getPrice();
                 Quantity = products.getQty();
-                PictureName = products.getPictureName();
+                PictureName = ifElseString(products.getPictureName());
 
+                //Checking minorvalue
                 if (category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname) == 0) {
                     int minorIDCreated = category.createMinorIDInDB(products.getMinorCategory(), propertyname);
                     MinorCategory = minorIDCreated;
@@ -111,29 +97,14 @@ public class ProductMapper implements ProductMapperInterface {
             } else {
                 ProductID = products.getId();
                 ProductName = products.getName();
-                //Might want to consider making an extra method to make it nicer.
-                if (products.getNameDescription() == "") {
-                    ProductNameDescription = null;
-                } else {
-                    ProductNameDescription = products.getNameDescription();
-                }
-                //Might want to consider making an extra method to make it nicer.
-
-                if (products.getDescription() == "") {
-                    ProductDescription = null;
-                } else {
-                    ProductDescription = products.getDescription();
-                }
-                //Might want to consider making an extra method to make it nicer.
-                if (products.getCompanyName() == "") {
-                    CompanyName = null;
-                } else {
-                    CompanyName = products.getCompanyName();
-                }
+                ProductNameDescription = ifElseString(products.getNameDescription());
+                ProductDescription = ifElseString(products.getDescription());
+                CompanyName = ifElseString(products.getCompanyName());
                 Price = products.getPrice();
                 Quantity = products.getQty();
-                PictureName = products.getPictureName();
+                PictureName = ifElseString(products.getPictureName());
 
+                //Checking minorvalue
                 if (category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname) == 0) {
                     int minorIDCreated = category.createMinorIDInDB(products.getMinorCategory(), propertyname);
                     MinorCategory = minorIDCreated;
@@ -188,6 +159,23 @@ public class ProductMapper implements ProductMapperInterface {
      *
      * @author - Bringordie - Frederik Braagaard
      */
+    public String ifElseString(String string) {
+        String returnvalue;
+        if (string.isEmpty() || string == null || string.equals("")) {
+            returnvalue = null;
+        } else {
+            returnvalue = string;
+        }
+        return returnvalue;
+
+    }
+
+    /**
+     *
+     * @author - Bringordie - Frederik Braagaard
+     * @param list holds all the values of the products
+     * @param propertyname used for checking to execute in production or test.
+     */
     @Override
     public void excelInsertOrUpdateToDB(ArrayList<Products> list, String propertyname) throws ClassNotFoundException, NumberFormatException, SQLException {
         int ProductID;
@@ -208,31 +196,15 @@ public class ProductMapper implements ProductMapperInterface {
             Boolean booleanIDCheck = checkIfProductExists(String.valueOf(ProductID), propertyname);
             if (booleanIDCheck == false) {
 
-                //
                 ProductName = products.getName();
-                //Might want to consider making an extra method to make it nicer.
-                if (products.getNameDescription() == "") {
-                    ProductNameDescription = null;
-                } else {
-                    ProductNameDescription = products.getNameDescription();
-                }
-                //Might want to consider making an extra method to make it nicer.
-
-                if (products.getDescription() == "") {
-                    ProductDescription = null;
-                } else {
-                    ProductDescription = products.getDescription();
-                }
-                //Might want to consider making an extra method to make it nicer.
-                if (products.getCompanyName() == "") {
-                    CompanyName = null;
-                } else {
-                    CompanyName = products.getCompanyName();
-                }
+                ProductNameDescription = ifElseString(products.getNameDescription());
+                ProductDescription = ifElseString(products.getDescription());
+                CompanyName = ifElseString(products.getCompanyName());
                 Price = products.getPrice();
                 Quantity = products.getQty();
                 PictureName = products.getPictureName();
 
+                //Checking minorvalue
                 if (category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname) == 0) {
                     int minorIDCreated = category.createMinorIDInDB(products.getMinorCategory(), propertyname);
                     MinorCategory = minorIDCreated;
@@ -283,29 +255,14 @@ public class ProductMapper implements ProductMapperInterface {
             } else {
                 ProductID = products.getId();
                 ProductName = products.getName();
-                //Might want to consider making an extra method to make it nicer.
-                if (products.getNameDescription() == "") {
-                    ProductNameDescription = null;
-                } else {
-                    ProductNameDescription = products.getNameDescription();
-                }
-                //Might want to consider making an extra method to make it nicer.
-
-                if (products.getDescription() == "") {
-                    ProductDescription = null;
-                } else {
-                    ProductDescription = products.getDescription();
-                }
-                //Might want to consider making an extra method to make it nicer.
-                if (products.getCompanyName() == "") {
-                    CompanyName = null;
-                } else {
-                    CompanyName = products.getCompanyName();
-                }
+                ProductNameDescription = ifElseString(products.getNameDescription());
+                ProductDescription = ifElseString(products.getDescription());
+                CompanyName = ifElseString(products.getCompanyName());
                 Price = products.getPrice();
                 Quantity = products.getQty();
                 PictureName = products.getPictureName();
 
+                //Checking minorvalue
                 if (category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname) == 0) {
                     int minorIDCreated = category.createMinorIDInDB(products.getMinorCategory(), propertyname);
                     MinorCategory = minorIDCreated;
