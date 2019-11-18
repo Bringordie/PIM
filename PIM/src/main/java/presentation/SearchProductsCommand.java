@@ -30,7 +30,7 @@ public class SearchProductsCommand extends Command{
           
           
           ArrayList<Products>product= new ArrayList();
-          product = db.getSearchResults(id);
+          product = db.searchProduct(id,"db.properties");
           request.getSession().setAttribute("searchResult", product);
         
         
