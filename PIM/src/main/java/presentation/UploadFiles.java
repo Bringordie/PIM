@@ -146,7 +146,7 @@ public class UploadFiles extends HttpServlet {
             JsonHandler handler = new JsonHandler();
             ArrayList<Products> s = handler.makeJSonFileIntoArray(fileNametest);
             db.jsonInsertOrUpdateToDB(s, "/db.properties");
-        } else {
+        } else if (fileNametest.contains(".xlsx") || fileNametest.contains(".xml")) {
             ExcelHandler excelhandler = new ExcelHandler();
             ArrayList<Products> products = new ArrayList();
             products = excelhandler.extractInfo(fileNametest);

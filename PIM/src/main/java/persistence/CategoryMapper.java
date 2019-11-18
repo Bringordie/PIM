@@ -52,26 +52,6 @@ public class CategoryMapper implements CategoryMapperInterface {
     }
 
     @Override
-    public void deleteMainCategory(int category, String propertyname) throws ClassNotFoundException, SQLException {
-        String sql1 = "DELETE FROM linkminormain WHERE mainid=" + category;
-        String sql2 = "DELETE FROM mainCategories WHERE categoryid=" + category;
-
-        getConnection(propertyname).prepareStatement(sql1).executeUpdate();
-        getConnection(propertyname).prepareStatement(sql2).executeUpdate();
-
-    }
-
-    @Override
-    public void deleteMinorCategory(int category, String propertyname) throws ClassNotFoundException, SQLException {
-        String sql1 = "DELETE FROM linkminormain WHERE minorid=" + category;
-        String sql2 = "DELETE FROM minorCategories WHERE categoryid=" + category;
-
-        getConnection(propertyname).prepareStatement(sql1).executeUpdate();
-        getConnection(propertyname).prepareStatement(sql2).executeUpdate();
-
-    }
-
-    @Override
     public void editMainCategory(int categoryInt, String categoryStr, String propertyname) throws ClassNotFoundException, SQLException {
         String sql = "UPDATE mainCategories SET mainCategoryName = ? WHERE categoryid =" + categoryInt;
 
@@ -278,6 +258,26 @@ public class CategoryMapper implements CategoryMapperInterface {
                 e.printStackTrace();
             }
         }
+    }
+    
+        @Override
+    public void deleteMainCategory(int category, String propertyname) throws ClassNotFoundException, SQLException {
+        String sql1 = "DELETE FROM linkminormain WHERE mainid=" + category;
+        String sql2 = "DELETE FROM mainCategories WHERE categoryid=" + category;
+        
+        getConnection(propertyname).prepareStatement(sql1).executeUpdate();
+        getConnection(propertyname).prepareStatement(sql2).executeUpdate();
+        
+    }
+
+    @Override
+    public void deleteMinorCategory(int category, String propertyname) throws ClassNotFoundException, SQLException {
+        String sql1 = "DELETE FROM linkminormain WHERE minorid=" + category;
+        String sql2 = "DELETE FROM minorCategories WHERE categoryid=" + category;
+        
+        getConnection(propertyname).prepareStatement(sql1).executeUpdate();
+        getConnection(propertyname).prepareStatement(sql2).executeUpdate();
+        
     }
 
 }

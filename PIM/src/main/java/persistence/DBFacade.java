@@ -75,6 +75,10 @@ public class DBFacade implements Facade {
         return categoryMapper.getMinorValuesFromDB(propertyname);
     }
     
+    @Override
+    public ArrayList<Products> searchProduct(int i, String propertyname) throws ClassNotFoundException, SQLException {
+        return productMapper.getSearchResults(i, propertyname);
+    }
     
         
     }
