@@ -36,6 +36,8 @@ public abstract class Command{
         commands.put("editMinorCategory", new EditMinorCategoryCommand());
         commands.put("gotoAddProduct", new GoToAddProductCommand());
         commands.put("addProduct", new AddProductCommand());
+        commands.put("gotoSearchProducts", new GoToSearchProductsCommand());
+        commands.put("searchResults", new SearchProductsCommand());
 //        commands.put("deleteProduct", new DeleteProductCommand());
     }
 

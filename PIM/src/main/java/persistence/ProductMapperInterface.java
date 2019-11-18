@@ -19,4 +19,6 @@ public interface ProductMapperInterface {
     public void addProduct(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
     
     public void deleteProduct(int ProductID) throws SQLException, ClassNotFoundException;
+    
+    public ArrayList<Products> getSearchResults(int i, String propertyname) throws SQLException, ClassNotFoundException;
 }
