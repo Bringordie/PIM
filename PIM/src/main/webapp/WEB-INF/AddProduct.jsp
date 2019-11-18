@@ -14,38 +14,39 @@
     </head>
     <body>
 
-        <h1>Add product!</h1>
+        <h1>Add a product!</h1>
 
         <form action="FrontController" name="addProduct" method="POST">
 
-            <input type="hidden" name="cmd" value="addProduct" /><br>
+            <input type="hidden" name="cmd" value="addProduct" required /><br>
 
             Add ProductID: <br />
-            <input type="text" name="ProductId" value="" /><br>
+            <input type="text" name="ProductId" value="" required /><br>
 
             Add Productname: <br />
-            <input type="text" name="ProductName" value="" /><br>
+            <input type="text" name="ProductName" value="" required /><br>
 
 
             Add ProductnameDescription: <br />
-            <input type="text" name="ProductNameDescription" value="" /><br>
+            <input type="text" name="ProductNameDescription" value="" required /><br>
 
             Add Productdescription: <br />
-            <input type="text" name="ProductDescription" value="" /><br>
+            <input type="text" name="ProductDescription" value="" required /><br>
 
             Add Companyname: <br />
-            <input type="text" name="CompanyName" value="" /><br>
+            <input type="text" name="CompanyName" value="" required /><br>
 
             Add Price: <br />
-            <input type="text" name="Price" value="" /><br>
+            <input type="text" name="Price" value="" required /><br>
 
             Add Quantity: <br />
-            <input type="text" name="Quantity" value="" /><br>
+            <input type="text" name="Quantity" value="" required /><br>
 
             Add Picturename: <br />
-            <input type="text" name="PictureName" value="" /><br>
+            <input type="text" name="PictureName" value="" required /><br>
 
-            Main category: <br />
+            Choose Main category: <br />
+            <% if (session.getAttribute("mainCategories") != null) { %>
             <table width = "10%" border = "1">
                 <thead>
                     <tr>
@@ -57,13 +58,17 @@
                     <c:forEach var="Categories" items="${mainCategories}">
                         <tr>
                             <td><c:out value="${Categories.getName()}" /></td>
-                            <td><input type="radio" name="mainid" value="${Categories.getID()}"</td>
+                            <td><input type="radio" name="mainid" value="${Categories.getID()}" required></td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
+            <% } else {%>
+            <p>There are no main categories!</p>
+            <% }%>
             <br>
-            Minor category: <br />
+            Choose Minor category: <br />
+            <% if (session.getAttribute("minorCategories") != null) { %>
             <table width = "10%" border = "1">
                 <thead>
                     <tr>
@@ -75,7 +80,7 @@
                     <c:forEach var="Categories" items="${minorCategories}">
                         <tr>
                             <td><c:out value="${Categories.getName()}" /></td>
-                            <td><input type="radio" name="minorid" value="${Categories.getID()}"</td>
+                            <td><input type="radio" name="minorid" value="${Categories.getID()}" required></td>
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -100,6 +105,9 @@
             </select> --%>
 
             <input type="submit" value="Submit" />
+            <% } else {%>
+            <p>There are no minor categories!</p>
+            <% }%>
         </form>
     </body>
 </html>

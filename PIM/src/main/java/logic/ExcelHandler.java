@@ -18,7 +18,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ExcelHandler {
 
 
-    public ArrayList<Products> extractInfo(String fileName) {
+    public ArrayList<Products> extractInfo(String fileName) throws IOException {
         ArrayList<Products> productList = new ArrayList<>();
         Workbook wb = null;
         try {

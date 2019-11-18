@@ -20,6 +20,7 @@
                     <h3>Delete a main category:</h3>
                     <form name="deleteMainCategory" action="FrontController" method="POST">
                         <input type="hidden" name="cmd" value="deleteMainCategory">
+                        <% if (session.getAttribute("mainCategories") != null) { %>
                         <table width = "50%" border = "1" align = "center">
                             <thead>
                                 <tr>
@@ -31,18 +32,22 @@
                                 <c:forEach var="Categories" items="${mainCategories}">
                                     <tr>
                                         <td><c:out value="${Categories.getName()}" /></td>
-                                        <td><input type="radio" name="id" value="${Categories.getID()}"</td>
+                                        <td><input type="radio" name="id" value="${Categories.getID()}" required></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
                         </table>
                         <br>
                         <input type="submit" value="Submit">
+                        <% } else {%>
+                        <p>There are no main categories!</p>
+                        <% }%>
                     </form>
                     <br>
                     <h3>Delete a minor category:</h3>
                     <form name="deleteMinorCategory" action="FrontController" method="POST">
                         <input type="hidden" name="cmd" value="deleteMinorCategory">
+                        <% if (session.getAttribute("minorCategories") != null) { %>
                         <table width = "50%" border = "1" align = "center">
                             <thead>
                                 <tr>
@@ -54,13 +59,16 @@
                                 <c:forEach var="Categories" items="${minorCategories}">
                                     <tr>
                                         <td><c:out value="${Categories.getName()}" /></td>
-                                        <td><input type="radio" name="id" value="${Categories.getID()}"</td>
+                                        <td><input type="radio" name="id" value="${Categories.getID()}" required></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
                         </table>
                         <br>
                         <input type="submit" value="Submit">
+                        <% } else {%>
+                        <p>There are no minor categories!</p>
+                        <% }%>
                     </form>
                 </td>
             </tr>

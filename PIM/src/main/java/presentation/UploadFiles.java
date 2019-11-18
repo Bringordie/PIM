@@ -140,7 +140,7 @@ public class UploadFiles extends HttpServlet {
         }
     }
 
-    public void uploadToDB(String fileNametest) throws ClassNotFoundException, FileNotFoundException, SQLException {
+    public void uploadToDB(String fileNametest) throws ClassNotFoundException, FileNotFoundException, SQLException, IOException {
         DBFacade db = new DBFacade();
         if (fileNametest.contains(".json")) {
             JsonHandler handler = new JsonHandler();

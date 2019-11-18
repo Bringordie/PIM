@@ -1,6 +1,7 @@
 package DBtest;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import logic.ExcelHandler;
@@ -41,7 +42,7 @@ public class DBtest {
     }
 
     @Test
-    public void testUploadOfExcelUploadEmptyRow() throws SQLException, ClassNotFoundException {
+    public void testUploadOfExcelUploadEmptyRow() throws SQLException, ClassNotFoundException, IOException {
         String fileName = "src\\test\\java\\files\\linewithemptyrow.xlsx";
         ArrayList<Products> product = excelhandler.extractInfo(fileName);
         dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
@@ -58,7 +59,7 @@ public class DBtest {
     }
 
     @Test
-    public void testUploadOfExcelUpload() throws SQLException, ClassNotFoundException {
+    public void testUploadOfExcelUpload() throws SQLException, ClassNotFoundException, IOException {
         String fileName = "src\\test\\java\\files\\linewithoutemptyrow.xlsx";
         ArrayList<Products> product = excelhandler.extractInfo(fileName);
         dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
@@ -83,7 +84,7 @@ public class DBtest {
     }
 
     @Test
-    public void testEmptyRowIsNullExcel() throws SQLException, ClassNotFoundException {
+    public void testEmptyRowIsNullExcel() throws SQLException, ClassNotFoundException, IOException {
         String fileName = "src\\test\\java\\files\\linewithemptyrow.xlsx";
         ArrayList<Products> product = excelhandler.extractInfo(fileName);
         dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);

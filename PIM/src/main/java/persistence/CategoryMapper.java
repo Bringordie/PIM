@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.logging.Level;
@@ -22,10 +23,13 @@ public class CategoryMapper implements CategoryMapperInterface {
         String sql = "INSERT INTO mainCategories (mainCategoryName) VALUES (?)";
         try {
 
-            PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
+            PreparedStatement statement = getConnection(propertyname).prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, category);
             statement.executeUpdate();
-            //int id = getMainMaxID();
+//            ResultSet ids = statement.getGeneratedKeys();
+//            ids.next();
+//            int id = ids.getInt(1);
+            
 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CategoryMapper.class.getName()).log(Level.SEVERE, null, ex);

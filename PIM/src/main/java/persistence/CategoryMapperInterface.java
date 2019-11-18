@@ -1,5 +1,6 @@
 package persistence;
 
+import exceptions.CategoryException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,7 +12,7 @@ import logic.Categories;
  */
 public interface CategoryMapperInterface {
     
-    public void addMainCategory (String category, String propertyname);
+    public void addMainCategory (String category, String propertyname) throws CategoryException;
     
     public void addMinorCategory (String category, String propertyname);
         
