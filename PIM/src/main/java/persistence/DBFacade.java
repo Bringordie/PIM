@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.Categories;
@@ -78,6 +77,11 @@ public class DBFacade implements Facade {
     @Override
     public ArrayList<Products> searchProduct(int i, String propertyname) throws ClassNotFoundException, SQLException {
         return productMapper.getSearchResults(i, propertyname);
+    }
+
+    @Override
+    public ArrayList<Products> showAllProducts(String propertyname) throws SQLException, ClassNotFoundException {
+        return productMapper.showAllProducts(propertyname);
     }
     
         

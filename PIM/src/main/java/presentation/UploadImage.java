@@ -81,7 +81,7 @@ public class UploadImage extends HttpServlet {
                         // load the properties file
                         Properties properties = new Properties();
                         properties.load(sa);
-                        // assign db parameters
+                        // assign properties parameters
                         String path = properties.getProperty("picturepath");
 
                         String fileNameAndPath = path + finalimage;

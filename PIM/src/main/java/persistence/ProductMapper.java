@@ -371,8 +371,8 @@ public class ProductMapper implements ProductMapperInterface {
     public void deleteProduct(int ProductID) throws SQLException, ClassNotFoundException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-        @Override
+
+    @Override
     public ArrayList<Products> getSearchResults(int i, String propertyname) throws SQLException, ClassNotFoundException {
 
         ArrayList<Products> searchResults = new ArrayList();
@@ -383,8 +383,8 @@ public class ProductMapper implements ProductMapperInterface {
             while (result.next()) {
                 int ProductID = result.getInt(1);
                 String ProductName = result.getString(2);
-                String ProductNameDescription = result.getString(3) ;
-                String ProductDescription = result.getString(4) ;
+                String ProductNameDescription = result.getString(3);
+                String ProductDescription = result.getString(4);
                 String CompanyName = result.getString(5);
                 double Price = result.getDouble(6);
                 int Quantity = result.getInt(7);
@@ -394,9 +394,41 @@ public class ProductMapper implements ProductMapperInterface {
                 String MainCategory = result.getString(11);
                 searchResults.add(new Products(ProductID, ProductName, ProductNameDescription, ProductDescription, CompanyName, Price, Quantity, PictureName, PublishedStatus, MinorCategory, MainCategory));
             }
-            
-                    }catch(SQLException e){
-                    System.out.println(e);
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return searchResults;
+    }
+
+    /**
+     *
+     * @author - Bringordie - Frederik Braagaard
+     */
+    @Override
+    public ArrayList<Products> showAllProducts(String propertyname) throws SQLException, ClassNotFoundException {
+        ArrayList<Products> searchResults = new ArrayList();
+        String sql = "SELECT * FROM products ORDER BY minorCategory ASC";
+        ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
+
+        try {
+            while (result.next()) {
+                int ProductID = result.getInt(1);
+                String ProductName = result.getString(2);
+                String ProductNameDescription = result.getString(3);
+                String ProductDescription = result.getString(4);
+                String CompanyName = result.getString(5);
+                double Price = result.getDouble(6);
+                int Quantity = result.getInt(7);
+                String PictureName = result.getString(8);
+                boolean PublishedStatus = result.getBoolean(9);
+                String MinorCategory = result.getString(10);
+                String MainCategory = result.getString(11);
+                searchResults.add(new Products(ProductID, ProductName, ProductNameDescription, ProductDescription, CompanyName, Price, Quantity, PictureName, PublishedStatus, MinorCategory, MainCategory));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
         }
         return searchResults;
     }

@@ -35,4 +35,6 @@ public interface Facade {
     public ArrayList<Categories> getMinorCategories (String propertyname) throws ClassNotFoundException, SQLException;
     
     public ArrayList<Products> searchProduct(int i, String propertyname) throws ClassNotFoundException, SQLException;
+    
+    public ArrayList<Products> showAllProducts(String propertyname) throws SQLException, ClassNotFoundException;
 }

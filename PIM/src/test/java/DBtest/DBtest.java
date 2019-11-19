@@ -148,9 +148,9 @@ public class DBtest {
         dbfacade.addMainCategory("Oksekød", DBPROPERTYTEST);
 
         dbfacade.editMainCategory(1, "Svinekød", DBPROPERTYTEST);
-        String dbcall2 = dbextra.getCustomDataFromDB("select mainCategoryName from mainCategories");
+        String dbcall = dbextra.getCustomDataFromDB("select mainCategoryName from mainCategories");
         String expectednow = "Svinekød";
-        assertEquals(dbcall2, expectednow);
+        assertEquals(dbcall, expectednow);
     }
 
     @Test
@@ -158,9 +158,9 @@ public class DBtest {
         dbfacade.addMinorCategory("Salat", DBPROPERTYTEST);
 
         dbfacade.editMinorCategory(1, "Frugt", DBPROPERTYTEST);
-        String dbcall2 = dbextra.getCustomDataFromDB("select minorCategoryName from minorCategories");
+        String dbcall = dbextra.getCustomDataFromDB("select minorCategoryName from minorCategories");
         String expectednow = "Frugt";
-        assertEquals(dbcall2, expectednow);
+        assertEquals(dbcall, expectednow);
     }
     
 }
