@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    <%@ include file = "header.jsp" %>
     <body>
         <h1>Resultater på ID:</h1>
         <table width = "50%" border = "1" align = "center">

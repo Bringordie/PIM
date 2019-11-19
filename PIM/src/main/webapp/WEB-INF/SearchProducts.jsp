@@ -12,6 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Search Products</title>
     </head>
+    <%@ include file = "header.jsp" %>
     <body>
         <h1>Brug søgefunktionen til at finde produkter efter ID</h1>
         <br>

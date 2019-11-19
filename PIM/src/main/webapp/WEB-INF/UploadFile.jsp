@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Upload File</title>
     </head>
+    <%@ include file = "header.jsp" %>
     <body>
         <h3>File Upload:</h3>
         Select a <b>JSON</b> or <b>EXCEL</b> file to upload: 

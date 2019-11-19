@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : AddCategory
     Created on : Nov 11, 2019, 11:27:45 AM
     Author     : Malthe
@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add Category</title>
     </head>
+    <%@ include file = "header.jsp" %>
     <body>
         <h1>Add a new category:</h1>
         <table>

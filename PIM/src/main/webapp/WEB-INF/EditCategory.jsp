@@ -12,6 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edit Category</title>
     </head>
+    <%@ include file = "header.jsp" %>
     <body>
         <h1>Edit the name of a main or minor category:</h1>
         <table>
