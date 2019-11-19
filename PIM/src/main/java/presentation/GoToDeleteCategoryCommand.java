@@ -26,13 +26,21 @@ public class GoToDeleteCategoryCommand extends Command {
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         ArrayList<Categories> mainCategories = new ArrayList();
         //mainCategories = category.getMainValuesFromDB("/db.properties");
-        mainCategories = db.getMainCategories("/db.properties");
-        request.getSession().setAttribute("mainCategories", mainCategories);
+        mainCategories = db.getMinorCategories("/db.properties");
+        if (mainCategories.size() != 0) {
+            request.getSession().setAttribute("mainCategories", mainCategories);
+        } else {
+            request.getSession().setAttribute("mainCategories", null);
+        }
         
         ArrayList<Categories> minorCategories = new ArrayList();
         //minorCategories = category.getMinorValuesFromDB("/db.properties");
         minorCategories = db.getMinorCategories("/db.properties");
-        request.getSession().setAttribute("minorCategories", minorCategories);
+        if (minorCategories.size() != 0) {
+            request.getSession().setAttribute("minorCategories", minorCategories);
+        } else {
+            request.getSession().setAttribute("minorCategories", null);
+        }
         
         return "DeleteCategory";
     }
