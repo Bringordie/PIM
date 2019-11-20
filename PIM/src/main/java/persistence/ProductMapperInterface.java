@@ -16,7 +16,7 @@ public interface ProductMapperInterface {
     
     public boolean checkIfProductExists(String s, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public void addProduct(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
+    public String addProduct(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
     
     public void deleteProduct(int ProductID) throws SQLException, ClassNotFoundException;
     

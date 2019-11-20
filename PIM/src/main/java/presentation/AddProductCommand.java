@@ -31,10 +31,14 @@ public class AddProductCommand extends Command {
        String picturename = (request.getParameter("PictureName"));
        String minorcategory = request.getParameter("minorid");
        String maincategory = request.getParameter("mainid");
-             
+       
+       String returnvalue = "";
+       
        products.add(new Products(id, productname, productnamedescription, productdescription, companyname, price, quantity, picturename, true ,minorcategory, maincategory));
-       db.addProduct(products, "/db.properties");
+       returnvalue = db.addProduct(products, "/db.properties");
       
+       request.getSession().setAttribute("returnproductvalue", returnvalue); 
+       
        
         return"AddProduct"; 
     }

@@ -340,31 +340,38 @@ public class ProductMapper implements ProductMapperInterface {
     }
 
     @Override
-    public void addProduct(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException {
-        try {
-            for (Products product : products) {
-                String sql = "INSERT INTO products(productid, name, nameDescription, "
-                        + "description, companyName, price, quantity, pictureName, "
-                        + "publishedStatus, minorCategory, mainCategory)"
-                        + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-                PreparedStatement statement = getConnection((propertyname)).prepareStatement(sql);
-                statement.setInt(1, product.getId());
-                statement.setString(2, product.getName());
-                statement.setString(3, product.getNameDescription());
-                statement.setString(4, product.getDescription());
-                statement.setString(5, product.getCompanyName());
-                statement.setDouble(6, product.getPrice());
-                statement.setInt(7, product.getQty());
-                statement.setString(8, product.getPictureName());
-                statement.setBoolean(9, product.getPublishedStatus());
-                statement.setString(10, product.getMinorCategory());
-                statement.setString(11, product.getMainCategory());
-                statement.executeUpdate();
+    public String addProduct(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException {
+        String returnvalue = "";
+        for (Products product : products) {
+            Boolean booleanIDCheck = checkIfProductExists(String.valueOf(product.getId()), propertyname);
+            if (booleanIDCheck == false) {
+                returnvalue = "productadded";
+                try {
+                    String sql = "INSERT INTO products(productid, name, nameDescription, "
+                            + "description, companyName, price, quantity, pictureName, "
+                            + "publishedStatus, minorCategory, mainCategory)"
+                            + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                    PreparedStatement statement = getConnection((propertyname)).prepareStatement(sql);
+                    statement.setInt(1, product.getId());
+                    statement.setString(2, product.getName());
+                    statement.setString(3, product.getNameDescription());
+                    statement.setString(4, product.getDescription());
+                    statement.setString(5, product.getCompanyName());
+                    statement.setDouble(6, product.getPrice());
+                    statement.setInt(7, product.getQty());
+                    statement.setString(8, product.getPictureName());
+                    statement.setBoolean(9, product.getPublishedStatus());
+                    statement.setString(10, product.getMinorCategory());
+                    statement.setString(11, product.getMainCategory());
+                    statement.executeUpdate();
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            } else {
+                returnvalue = "alreadyexists";
             }
-        } catch (SQLException e) {
-            System.out.println(e);
         }
-
+        return returnvalue;
     }
 
     @Override
@@ -432,47 +439,48 @@ public class ProductMapper implements ProductMapperInterface {
         }
         return searchResults;
     }
-    
-    
-         public void EditProduct(int id, Products product) throws SQLException, ClassNotFoundException {
- 
-        try {  
-          {
-        String sql = ("UPDATE products SET productid = (?), name = (?), nameDescription= (?), "
+
+    public void EditProduct(int id, Products product) throws SQLException, ClassNotFoundException {
+
+        try {
+            {
+                String sql = ("UPDATE products SET productid = (?), name = (?), nameDescription= (?), "
                         + "description= (?), companyName= (?), price= (?), quantity= (?), pictureName= (?), "
                         + "publishedStatus= (?), minorCategory= (?), mainCategory= (?) WHERE (`productid` = '" + id + "');");
-            PreparedStatement statement = getConnection(("/db.properties")).prepareStatement(sql);
-            statement.setInt(1, product.getId());
-            statement.setString(2, product.getName());
-            statement.setString(3, product.getNameDescription());
-            statement.setString(4, product.getDescription());
-            statement.setString(5, product.getCompanyName());
-            statement.setDouble(6, product.getPrice());
-            statement.setInt(7, product.getQty());
-            statement.setString(8, product.getPictureName());
-            statement.setBoolean(9, product.getPublishedStatus());
-            statement.setString(10, product.getMinorCategory());
-            statement.setString(11, product.getMainCategory());
-            statement.executeUpdate(); }  
+                PreparedStatement statement = getConnection(("/db.properties")).prepareStatement(sql);
+                statement.setInt(1, product.getId());
+                statement.setString(2, product.getName());
+                statement.setString(3, product.getNameDescription());
+                statement.setString(4, product.getDescription());
+                statement.setString(5, product.getCompanyName());
+                statement.setDouble(6, product.getPrice());
+                statement.setInt(7, product.getQty());
+                statement.setString(8, product.getPictureName());
+                statement.setBoolean(9, product.getPublishedStatus());
+                statement.setString(10, product.getMinorCategory());
+                statement.setString(11, product.getMainCategory());
+                statement.executeUpdate();
+            }
         } catch (SQLException e) {
             System.out.println(e);
-        }}
-    
- 
- public void DeleteProduct(int id) throws SQLException, ClassNotFoundException {
- 
-        try {  
-           {
-          String sql = "DELETE FROM products WHERE productid = ?";
-            PreparedStatement statement = getConnection(("/db.properties")).prepareStatement(sql);
-            statement.setInt(1, id);
-            
-            statement.executeUpdate(); }  
-        } catch (SQLException e) {
-            System.out.println(e);
-  
+        }
     }
 
-}
+    public void DeleteProduct(int id) throws SQLException, ClassNotFoundException {
+
+        try {
+            {
+                String sql = "DELETE FROM products WHERE productid = ?";
+                PreparedStatement statement = getConnection(("/db.properties")).prepareStatement(sql);
+                statement.setInt(1, id);
+
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+
+        }
+
+    }
 
 }

@@ -16,7 +16,7 @@ public interface Facade {
     
     public void excelInsertOrUpdateToDB(ArrayList<Products> product, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public void addProduct(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
+    public String addProduct(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
     
     public void addMainCategory (String category, String propertyname);
     

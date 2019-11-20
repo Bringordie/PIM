@@ -30,8 +30,8 @@ public class DBFacade implements Facade {
     }
 
     @Override
-    public void addProduct(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException {
-        productMapper.addProduct(products, propertyname);
+    public String addProduct(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException {
+        return productMapper.addProduct(products, propertyname);
     } 
 
     @Override
