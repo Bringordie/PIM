@@ -14,7 +14,7 @@
     <%@ include file = "header.jsp" %>
     <body>
       
-        <h1>Hello World!</h1>
+       <h1>Delete product!</h1>
         
         <form action="FrontController" name="deleteProduct" method="POST">
             
