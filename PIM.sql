@@ -18,7 +18,7 @@ CREATE TABLE minorCategories (
 
 CREATE TABLE linkMinorMain (
 	mainid INT NOT NULL,
-    minorid INT NOT NULL UNIQUE,
+    minorid INT NOT NULL,
     FOREIGN KEY (mainid) REFERENCES mainCategories(categoryid),
     FOREIGN KEY (minorid) REFERENCES minorCategories(categoryid)
 );
