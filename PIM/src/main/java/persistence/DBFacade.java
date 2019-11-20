@@ -1,18 +1,9 @@
 package persistence;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import logic.Categories;
 import logic.Products;
-//import logic.Productsint;
-import static persistence.DBConnection.getConnection;
 
 public class DBFacade implements Facade {
     ProductMapper productMapper = new ProductMapper();
@@ -25,7 +16,6 @@ public class DBFacade implements Facade {
 
     @Override
     public void excelInsertOrUpdateToDB(ArrayList<Products> product, String propertyname) throws SQLException, ClassNotFoundException {
-        //productMapper.saveToDatabaseExcel(dataHolder, propertyname);
         productMapper.excelInsertOrUpdateToDB(product, propertyname);
     }
 

@@ -21,7 +21,8 @@ public class FrontController extends HttpServlet {
             Command cmd = Command.from(request);
             String view = cmd.execute(request, response);
             request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(request, response);
-        } catch (SQLException ex) {
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 

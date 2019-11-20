@@ -18,7 +18,6 @@ public class AddMinorCategoryCommand extends Command {
         
         String minorCatName = request.getParameter("MinorName");
         db.addMinorCategory(minorCatName, "/db.properties");
-        //category.addMinorCategory(minorCatName, "/db.properties");
         
         return "AddCategory";
     }

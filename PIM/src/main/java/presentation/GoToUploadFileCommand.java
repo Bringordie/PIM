@@ -8,10 +8,7 @@ package presentation;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Malthe
- */
+
 public class GoToUploadFileCommand extends Command {
     
     @Override

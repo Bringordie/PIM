@@ -8,7 +8,6 @@ package presentation;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +25,6 @@ public class GoToEditCategoryCommand extends Command {
         
         
          ArrayList<Categories> mainCategories = new ArrayList();
-        //mainCategories = category.getMainValuesFromDB("/db.properties");
         mainCategories = db.getMainCategories("/db.properties");
         if (mainCategories.size() != 0) {
             request.getSession().setAttribute("mainCategories", mainCategories);
@@ -35,7 +33,6 @@ public class GoToEditCategoryCommand extends Command {
         }
         
         ArrayList<Categories> minorCategories = new ArrayList();
-        //minorCategories = category.getMinorValuesFromDB("/db.properties");
         minorCategories = db.getMinorCategories("/db.properties");
         if (minorCategories.size() != 0) {
             request.getSession().setAttribute("minorCategories", minorCategories);

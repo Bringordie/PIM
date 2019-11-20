@@ -21,15 +21,6 @@ public class Products {
     private final boolean PublishedStatus;
     private final String MinorCategory;
     private final String MainCategory;
-    private static ArrayList<Products> productTempHolder;
-
-    public static void setProductsTempHolder(ArrayList<Products> products) {
-        Products.productTempHolder = products;
-    }
-
-    public static ArrayList<Products> getProductsTempHolder() {
-        return productTempHolder;
-    }
 
     public Products(int ProductID, String ProductName, String ProductNameDescription, 
              String ProductDescription, String CompanyName, double Price, int Quantity, 
@@ -79,16 +70,8 @@ public class Products {
         return MainCategory;
     }
 
-    public static ArrayList<Products> getProductTempHolder() {
-        return productTempHolder;
-    }
-
     public int getId() {
         return ProductID;
-    }
-
-    public static void emptyProductHolder() {
-        productTempHolder.clear();
     }
 
     public double getPrice() {

@@ -262,21 +262,29 @@ public class CategoryMapper implements CategoryMapperInterface {
     
         @Override
     public void deleteMainCategory(int category, String propertyname) throws ClassNotFoundException, SQLException {
-        String sql1 = "DELETE FROM linkminormain WHERE mainid=" + category;
-        String sql2 = "DELETE FROM mainCategories WHERE categoryid=" + category;
+        String sql1 = "update products set publishedStatus = 0 where mainCategory =" + category;
+        String sql2 = "update products set mainCategory = NULL where mainCategory =" + category;
+        String sql3 = "DELETE FROM linkminormain WHERE mainid=" + category;
+        String sql4 = "DELETE FROM mainCategories WHERE categoryid=" + category;
         
         getConnection(propertyname).prepareStatement(sql1).executeUpdate();
         getConnection(propertyname).prepareStatement(sql2).executeUpdate();
+        getConnection(propertyname).prepareStatement(sql3).executeUpdate();
+        getConnection(propertyname).prepareStatement(sql4).executeUpdate();
         
     }
 
     @Override
     public void deleteMinorCategory(int category, String propertyname) throws ClassNotFoundException, SQLException {
-        String sql1 = "DELETE FROM linkminormain WHERE minorid=" + category;
-        String sql2 = "DELETE FROM minorCategories WHERE categoryid=" + category;
+        String sql1 = "update products set publishedStatus = 0 where minorCategory =" + category;
+        String sql2 = "update products set minorCategory = NULL where minorCategory =" + category;
+        String sql3 = "DELETE FROM linkminormain WHERE minorid=" + category;
+        String sql4 = "DELETE FROM minorCategories WHERE categoryid=" + category;
         
         getConnection(propertyname).prepareStatement(sql1).executeUpdate();
         getConnection(propertyname).prepareStatement(sql2).executeUpdate();
+        getConnection(propertyname).prepareStatement(sql3).executeUpdate();
+        getConnection(propertyname).prepareStatement(sql4).executeUpdate();
         
     }
 
