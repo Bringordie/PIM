@@ -84,5 +84,15 @@ public class DBFacade implements Facade {
         return productMapper.showAllProducts(propertyname);
     }
     
+    @Override
+    public void EditProduct (int id, Products product, String propertyname) throws SQLException, ClassNotFoundException {
+        productMapper.EditProduct(id, product, propertyname);
+    } 
+    
+    @Override
+    public void DeleteProduct (int id, String propertyname) throws SQLException, ClassNotFoundException {
+        productMapper.DeleteProduct(id, propertyname);
+    } 
+
         
-    }
+}

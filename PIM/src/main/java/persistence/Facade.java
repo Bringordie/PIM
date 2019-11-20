@@ -37,4 +37,9 @@ public interface Facade {
     public ArrayList<Products> searchProduct(int i, String propertyname) throws ClassNotFoundException, SQLException;
     
     public ArrayList<Products> showAllProducts(String propertyname) throws SQLException, ClassNotFoundException;
+        
+    public void EditProduct(int id, Products product, String propertyname) throws SQLException, ClassNotFoundException;
+    
+    public void DeleteProduct(int id, String propertyname) throws SQLException, ClassNotFoundException;
+
 }

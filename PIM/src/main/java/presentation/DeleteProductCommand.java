@@ -1,3 +1,4 @@
+
 package presentation;
 
 import java.io.IOException;
@@ -8,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.Products;
 import persistence.DBFacade;
-import persistence.ProductMapper;
 import presentation.UploadFiles;
 
 /**
@@ -17,13 +17,13 @@ import presentation.UploadFiles;
  */
 public class DeleteProductCommand extends Command {
     
-    ProductMapper productmapper = new ProductMapper();
+    DBFacade dbfacade = new DBFacade();
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) 
        throws ServletException, IOException, SQLException, ClassNotFoundException{
         //TODO
-      productmapper.DeleteProduct(Integer.parseInt(request.getParameter("ProductId")));
+      dbfacade.DeleteProduct(Integer.parseInt(request.getParameter("ProductId")), "/db.properties");
  
         return"DeleteProduct"; 
     }

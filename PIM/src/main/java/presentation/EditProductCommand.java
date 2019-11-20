@@ -35,8 +35,9 @@ public class EditProductCommand extends Command {
        String minorcategory = "1";
        String maincategory = "1";
        
-        productmapper.EditProduct(id, new Products(id, productname, productnamedescription, productdescription, companyname, price, quantity, picturename, true ,minorcategory, maincategory));
+    productmapper.EditProduct(id, new Products(id, productname, productnamedescription, productdescription, companyname, price, quantity, picturename, true ,minorcategory, maincategory), "/db.properties");
     
+
       
       
         return"EditProduct"; 
