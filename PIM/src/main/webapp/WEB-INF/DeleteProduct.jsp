@@ -22,28 +22,6 @@
              Delete ProductID: <br />
             <input type="text" name="ProductId" value="" /><br>
              
-            Delete Productname: <br />
-            <input type="text" name="ProductName" value="" /><br>
-            
-            
-             Delete ProductnameDescription: <br />
-            <input type="text" name="ProductNameDescription" value="" /><br>
-            
-             Delete Productdescription: <br />
-            <input type="text" name="ProductDescription" value="" /><br>
-            
-             Delete Companyname: <br />
-            <input type="text" name="CompanyName" value="" /><br>
-            
-             Delete Price: <br />
-            <input type="text" name="Price" value="" /><br>
-            
-             Delete Quantity: <br />
-            <input type="text" name="Quantity" value="" /><br>
-            
-             Delete Picturename: <br />
-            <input type="text" name="PictureName" value="" /><br>
-            
             
             <input type="submit" value="Submit" />
         </form>
