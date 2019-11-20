@@ -37,6 +37,7 @@ public abstract class Command{
          commands.put("gotoDeleteProduct", new GotoDeleteProductCommand());
         commands.put("deleteProduct", new DeleteProductCommand());
         commands.put("gotoEditProduct", new GotoEditProductCommand());
+        commands.put("editProductSearch", new EditProductSearchCommand());
         commands.put("editProduct", new EditProductCommand());
 //        commands.put("deleteProduct", new DeleteProductCommand());
     }

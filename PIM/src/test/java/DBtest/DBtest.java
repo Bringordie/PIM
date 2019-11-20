@@ -35,14 +35,16 @@ public class DBtest {
 
     }
 
+    @Ignore
     @Test
-    public void testConnectionIsOK() throws SQLException, ClassNotFoundException {
+    public void connectionTest() throws SQLException, ClassNotFoundException {
         assertNotNull(DBConnection.getConnection(DBPROPERTYTEST));
 
     }
 
+    @Ignore
     @Test
-    public void testUploadOfExcelUploadEmptyRow() throws SQLException, ClassNotFoundException, IOException {
+    public void uploadOfExcelUploadEmptyRow() throws SQLException, ClassNotFoundException, IOException {
         String fileName = "src\\test\\java\\files\\linewithemptyrow.xlsx";
         ArrayList<Products> product = excelhandler.extractInfo(fileName);
         dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
@@ -58,20 +60,55 @@ public class DBtest {
 
     }
 
+    @Ignore
     @Test
-    public void testUploadOfExcelUpload() throws SQLException, ClassNotFoundException, IOException {
+    public void uploadOfExcelUpload() throws SQLException, ClassNotFoundException, IOException {
         String fileName = "src\\test\\java\\files\\linewithoutemptyrow.xlsx";
         ArrayList<Products> product = excelhandler.extractInfo(fileName);
         dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
 
-        String expectedrequired = "1";
-        String actuallyrequired = dbextra.getCustomDataFromDB("select publishedStatus from products;");
-        assertEquals(expectedrequired, actuallyrequired);
+        String expected = "1";
+        String actually = dbextra.getCustomDataFromDB("select publishedStatus from products;");
+        assertEquals(expected, actually);
 
     }
-
+    
+    @Ignore
     @Test
-    public void testUploadOfJsonUpload() throws SQLException, ClassNotFoundException, FileNotFoundException {
+    public void updateOfExcelUpload() throws SQLException, ClassNotFoundException, IOException {
+        String fileName = "src\\test\\java\\files\\linewithoutemptyrow.xlsx";
+        ArrayList<Products> product = excelhandler.extractInfo(fileName);
+        dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
+        dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
+        dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
+        dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
+
+        String expected = "1";
+        String actually = dbextra.getCustomDataFromDB("select publishedStatus from products;");
+        assertEquals(expected, actually);
+
+    }
+    
+    @Ignore
+    @Test
+    public void creationOfLinkedMMOfExcelUpload() throws SQLException, ClassNotFoundException, IOException {
+        String fileName = "src\\test\\java\\files\\linewithoutemptyrow.xlsx";
+        ArrayList<Products> product = excelhandler.extractInfo(fileName);
+        dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
+        String expectedminor = "1";
+        String expectedmain = "1";
+        
+        String actuallymain = dbextra.getCustomDataFromDB("select mainid from linkMinorMain;");
+        assertEquals(expectedmain, actuallymain);
+        
+        String actuallyminor = dbextra.getCustomDataFromDB("select minorid from linkMinorMain;");
+        assertEquals(expectedminor, actuallyminor);
+        
+    }
+    
+    @Ignore
+    @Test
+    public void uploadOfJsonUpload() throws SQLException, ClassNotFoundException, FileNotFoundException {
         String fileName = "src\\test\\java\\files\\singledata.json";
         ArrayList<Products> product = jsonhandler.makeJSonFileIntoArray(fileName);
         dbfacade.jsonInsertOrUpdateToDB(product, DBPROPERTYTEST);
@@ -82,9 +119,27 @@ public class DBtest {
         assertEquals(expected, Integer.parseInt(dbcall));
 
     }
-
+    
+    @Ignore
     @Test
-    public void testEmptyRowIsNullExcel() throws SQLException, ClassNotFoundException, IOException {
+    public void updateOfJsonUpload() throws SQLException, ClassNotFoundException, FileNotFoundException {
+        String fileName = "src\\test\\java\\files\\singledata.json";
+        ArrayList<Products> product = jsonhandler.makeJSonFileIntoArray(fileName);
+        dbfacade.jsonInsertOrUpdateToDB(product, DBPROPERTYTEST);
+        dbfacade.jsonInsertOrUpdateToDB(product, DBPROPERTYTEST);
+        dbfacade.jsonInsertOrUpdateToDB(product, DBPROPERTYTEST);
+        dbfacade.jsonInsertOrUpdateToDB(product, DBPROPERTYTEST);
+
+        int expected = 1;
+        String dbcall = dbextra.getCustomDataFromDB("select COUNT(name) from products;");
+
+        assertEquals(expected, Integer.parseInt(dbcall));
+
+    }
+
+    @Ignore
+    @Test
+    public void emptyRowIsNullExcel() throws SQLException, ClassNotFoundException, IOException {
         String fileName = "src\\test\\java\\files\\linewithemptyrow.xlsx";
         ArrayList<Products> product = excelhandler.extractInfo(fileName);
         dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
@@ -95,8 +150,9 @@ public class DBtest {
 
     }
 
+    @Ignore
     @Test
-    public void testCreationOfMainCategory() throws SQLException, ClassNotFoundException {
+    public void creationOfMainCategory() throws SQLException, ClassNotFoundException {
         dbfacade.addMainCategory("Frost", DBPROPERTYTEST);
 
         String dbcall = dbextra.getCustomDataFromDB("select mainCategoryName from mainCategories");
@@ -105,8 +161,9 @@ public class DBtest {
 
     }
 
+    @Ignore
     @Test
-    public void testCreationOfMinorCategory() throws SQLException, ClassNotFoundException {
+    public void creationOfMinorCategory() throws SQLException, ClassNotFoundException {
         dbfacade.addMinorCategory("Salat", DBPROPERTYTEST);
 
         String dbcall = dbextra.getCustomDataFromDB("select minorCategoryName from minorCategories");
@@ -115,8 +172,9 @@ public class DBtest {
 
     }
 
+    @Ignore
     @Test
-    public void testDeletionOfMainCategory() throws SQLException, ClassNotFoundException {
+    public void deletionOfMainCategory() throws SQLException, ClassNotFoundException {
         dbfacade.addMainCategory("Salat", DBPROPERTYTEST);
 
         String dbcall = dbextra.getCustomDataFromDB("select COUNT(mainCategoryName) from mainCategories");
@@ -126,11 +184,12 @@ public class DBtest {
         dbfacade.deleteMainCategory(1, DBPROPERTYTEST);
         String dbcall2 = dbextra.getCustomDataFromDB("select COUNT(mainCategoryName) from mainCategories");
         String expectednow = "0";
-        assertEquals(dbcall2, expectednow);
+        assertEquals(expectednow, dbcall2);
     }
 
+    @Ignore
     @Test
-    public void testDeletionOfMinorCategory() throws SQLException, ClassNotFoundException {
+    public void deletionOfMinorCategory() throws SQLException, ClassNotFoundException {
         dbfacade.addMinorCategory("Salat", DBPROPERTYTEST);
 
         String dbcall = dbextra.getCustomDataFromDB("select COUNT(minorCategoryName) from minorCategories");
@@ -140,27 +199,159 @@ public class DBtest {
         dbfacade.deleteMinorCategory(1, DBPROPERTYTEST);
         String dbcall2 = dbextra.getCustomDataFromDB("select COUNT(minorCategoryName) from minorCategories");
         String expectednow = "0";
-        assertEquals(dbcall2, expectednow);
+        assertEquals(expectednow, dbcall2);
     }
 
+    @Ignore
     @Test
-    public void testEditMainCategory() throws SQLException, ClassNotFoundException {
+    public void editMainCategory() throws SQLException, ClassNotFoundException {
         dbfacade.addMainCategory("Oksekød", DBPROPERTYTEST);
 
         dbfacade.editMainCategory(1, "Svinekød", DBPROPERTYTEST);
         String dbcall = dbextra.getCustomDataFromDB("select mainCategoryName from mainCategories");
-        String expectednow = "Svinekød";
-        assertEquals(dbcall, expectednow);
+        String expected = "Svinekød";
+        assertEquals(expected, dbcall);
     }
 
+    @Ignore
     @Test
-    public void testEditMinorCategory() throws SQLException, ClassNotFoundException {
+    public void editMinorCategory() throws SQLException, ClassNotFoundException {
         dbfacade.addMinorCategory("Salat", DBPROPERTYTEST);
-
         dbfacade.editMinorCategory(1, "Frugt", DBPROPERTYTEST);
         String dbcall = dbextra.getCustomDataFromDB("select minorCategoryName from minorCategories");
-        String expectednow = "Frugt";
-        assertEquals(dbcall, expectednow);
+        String expected = "Frugt";
+        assertEquals(expected, dbcall);
+    }
+    
+    @Ignore
+    @Test
+    public void addProductManually() throws SQLException, ClassNotFoundException {
+        dbfacade.addMainCategory("Frugt", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Økologisk", DBPROPERTYTEST);
+        ArrayList<Products> products = new ArrayList();
+        products.add(new Products(34, "Prudctname", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true ,"1", "1"));
+        dbfacade.addProduct(products, DBPROPERTYTEST);
+
+        String dbcall = dbextra.getCustomDataFromDB("select COUNT(productid) from products;");
+        String expected = "1";
+        assertEquals(expected, dbcall);
+    }
+    
+    @Ignore
+    @Test
+    public void getMainCategories() throws SQLException, ClassNotFoundException {
+        dbfacade.addMainCategory("Salat", DBPROPERTYTEST);
+        dbfacade.addMainCategory("Frugt og Grønt", DBPROPERTYTEST);
+        dbfacade.addMainCategory("Is", DBPROPERTYTEST);
+        
+        String expected = "3";
+        String dbcall = dbextra.getCustomDataFromDB("select COUNT(mainCategoryName) from maincategories;");
+        
+        assertEquals(expected, dbcall);
+    }
+    
+    @Ignore
+    @Test
+    public void getMinorCategories() throws SQLException, ClassNotFoundException {
+        dbfacade.addMinorCategory("Frost", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Drikkevarer", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Kød", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Slik", DBPROPERTYTEST);
+        
+        String expected = "4";
+        String dbcall = dbextra.getCustomDataFromDB("select COUNT(minorCategoryName) from minorCategories;");
+        
+        assertEquals(expected, dbcall);
+    }
+    
+    @Ignore
+    @Test
+    public void searchProductByID() throws SQLException, ClassNotFoundException {
+        dbfacade.addMainCategory("Frugt", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Økologisk", DBPROPERTYTEST);
+        ArrayList<Products> products = new ArrayList();
+        products.add(new Products(34, "Grønne æbler", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true ,"1", "1"));
+        products.add(new Products(55, "Test1", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true ,"1", "1"));
+        products.add(new Products(35, "Test2", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true ,"1", "1"));
+        products.add(new Products(500, "Test3", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true ,"1", "1"));
+        dbfacade.addProduct(products, DBPROPERTYTEST);
+        
+        String expected = "Grønne æbler";
+        ArrayList<Products> dbcall = dbfacade.searchProduct(34, DBPROPERTYTEST);
+        String actually = "";
+        for (Products productsdb : dbcall) {
+            actually = productsdb.getName();
+        }
+        
+        assertEquals(expected, actually);
+    }
+    
+    @Ignore
+    @Test
+    public void showAllProducts() throws SQLException, ClassNotFoundException {
+        dbfacade.addMainCategory("Frugt", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Økologisk", DBPROPERTYTEST);
+        ArrayList<Products> products = new ArrayList();
+        products.add(new Products(34, "Gulerødder øko.", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true ,"1", "1"));
+        products.add(new Products(35, "Solsikkeskud øko.", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true ,"1", "1"));
+        products.add(new Products(55, "Radisemix øko.", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true ,"1", "1"));
+        products.add(new Products(500, "Kaki frugter", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true ,"1", "1"));
+        dbfacade.addProduct(products, DBPROPERTYTEST);
+        
+        ArrayList<Products> dbcall = dbfacade.showAllProducts(DBPROPERTYTEST);
+        
+        String productnames = "";
+        final StringBuilder builder = new StringBuilder();
+        String expected = "Gulerødder øko.+Solsikkeskud øko.+Radisemix øko.+Kaki frugter+";
+        for (Products productsdb : dbcall) {
+            builder.append(productsdb.getName() + "+");
+        }
+        String concatenatedString = builder.toString();
+        assertEquals(expected, concatenatedString);
+    }
+    
+    @Ignore
+    @Test
+    public void checkOrCreateLinkedMM() throws SQLException, ClassNotFoundException, IOException {
+        dbfacade.addMainCategory("Frugt", DBPROPERTYTEST);
+        dbfacade.addMainCategory("Økologisk", DBPROPERTYTEST);
+
+        dbfacade.addMinorCategory("Frost", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Drikkevarer", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Kød", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Slik", DBPROPERTYTEST);
+        
+        categorymapper.checkOrCreateLinkminormain(2, 3, DBPROPERTYTEST);
+        categorymapper.checkOrCreateLinkminormain(2, 3, DBPROPERTYTEST);
+        categorymapper.checkOrCreateLinkminormain(2, 3, DBPROPERTYTEST);
+        categorymapper.checkOrCreateLinkminormain(2, 3, DBPROPERTYTEST);
+        
+        String expected = "1";
+        String actually = dbextra.getCustomDataFromDB("select COUNT(minorid) from linkMinorMain;");
+        
+        assertEquals(expected, actually);
+    }
+    
+    @Ignore
+    @Test
+    public void checkCreationOfSeveralLinkMM() throws SQLException, ClassNotFoundException, IOException {
+        dbfacade.addMainCategory("Frugt", DBPROPERTYTEST);
+        dbfacade.addMainCategory("Økologisk", DBPROPERTYTEST);
+
+        dbfacade.addMinorCategory("Frost", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Drikkevarer", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Kød", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Slik", DBPROPERTYTEST);
+        
+        categorymapper.checkOrCreateLinkminormain(2, 3, DBPROPERTYTEST);
+        categorymapper.checkOrCreateLinkminormain(1, 1, DBPROPERTYTEST);
+        categorymapper.checkOrCreateLinkminormain(2, 2, DBPROPERTYTEST);
+        categorymapper.checkOrCreateLinkminormain(1, 4, DBPROPERTYTEST);
+        
+        String expected = "4";
+        String actually = dbextra.getCustomDataFromDB("select COUNT(minorid) from linkMinorMain;");
+        
+        assertEquals(expected, actually);
     }
     
 }
