@@ -432,5 +432,47 @@ public class ProductMapper implements ProductMapperInterface {
         }
         return searchResults;
     }
+    
+    
+         public void EditProduct(int id, Products product) throws SQLException, ClassNotFoundException {
+ 
+        try {  
+          {
+        String sql = ("UPDATE products SET productid = (?), name = (?), nameDescription= (?), "
+                        + "description= (?), companyName= (?), price= (?), quantity= (?), pictureName= (?), "
+                        + "publishedStatus= (?), minorCategory= (?), mainCategory= (?) WHERE (`productid` = '" + id + "');");
+            PreparedStatement statement = getConnection(("/db.properties")).prepareStatement(sql);
+            statement.setInt(1, product.getId());
+            statement.setString(2, product.getName());
+            statement.setString(3, product.getNameDescription());
+            statement.setString(4, product.getDescription());
+            statement.setString(5, product.getCompanyName());
+            statement.setDouble(6, product.getPrice());
+            statement.setInt(7, product.getQty());
+            statement.setString(8, product.getPictureName());
+            statement.setBoolean(9, product.getPublishedStatus());
+            statement.setString(10, product.getMinorCategory());
+            statement.setString(11, product.getMainCategory());
+            statement.executeUpdate(); }  
+        } catch (SQLException e) {
+            System.out.println(e);
+        }}
+    
+ 
+ public void DeleteProduct(int id) throws SQLException, ClassNotFoundException {
+ 
+        try {  
+           {
+          String sql = "DELETE FROM products WHERE productid = ?";
+            PreparedStatement statement = getConnection(("/db.properties")).prepareStatement(sql);
+            statement.setInt(1, id);
+            
+            statement.executeUpdate(); }  
+        } catch (SQLException e) {
+            System.out.println(e);
+  
+    }
+
+}
 
 }
