@@ -84,8 +84,8 @@ public class DBFacade implements Facade {
         productMapper.DeleteProduct(id, propertyname);
     } 
     
-    public ArrayList<Products> showSearchedProduct(int id, String propertyname) throws SQLException, ClassNotFoundException {
-        return productMapper.showSearchedProduct(id, propertyname);
+    public ArrayList<Products> showSearchedProduct(String s, String attribute, String propertyname) throws SQLException, ClassNotFoundException {
+        return productMapper.showSearchedProduct(s, attribute, propertyname);
     }
 
         

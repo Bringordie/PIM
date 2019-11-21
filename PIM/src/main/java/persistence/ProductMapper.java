@@ -485,9 +485,10 @@ public class ProductMapper implements ProductMapperInterface {
      * @author - Bringordie - Frederik Braagaard
      */
     @Override
-    public ArrayList<Products> showSearchedProduct(int id, String propertyname) throws SQLException, ClassNotFoundException {
+    public ArrayList<Products> showSearchedProduct(String s, String attribute, String propertyname) throws SQLException, ClassNotFoundException {
         ArrayList<Products> searchResults = new ArrayList();
-        String sql = "SELECT * FROM products where productid = "+id;
+        //String sql = "SELECT * FROM products where productid = "+id;
+        String sql = "select * from products where " + attribute + " LIKE '%" + s + "%'";
         ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
 
         try {
