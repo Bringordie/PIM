@@ -17,7 +17,7 @@
         Select a <b>JSON</b> or <b>EXCEL</b> file to upload: 
         <br />
         <form action = "Upload" method = "POST" enctype = "multipart/form-data">
-         <input type = "file" name = "file" size = "50" required/>
+         <input type = "file" name = "file" size = "50" required accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.csv,.json"/>
          <br />
          <input type = "submit" value = "Upload File to Website" />
       </form>
@@ -26,7 +26,7 @@
         <br />
         <form action = "UploadImage" method = "POST" enctype = "multipart/form-data">
          <%--<input type = "file" name = "file" size = "50" required/>--%>
-         <input <input name="file" type="file" id="file" multiple required>
+         <input <input name="file" type="file" id="file" multiple required accept="image/*">
          <br />
          <input type = "submit" value = "Upload File to Website" />
       </form>
