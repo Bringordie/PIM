@@ -16,8 +16,11 @@ public class AddMinorCategoryCommand extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         
+        String categoryResponse;
         String minorCatName = request.getParameter("MinorName");
-        db.addMinorCategory(minorCatName, "/db.properties");
+        
+        categoryResponse = db.addMinorCategory(minorCatName, "/db.properties");
+        request.getSession().setAttribute("minorResponse", categoryResponse);
         
         return "AddCategory";
     }

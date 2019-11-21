@@ -16,8 +16,11 @@ public class AddMainCategoryCommand extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         
+        String categoryResponse;
         String mainCatName = request.getParameter("MainName");
-        db.addMainCategory(mainCatName, "/db.properties");
+        
+        categoryResponse = db.addMainCategory(mainCatName, "/db.properties");
+        request.getSession().setAttribute("mainResponse", categoryResponse);
         
         return "AddCategory";
     }

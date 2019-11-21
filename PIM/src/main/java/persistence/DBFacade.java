@@ -25,13 +25,13 @@ public class DBFacade implements Facade {
     } 
 
     @Override
-    public void addMainCategory(String category, String propertyname) {
-        categoryMapper.addMainCategory(category, propertyname);
+    public String addMainCategory(String category, String propertyname) throws ClassNotFoundException, SQLException {
+        return categoryMapper.addMainCategory(category, propertyname);
     }
 
     @Override
-    public void addMinorCategory(String category, String propertyname) {
-        categoryMapper.addMinorCategory(category, propertyname);
+    public String addMinorCategory(String category, String propertyname) throws ClassNotFoundException, SQLException {
+        return categoryMapper.addMinorCategory(category, propertyname);
     }
 
     @Override

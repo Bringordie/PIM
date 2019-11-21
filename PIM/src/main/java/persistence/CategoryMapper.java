@@ -19,26 +19,36 @@ import static persistence.DBConnection.getConnection;
 public class CategoryMapper implements CategoryMapperInterface {
 
     @Override
-    public void addMainCategory(String category, String propertyname) {
+    public String addMainCategory(String category, String propertyname) throws ClassNotFoundException, SQLException {
+        String returnvalue = "";
         String sql = "INSERT INTO mainCategories (mainCategoryName) VALUES (?)";
+        Boolean booleanNameCheck = checkMainCategory(category, propertyname);
+        if (booleanNameCheck == false) {
+            returnvalue = "Category added!";
+        
         try {
 
-            PreparedStatement statement = getConnection(propertyname).prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
             statement.setString(1, category);
             statement.executeUpdate();
-//            ResultSet ids = statement.getGeneratedKeys();
-//            ids.next();
-//            int id = ids.getInt(1);
             
 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CategoryMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
+        } else {
+            returnvalue = "Category already exists!"; 
+        }
+        return returnvalue;
     }
 
     @Override
-    public void addMinorCategory(String category, String propertyname) {
+    public String addMinorCategory(String category, String propertyname) throws ClassNotFoundException, SQLException {
+        String returnvalue = "";
         String sql = "INSERT INTO minorCategories (minorCategoryName) VALUES (?)";
+        Boolean booleanNameCheck = checkMinorCategory(category, propertyname);
+        if (booleanNameCheck == false) {
+            returnvalue = "Category added!";
         try {
 
             PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
@@ -49,6 +59,10 @@ public class CategoryMapper implements CategoryMapperInterface {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CategoryMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
+        } else {
+            returnvalue = "Category already exists!"; 
+        }
+        return returnvalue;
     }
 
     @Override
@@ -286,6 +300,50 @@ public class CategoryMapper implements CategoryMapperInterface {
         getConnection(propertyname).prepareStatement(sql3).executeUpdate();
         getConnection(propertyname).prepareStatement(sql4).executeUpdate();
         
+    }
+
+    @Override
+    public Boolean checkMainCategory(String category, String propertyname) throws SQLException, ClassNotFoundException {
+        Boolean returnvalue = false;
+        int tempholder;
+        String sql = "select COUNT(categoryid) FROM mainCategories WHERE mainCategoryName = '" + category + "'";
+        ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
+        
+        try {
+            while (result.next()) {
+                tempholder = result.getInt(1);
+                if (tempholder == 0) {
+                    returnvalue = false;
+                } else {
+                    returnvalue = true;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return returnvalue;
+    }
+
+    @Override
+    public Boolean checkMinorCategory(String category, String propertyname) throws SQLException, ClassNotFoundException {
+        Boolean returnvalue = false;
+        int tempholder;
+        String sql = "select COUNT(categoryid) FROM minorCategories WHERE minorCategoryName = '" + category + "'";
+        ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
+        
+        try {
+            while (result.next()) {
+                tempholder = result.getInt(1);
+                if (tempholder == 0) {
+                    returnvalue = false;
+                } else {
+                    returnvalue = true;
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return returnvalue;
     }
 
 }

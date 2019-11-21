@@ -23,6 +23,11 @@
                         <input type="text" name="MainName" required>
                         <input type="submit" value="Submit">
                     </form>
+                    <% if (session.getAttribute("mainResponse").equals("Category added!")) { %>
+                    <h3>Main category has been added!</h3>
+                    <% } else if (session.getAttribute("mainResponse").equals("Category already exists!")) { %>
+                    <h3>Error: That main category already exists!</h3>
+                    <% } else {} %>
                     <br>
                     <form name="addMinorCategory" action="FrontController" method="POST">
                         <input type="hidden" name="cmd" value="addMinorCategory">
@@ -30,6 +35,11 @@
                         <input type="text" name="MinorName" required>
                         <input type="submit" value="Submit">
                     </form>
+                    <% if (session.getAttribute("minorResponse").equals("Category added!")) { %>
+                    <h3>Minor category has been added!</h3>
+                    <% } else if (session.getAttribute("minorResponse").equals("Category already exists!")) { %>
+                    <h3>Error: That main category already exists!</h3>
+                    <% } else {} %>
                 </td>
             </tr>
         </table>

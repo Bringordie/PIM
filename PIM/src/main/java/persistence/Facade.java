@@ -18,9 +18,9 @@ public interface Facade {
     
     public String addProduct(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public void addMainCategory (String category, String propertyname);
+    public String addMainCategory (String category, String propertyname) throws ClassNotFoundException, SQLException;
     
-    public void addMinorCategory (String category, String propertyname);
+    public String addMinorCategory (String category, String propertyname) throws ClassNotFoundException, SQLException;
     
     public void deleteMainCategory (int category, String propertyname) throws ClassNotFoundException, SQLException;
     
