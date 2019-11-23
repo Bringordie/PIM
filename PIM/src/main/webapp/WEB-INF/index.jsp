@@ -11,5 +11,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-<%@ include file = "header.jsp" %>
+    <%@ include file = "header.jsp" %>
+
+    <body>
+
+        <form action="FrontController">
+            <input type="hidden" name="cmd" value="gotoSearchProducts">
+            <input type="Submit" value="Go to search" />
+        </form>
+
+    </body>
 </html>

@@ -86,7 +86,7 @@
                     </c:forEach>
                 </tbody>
             </table>
-            <%--
+            <%-- This should be removed closer to the project closure in case we want to use a dropdown instead
             <select name="Minor">
                 <option></option>
                     <c:forEach var="Categories" items="${minorCategories}">
@@ -110,15 +110,11 @@
             <p>There are no minor categories!</p>
             <% }%>
         </form>
-        <% if (session.getAttribute("returnproductvalue") == null){
-                System.out.println("Something went wrong");
-            }
+        <% if (session.getAttribute("returnproductvalue") == null){}
                 else if (session.getAttribute("returnproductvalue").toString().equals("productadded")) { %>
             <h1>Product created</h1>
             <%} else if (session.getAttribute("returnproductvalue").toString().equals("alreadyexists")) {%>
             <h1>Unable to execute request. Product with this ID already exists.</h1>
-            <%} else { %>
-            <h1>I am retarded.</h1>
-            <%}%>
+            <%} else {}%>
     </body>
 </html>

@@ -36,7 +36,7 @@ public abstract class Command {
         commands.put("gotoEditProduct", new GoToEditProductCommand());
         commands.put("gotoSearchProducts", new GoToSearchProductsCommand());
         commands.put("gotoUploadFile", new GoToUploadFileCommand());
-        commands.put("searchResults", new SearchProductsCommand());
+        commands.put("searchResults", new SearchProductCommand());
     }
 
     static Command from(HttpServletRequest request) {
