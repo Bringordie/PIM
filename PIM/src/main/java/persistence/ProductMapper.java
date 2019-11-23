@@ -439,48 +439,51 @@ public class ProductMapper implements ProductMapperInterface {
         }
         return searchResults;
     }
-         public void EditProduct(int id, Products product, String propertyname) throws SQLException, ClassNotFoundException {
- 
-        try {  
-          {
-        String sql = ("UPDATE products SET productid = (?), name = (?), nameDescription= (?), "
+
+    public void EditProduct(int id, Products product, String propertyname) throws SQLException, ClassNotFoundException {
+
+        try {
+            {
+                String sql = ("UPDATE products SET productid = (?), name = (?), nameDescription= (?), "
                         + "description= (?), companyName= (?), price= (?), quantity= (?), pictureName= (?), "
                         + "publishedStatus= (?), minorCategory= (?), mainCategory= (?) WHERE (`productid` = '" + id + "');");
-            PreparedStatement statement = getConnection((propertyname)).prepareStatement(sql);
-            statement.setInt(1, product.getId());
-            statement.setString(2, product.getName());
-            statement.setString(3, product.getNameDescription());
-            statement.setString(4, product.getDescription());
-            statement.setString(5, product.getCompanyName());
-            statement.setDouble(6, product.getPrice());
-            statement.setInt(7, product.getQty());
-            statement.setString(8, product.getPictureName());
-            statement.setBoolean(9, product.getPublishedStatus());
-            statement.setString(10, product.getMinorCategory());
-            statement.setString(11, product.getMainCategory());
-            statement.executeUpdate(); }  
+                PreparedStatement statement = getConnection((propertyname)).prepareStatement(sql);
+                statement.setInt(1, product.getId());
+                statement.setString(2, product.getName());
+                statement.setString(3, product.getNameDescription());
+                statement.setString(4, product.getDescription());
+                statement.setString(5, product.getCompanyName());
+                statement.setDouble(6, product.getPrice());
+                statement.setInt(7, product.getQty());
+                statement.setString(8, product.getPictureName());
+                statement.setBoolean(9, product.getPublishedStatus());
+                statement.setString(10, product.getMinorCategory());
+                statement.setString(11, product.getMainCategory());
+                statement.executeUpdate();
+            }
         } catch (SQLException e) {
             System.out.println(e);
-        }}
-    
- 
- public void DeleteProduct(int id, String propertyname) throws SQLException, ClassNotFoundException {
- 
-        try {  
-           {
-          String sql = "DELETE FROM products WHERE productid = ?";
-            PreparedStatement statement = getConnection((propertyname)).prepareStatement(sql);
-            statement.setInt(1, id);
-            
-            statement.executeUpdate(); }  
-        } catch (SQLException e) {
-            System.out.println(e);
-  
+        }
     }
 
-}
- 
- /**
+    public void DeleteProduct(int id, String propertyname) throws SQLException, ClassNotFoundException {
+
+        try {
+            {
+                String sql = "DELETE FROM products WHERE productid = ?";
+                PreparedStatement statement = getConnection((propertyname)).prepareStatement(sql);
+                statement.setInt(1, id);
+
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+
+        }
+
+    }
+
+    /**
      *
      * @author - Bringordie - Frederik Braagaard
      */
@@ -517,5 +520,42 @@ public class ProductMapper implements ProductMapperInterface {
         return searchResults;
     }
 
-}
+    /**
+     *
+     * @author - Bringordie - Frederik Braagaard
+     */
+    @Override
+    public ArrayList<Products> dbWriter(String propertyname) throws SQLException, ClassNotFoundException {
+        ArrayList<Products> searchResults = new ArrayList();
+        String sql = "select products.*, maincategories.mainCategoryName, "
+                + "minorcategories.minorCategoryName from products inner join "
+                + "maincategories on products.mainCategory = maincategories.categoryid "
+                + "inner join minorcategories on products.minorCategory "
+                + "= minorcategories.categoryid ORDER BY minorcategories.minorCategoryName ASC";
+        ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
 
+        try {
+            while (result.next()) {
+                int ProductID = result.getInt(1);
+                String ProductName = result.getString(2);
+                String ProductNameDescription = result.getString(3);
+                String ProductDescription = result.getString(4);
+                String CompanyName = result.getString(5);
+                double Price = result.getDouble(6);
+                int Quantity = result.getInt(7);
+                String PictureName = result.getString(8);
+                //This one will just be ignored.
+                boolean PublishedStatus = result.getBoolean(9);
+                //Skipping 2 because of join
+                String MainCategory = result.getString(12);
+                String MinorCategory = result.getString(13);
+                searchResults.add(new Products(ProductID, ProductName, ProductNameDescription, ProductDescription, CompanyName, Price, Quantity, PictureName, PublishedStatus, MinorCategory, MainCategory));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return searchResults;
+    }
+
+}

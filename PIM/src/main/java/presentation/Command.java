@@ -25,6 +25,8 @@ public abstract class Command {
         commands.put("deleteMainCategory", new DeleteMainCategoryCommand());
         commands.put("deleteMinorCategory", new DeleteMinorCategoryCommand());
         commands.put("deleteProduct", new DeleteProductCommand());
+        commands.put("downloadJson", new DownloadJson());
+        commands.put("downloadExcel", new DownloadExcel());
         commands.put("editCategory", new GoToEditCategoryCommand());
         commands.put("editMainCategory", new EditMainCategoryCommand());
         commands.put("editMinorCategory", new EditMinorCategoryCommand());
