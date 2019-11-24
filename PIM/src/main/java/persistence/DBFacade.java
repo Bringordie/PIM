@@ -88,5 +88,10 @@ public class DBFacade implements Facade {
         return productMapper.showSearchedProduct(s, attribute, propertyname);
     }
 
+    @Override
+    public ArrayList<Products> dbDownload(String propertyname) throws SQLException, ClassNotFoundException {
+        return productMapper.dbDownload(propertyname);
+    }
+
         
 }

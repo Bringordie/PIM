@@ -525,7 +525,7 @@ public class ProductMapper implements ProductMapperInterface {
      * @author - Bringordie - Frederik Braagaard
      */
     @Override
-    public ArrayList<Products> dbWriter(String propertyname) throws SQLException, ClassNotFoundException {
+    public ArrayList<Products> dbDownload(String propertyname) throws SQLException, ClassNotFoundException {
         ArrayList<Products> searchResults = new ArrayList();
         String sql = "select products.*, maincategories.mainCategoryName, "
                 + "minorcategories.minorCategoryName from products inner join "

@@ -1,24 +1,17 @@
 package logic;
 
-import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeMap;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import persistence.ProductMapper;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import persistence.DBFacade;
 import presentation.UploadFiles;
 
 /**
@@ -39,8 +32,8 @@ public class ExcelWriter {
         data.put("1", new Object[]{"ProductID", "ProductName", "ProductNameDescription",
             "ProductDescription", "CompanyName", "Price", "Quantity", "PictureName",
             "MinorCategory", "MainCategory"});
-        ProductMapper product = new ProductMapper();
-        ArrayList<Products> writer = product.dbWriter(property);
+        DBFacade db = new DBFacade();
+        ArrayList<Products> writer = db.dbDownload(property);
         int count = 1;
         for (Products products : writer) {
             ++count;

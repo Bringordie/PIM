@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import persistence.ProductMapper;
+import persistence.DBFacade;
 import presentation.UploadFiles;
 
 /**
@@ -20,8 +20,8 @@ public class JsonWriter {
         //Creating a JSONObject object
         //Creating a json array
         JSONArray array = new JSONArray();
-        ProductMapper product = new ProductMapper();
-        ArrayList<Products> writer = product.dbWriter(property);
+        DBFacade db = new DBFacade();
+        ArrayList<Products> writer = db.dbDownload(property);
 
         for (Products products : writer) {
             JSONObject record = new JSONObject();

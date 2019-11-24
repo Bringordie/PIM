@@ -1,13 +1,5 @@
 package logic;
 
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
-import java.io.FileNotFoundException;
-import java.io.Serializable;
-import java.io.StringReader;
-import java.util.ArrayList;
-
-
 public class Products {
 
     private final int ProductID;

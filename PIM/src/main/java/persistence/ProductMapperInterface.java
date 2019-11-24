@@ -26,5 +26,5 @@ public interface ProductMapperInterface {
     
     public ArrayList<Products> showSearchedProduct(String s, String attribute, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public ArrayList<Products> dbWriter(String propertyname) throws SQLException, ClassNotFoundException;
+    public ArrayList<Products> dbDownload(String propertyname) throws SQLException, ClassNotFoundException;
 }
