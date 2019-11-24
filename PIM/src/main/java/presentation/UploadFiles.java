@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,6 +27,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import persistence.DBFacade;
+import java.nio.file.Paths;
 
 /**
  *
@@ -127,6 +130,7 @@ public class UploadFiles extends HttpServlet {
 
                     String fileNametest = path + fi.getName();
                     uploadToDB(fileNametest);
+                    Files.deleteIfExists(Paths.get(path+fi.getName())); 
                     
                     
                     out.println("Uploaded Filename: " + fileName + " has been uploaded to the server" + "<br>");
