@@ -31,15 +31,12 @@
          <input type = "submit" value = "Upload File to Website" />
       </form>
          <h3>Download products as .json file</h3>
-        <form action = "FrontController">
-            <input type="hidden" name="cmd" value="downloadJson" />
+        <form action = "DownloadJson">
          <input type = "submit" value = "Download File" />
       </form>
          <h3>Download products as .xlsx file</h3>
-        <form action = "FrontController">
-            <input type="hidden" name="cmd" value="downloadExcel" />
+        <form action = "DownloadExcel">
          <input type = "submit" value = "Download File" />
       </form>
-         
     </body>
 </html>

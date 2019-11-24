@@ -20,7 +20,6 @@ public class JsonHandler {
         public ArrayList<Products> makeJSonFileIntoArray(String location) throws FileNotFoundException  {
             ArrayList<Products> products = new ArrayList();
             
-            //Products[] userArray = gson.fromJson(new FileReader("C:\\Users\\Frederik\\Desktop\\PIM\\programlanguage.json"), Products[].class);
             Products[] userArray = gson.fromJson(new FileReader(location), Products[].class);
             for (Products products1 : userArray) {
                 products.add(products1);

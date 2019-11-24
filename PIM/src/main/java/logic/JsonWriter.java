@@ -2,10 +2,13 @@ package logic;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Properties;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import persistence.ProductMapper;
+import presentation.UploadFiles;
 
 /**
  *
@@ -15,7 +18,6 @@ public class JsonWriter {
 
     public void DataBaseToJson(String property) throws Exception {
         //Creating a JSONObject object
-        JSONObject jsonObject = new JSONObject();
         //Creating a json array
         JSONArray array = new JSONArray();
         ProductMapper product = new ProductMapper();
@@ -23,23 +25,28 @@ public class JsonWriter {
 
         for (Products products : writer) {
             JSONObject record = new JSONObject();
-            record.put("ID", products.getId() + "/n");
-            record.put("Product Name", products.getName());
-            record.put("Product Name Description", products.getNameDescription());
-            record.put("Product Description", products.getDescription());
-            record.put("Company Name", products.getCompanyName());
+            record.put("ProductID", products.getId());
+            record.put("ProductName", products.getName());
+            record.put("ProductNameDescription", products.getNameDescription());
+            record.put("ProductDescription", products.getDescription());
+            record.put("CompanyName", products.getCompanyName());
             record.put("Price", products.getPrice());
             record.put("Quantity", products.getQty());
-            record.put("Picture Name", products.getPictureName());
-            record.put("Minor Category", products.getMinorCategory());
-            record.put("Main Category", products.getMainCategory());
+            record.put("PictureName", products.getPictureName());
+            record.put("MinorCategory", products.getMinorCategory());
+            record.put("MainCategory", products.getMainCategory());
             array.add(record);
         }
-        jsonObject.put("Product_data", array);
         try {
-            String home = System.getProperty("user.home");
-            FileWriter file = new FileWriter(home + "/Downloads/" + "jsondownload.json");
-            file.write(jsonObject.toJSONString());
+            // load the properties file
+            InputStream sa = UploadFiles.class.getResourceAsStream("/filepath.properties");
+            Properties properties = new Properties();
+            properties.load(sa);
+            // assign properties parameters
+            String path = properties.getProperty("filepath");
+            
+            FileWriter file = new FileWriter(path+"Products.json");
+            file.write(array.toJSONString());
             file.close();
         } catch (IOException e) {
             System.out.println(e);

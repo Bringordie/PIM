@@ -117,13 +117,12 @@ public class UploadFiles extends HttpServlet {
                         file = new File(filePath + fileName.substring(fileName.lastIndexOf("\\") + 1));
                     }
                     fi.write(file);
-                    //TEST
-                    InputStream sa = UploadFiles.class.getResourceAsStream("/filepath.properties");
 
                     // load the properties file
+                    InputStream sa = UploadFiles.class.getResourceAsStream("/filepath.properties");
                     Properties properties = new Properties();
                     properties.load(sa);
-                    // assign db parameters
+                    // assign properties parameters
                     String path = properties.getProperty("filepath");
 
                     String fileNametest = path + fi.getName();

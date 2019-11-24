@@ -13,7 +13,17 @@
       <description>Location to store uploaded file</description> 
       <param-name>file-upload</param-name> 
       <param-value>
-         C:/Users/Malthe/Google Drive/CPH BusAca/2semDAT/Tomcat/apache-tomcat-9.0.26/webapps/data/
+         C:\Users\Frederik\Desktop\apache-tomcat-8.5.47\webapps\data\
       </param-value> 
    </context-param>
+   <servlet>
+    <description>This servlet sends file to client</description>
+    <display-name>DownloadFileServlet</display-name>
+    <servlet-name>DownloadFileServlet</servlet-name>
+    <servlet-class>net.codejava.DownloadFileServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>DownloadFileServlet</servlet-name>
+    <url-pattern>/DownloadFileServlet</url-pattern>
+</servlet-mapping> 
 </web-app>

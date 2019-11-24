@@ -13,7 +13,7 @@ public class GoToUploadFileCommand extends Command {
     
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) {
-        
+               
         return "UploadFile";
     }
     
