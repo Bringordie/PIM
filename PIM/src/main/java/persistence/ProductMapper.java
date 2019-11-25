@@ -415,7 +415,12 @@ public class ProductMapper implements ProductMapperInterface {
     @Override
     public ArrayList<Products> showAllProducts(String propertyname) throws SQLException, ClassNotFoundException {
         ArrayList<Products> searchResults = new ArrayList();
-        String sql = "SELECT * FROM products ORDER BY minorCategory ASC";
+        //String sql = "SELECT * FROM products ORDER BY minorCategory ASC";
+        String sql = "select products.*, maincategories.mainCategoryName, "
+                + "minorcategories.minorCategoryName from products inner join "
+                + "maincategories on products.mainCategory = maincategories.categoryid "
+                + "inner join minorcategories on products.minorCategory "
+                + "= minorcategories.categoryid ORDER BY minorcategories.minorCategoryName ASC";
         ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
 
         try {
@@ -428,9 +433,11 @@ public class ProductMapper implements ProductMapperInterface {
                 double Price = result.getDouble(6);
                 int Quantity = result.getInt(7);
                 String PictureName = result.getString(8);
+                //This one will just be ignored.
                 boolean PublishedStatus = result.getBoolean(9);
-                String MinorCategory = result.getString(10);
-                String MainCategory = result.getString(11);
+                //Skipping 2 because of join
+                String MainCategory = result.getString(12);
+                String MinorCategory = result.getString(13);
                 searchResults.add(new Products(ProductID, ProductName, ProductNameDescription, ProductDescription, CompanyName, Price, Quantity, PictureName, PublishedStatus, MinorCategory, MainCategory));
             }
 
