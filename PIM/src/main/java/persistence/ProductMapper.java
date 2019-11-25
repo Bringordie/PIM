@@ -466,22 +466,29 @@ public class ProductMapper implements ProductMapperInterface {
         }
     }
 
-    public void DeleteProduct(int id, String propertyname) throws SQLException, ClassNotFoundException {
+    public String DeleteProduct(int id, String propertyname) throws SQLException, ClassNotFoundException {
 
-        try {
-            {
+        String returnvalue = "";
+        Boolean booleanIDCheck = checkIfProductExists((Integer.toString(id)), propertyname);
+        if (booleanIDCheck == true) {
+            
+
+            try {             
                 String sql = "DELETE FROM products WHERE productid = ?";
                 PreparedStatement statement = getConnection((propertyname)).prepareStatement(sql);
                 statement.setInt(1, id);
-
                 statement.executeUpdate();
+                returnvalue = "deleteproduct";
+                
+            } catch (SQLException e) {
+                System.out.println(e);
             }
-        } catch (SQLException e) {
-            System.out.println(e);
-
+             return returnvalue;
         }
-
+        returnvalue = "deletealreadyexists";
+        return returnvalue;
     }
+// throw new IllegalArgumentException("Collection of users must not be null");
 
     /**
      *

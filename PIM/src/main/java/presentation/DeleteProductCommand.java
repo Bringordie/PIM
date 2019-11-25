@@ -20,7 +20,12 @@ public class DeleteProductCommand extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) 
        throws ServletException, IOException, SQLException, ClassNotFoundException{
         //TODO
-      dbfacade.DeleteProduct(Integer.parseInt(request.getParameter("ProductId")), "/db.properties");
+        
+        String returnvalue = "";
+        
+      returnvalue = dbfacade.DeleteProduct(Integer.parseInt(request.getParameter("ProductId")), "/db.properties");
+      
+      request.getSession().setAttribute("returndeleteproductvalue", returnvalue);
  
         return"DeleteProduct"; 
     }

@@ -26,5 +26,15 @@
             
             <input type="submit" value="Submit" />
         </form>
+          <% if (session.getAttribute("returndeleteproductvalue") == null){
+                System.out.println("no good!");
+            }
+                else if (session.getAttribute("returndeleteproductvalue").toString().equals("deleteproduct")) { %>
+            <h1> Product has been deleted</h1>                                  
+            <%} else if (session.getAttribute("returndeleteproductvalue").toString().equals("deletealreadyexists")) {%>
+            <h1>Productid doesn't exist, and the product has not been deleted!</h1>
+            <%} else { %>
+            <h1>svans</h1>
+            <%}%>
     </body>
 </html>
