@@ -34,6 +34,7 @@ public class EditProductSearchCommand extends Command {
         
         request.getSession().setAttribute("resulthits", results);
         request.getSession().setAttribute("productarray", search);
+        request.getSession().setAttribute("productupdated", "empty");
         
        
       

@@ -33,7 +33,9 @@ public class EditProductCommand extends Command {
        String maincategory = "1";
        
     productmapper.EditProduct(id, new Products(id, productname, productnamedescription, productdescription, companyname, price, quantity, picturename, true ,minorcategory, maincategory), "/db.properties");
-    
+
+    String productupdated = "Productupdated";
+    request.getSession().setAttribute("productupdated", productupdated);
 
       
       

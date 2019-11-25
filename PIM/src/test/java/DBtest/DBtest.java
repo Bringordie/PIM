@@ -45,7 +45,7 @@ public class DBtest {
     
     @Test
     public void uploadOfExcelUploadEmptyRow() throws SQLException, ClassNotFoundException, IOException {
-        String fileName = "src\\test\\java\\files\\linewithemptyrow.xlsx";
+        String fileName = "src/test/java/files/linewithemptyrow.xlsx";
         ArrayList<Products> product = excelhandler.extractInfo(fileName);
         dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
 
@@ -63,7 +63,7 @@ public class DBtest {
     
     @Test
     public void uploadOfExcelUpload() throws SQLException, ClassNotFoundException, IOException {
-        String fileName = "src\\test\\java\\files\\linewithoutemptyrow.xlsx";
+        String fileName = "src/test/java/files/linewithoutemptyrow.xlsx";
         ArrayList<Products> product = excelhandler.extractInfo(fileName);
         dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
 
@@ -76,7 +76,7 @@ public class DBtest {
     
     @Test
     public void updateOfExcelUpload() throws SQLException, ClassNotFoundException, IOException {
-        String fileName = "src\\test\\java\\files\\linewithoutemptyrow.xlsx";
+        String fileName = "src/test/java/files/linewithoutemptyrow.xlsx";
         ArrayList<Products> product = excelhandler.extractInfo(fileName);
         dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
         dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
@@ -92,7 +92,7 @@ public class DBtest {
     
     @Test
     public void creationOfLinkedMMOfExcelUpload() throws SQLException, ClassNotFoundException, IOException {
-        String fileName = "src\\test\\java\\files\\linewithoutemptyrow.xlsx";
+        String fileName = "src/test/java/files/linewithoutemptyrow.xlsx";
         ArrayList<Products> product = excelhandler.extractInfo(fileName);
         dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
         String expectedminor = "1";
@@ -109,7 +109,7 @@ public class DBtest {
     
     @Test
     public void uploadOfJsonUpload() throws SQLException, ClassNotFoundException, FileNotFoundException {
-        String fileName = "src\\test\\java\\files\\singledata.json";
+        String fileName = "src/test/java/files/singledata.json";
         ArrayList<Products> product = jsonhandler.makeJSonFileIntoArray(fileName);
         dbfacade.jsonInsertOrUpdateToDB(product, DBPROPERTYTEST);
 
@@ -123,7 +123,7 @@ public class DBtest {
     
     @Test
     public void updateOfJsonUpload() throws SQLException, ClassNotFoundException, FileNotFoundException {
-        String fileName = "src\\test\\java\\files\\singledata.json";
+        String fileName = "src/test/java/files/singledata.json";
         ArrayList<Products> product = jsonhandler.makeJSonFileIntoArray(fileName);
         dbfacade.jsonInsertOrUpdateToDB(product, DBPROPERTYTEST);
         dbfacade.jsonInsertOrUpdateToDB(product, DBPROPERTYTEST);
@@ -140,7 +140,7 @@ public class DBtest {
     
     @Test
     public void emptyRowIsNullExcel() throws SQLException, ClassNotFoundException, IOException {
-        String fileName = "src\\test\\java\\files\\linewithemptyrow.xlsx";
+        String fileName = "src/test/java/files/linewithemptyrow.xlsx";
         ArrayList<Products> product = excelhandler.extractInfo(fileName);
         dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
 

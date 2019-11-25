@@ -25,13 +25,15 @@
          
          <% if (session.getAttribute("resulthits").equals("empty")) {
          }else {%>
-        
+        <% if (session.getAttribute("productupdated").equals("Productupdated")) { %>
+        <h3>Product has been updated</h3>
+        <%} else { %>
         <form action="FrontController" name="editProduct" method="POST">
             
             <input type="hidden" name="cmd" value="editProduct" /><br>
             <c:forEach var="productarray" items="${productarray}">
              Edit ProductID: <br />
-            <input type="number" name="ProductId" value="${productarray.getId()}" readonly/><br>
+            <input type="number" name="ProductId" value="${productarray.getId()}" readonly style="color:#888;"/><br>
              
             Edit Productname: <br />
             <input type="text" name="ProductName" value="${productarray.getName()}" /><br>
@@ -58,6 +60,7 @@
             
             <input type="submit" value="Submit" />
         </form>
+         <%}%>
          <%}%>
     </body>
 </html>
