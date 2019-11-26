@@ -48,7 +48,7 @@
                     <td>ID</td>
                     <td>Name</td>
                     <td>Name Description</td>
-                    <%--<td>Description</td>--%>
+                    <td>Description</td>
                     <td>Company Name</td>
                     <td>Price</td>
                     <td>Qty</td>
@@ -56,7 +56,7 @@
                     <td>Published Status</td>
                     <td>Minor Category</td>
                     <td>Main Category</td>
-
+                    
 
                 </tr>
             </thead>
@@ -66,7 +66,7 @@
                 <td><c:out value="${Products.getId()}" /></td>
                 <td><c:out value="${Products.getName()}" /></td>
                 <td><c:out value="${Products.getNameDescription()}" /></td>
-                <%--<td><c:out value="${Products.getDescription()}" /></td>--%>
+                <td><c:out value="${Products.getDescription()}" /></td>
                 <td><c:out value="${Products.getCompanyName()}" /></td>
                 <td><c:out value="${Products.getPrice()}" /></td>
                 <td><c:out value="${Products.getQty()}" /></td>

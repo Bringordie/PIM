@@ -38,6 +38,7 @@ public abstract class Command {
         commands.put("gotoUploadFile", new GoToUploadFileCommand());
         commands.put("gotoViewAllProducts", new GoToViewAllProductsCommand());
         commands.put("searchResults", new SearchProductCommand());
+        commands.put("gotoBulkEditProducts", new GoToBulkEditProductsCommand());
     }
 
     static Command from(HttpServletRequest request) {
