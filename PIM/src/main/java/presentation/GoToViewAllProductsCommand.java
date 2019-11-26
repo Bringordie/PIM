@@ -8,10 +8,13 @@ package presentation;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.Categories;
+import logic.FileReaderLogic;
 import logic.Products;
 import persistence.ProductMapper;
 
@@ -23,16 +26,27 @@ public class GoToViewAllProductsCommand extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
-     
-        
+
+        FileReaderLogic filechecker = new FileReaderLogic();
+
         ProductMapper productmapper = new ProductMapper();
         ArrayList<Products> viewallproducts = new ArrayList();
         viewallproducts = productmapper.showAllProducts("/db.properties");
-        
+        for (Products viewallproduct : viewallproducts) {
+            viewallproduct.getPictureName();
+            try {
+                String picturestatus = filechecker.FileCheck(viewallproduct.getPictureName());
+                System.out.println("before" + viewallproduct.getPictureName());
+                viewallproduct.setPictureName(picturestatus);
+                System.out.println("after" + viewallproduct.getPictureName());
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+        }
+
         request.getSession().setAttribute("viewallproducts", viewallproducts);
-        
-        
+
         return "ShowProducts";
     }
-    
+
 }

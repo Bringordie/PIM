@@ -9,7 +9,7 @@ public class Products {
     private final String CompanyName;
     private final double Price;
     private final int Quantity;
-    private final String PictureName;
+    private String PictureName;
     private final boolean PublishedStatus;
     private final String MinorCategory;
     private final String MainCategory;
@@ -32,6 +32,10 @@ public class Products {
 
     public String getName() {
         return ProductName;
+    }
+
+    public void setPictureName(String PictureName) {
+        this.PictureName = PictureName;
     }
 
     public String getDescription() {

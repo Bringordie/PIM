@@ -8,6 +8,7 @@
     </head>
     <%@ include file = "header.jsp" %>
     <body>
+        <%--<img src="http://localhost:8080/pictures/kaki-frugter.jpg" border="0" ></a>--%>
         <br>
         <br>
         <form action="FrontController">
@@ -40,7 +41,8 @@
                             <td><c:out value="${viewallproducts.getCompanyName()}" /></td>
                             <td><c:out value="${viewallproducts.getPrice()}" /></td>
                             <td><c:out value="${viewallproducts.getQty()}" /></td>
-                            <td><c:out value="${viewallproducts.getPictureName()}" /></td>
+                            <%--<td><c:out value="${viewallproducts.getPictureName()}" /></td>--%>
+                            <td><img src="${viewallproducts.getPictureName()}" border="0" with=70px height=70px></td>
                             <td><c:out value="${viewallproducts.getPublishedStatus()}" /></td>
                             <td><c:out value="${viewallproducts.getMinorCategory()}" /></td>
                             <td><c:out value="${viewallproducts.getMainCategory()}" /></td>
