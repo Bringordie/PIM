@@ -37,6 +37,7 @@ public abstract class Command {
         commands.put("gotoSearchProducts", new GoToSearchProductsCommand());
         commands.put("gotoUploadFile", new GoToUploadFileCommand());
         commands.put("gotoViewAllProducts", new GoToViewAllProductsCommand());
+        commands.put("gotoViewSingleProduct", new GoToSingleProductViewCommand());
         commands.put("searchResults", new SearchProductCommand());
         commands.put("gotoBulkEditProducts", new GoToBulkEditProductsCommand());
     }

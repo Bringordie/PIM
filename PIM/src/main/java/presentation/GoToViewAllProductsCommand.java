@@ -36,9 +36,7 @@ public class GoToViewAllProductsCommand extends Command {
             viewallproduct.getPictureName();
             try {
                 String picturestatus = filechecker.FileCheck(viewallproduct.getPictureName());
-                System.out.println("before" + viewallproduct.getPictureName());
                 viewallproduct.setPictureName(picturestatus);
-                System.out.println("after" + viewallproduct.getPictureName());
             } catch (Exception ex) {
                 System.out.println(ex);
             }
