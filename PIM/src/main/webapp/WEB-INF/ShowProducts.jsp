@@ -13,6 +13,10 @@
         <form action="FrontController">
             <input type="hidden" name="cmd" value="gotoBulkEditProducts">
             <input type="submit" value="Edit Selected Products">
+            <% if (session.getAttribute("errormsg").toString().equals("noinput")) { %>
+            <h3>Please select at least one product to edit.</h3>
+            <%} else if (session.getAttribute("errormsg").toString().equals("empty")) { %>
+            <%} %>
             <table width = "50%" border = "1" align = "center">
                 <thead>
                     <tr>

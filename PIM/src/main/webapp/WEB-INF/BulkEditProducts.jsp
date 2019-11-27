@@ -14,7 +14,7 @@
     </head>
     <%@ include file = "header.jsp" %>
     <body>
-        <h1>Bulk Edit Multiple Products</h1>
+        <h1>Bulk Edit Multiple Products:</h1>
         <br>
         <br>
         <table width = "50%" boder="1" align="center">
@@ -51,5 +51,6 @@
                 </c:forEach>
             </tbody>
         </table>
-    </body>
-</html>
+    </form>
+</body>
+</html>e

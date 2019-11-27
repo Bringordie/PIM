@@ -25,7 +25,7 @@ public class AddProductCommand extends Command {
        String productnamedescription = (request.getParameter("ProductNameDescription"));
        String productdescription = (request.getParameter("ProductDescription"));
        String companyname = (request.getParameter("CompanyName"));
-       double price = Integer.parseInt(request.getParameter("Price"));
+       double price = Double.parseDouble(request.getParameter("Price"));
        int quantity = Integer.parseInt(request.getParameter("Quantity"));
        String picturename = (request.getParameter("PictureName"));
        String minorcategory = request.getParameter("minorid");

@@ -19,6 +19,7 @@
          
          <form action="FrontController" method="POST">
              <input type="hidden" name="cmd" value="editProductSearch" />
+             <p>Please enter the ID of the product you want to edit:</p>
              <input type="number" name="ProductID" value="" />
              <input type="submit" value="Submit" />
          </form>
@@ -38,7 +39,6 @@
             Edit Productname: <br />
             <input type="text" name="ProductName" value="${productarray.getName()}" /><br>
             
-            
              Edit ProductnameDescription: <br />
             <input type="text" name="ProductNameDescription" value="${productarray.getNameDescription()}" /><br>
             
@@ -49,7 +49,7 @@
             <input type="text" name="CompanyName" value="${productarray.getCompanyName()}" /><br>
             
              Edit Price: <br />
-            <input type="text" name="Price" value="${productarray.getPrice()}" /><br>
+            <input type="number" step="0.01" name="Price" value="${productarray.getPrice()}" /><br>
             
              Edit Quantity: <br />
             <input type="number" name="Quantity" value="${productarray.getQty()}" /><br>

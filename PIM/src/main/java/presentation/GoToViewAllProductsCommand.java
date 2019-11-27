@@ -41,7 +41,7 @@ public class GoToViewAllProductsCommand extends Command {
                 System.out.println(ex);
             }
         }
-
+        request.getSession().setAttribute("errormsg", "empty");
         request.getSession().setAttribute("viewallproducts", viewallproducts);
 
         return "ShowProducts";

@@ -18,27 +18,36 @@ import logic.Products;
 public class GoToBulkEditProductsCommand extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) 
+    String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
-        
+
         String[] products = request.getParameterValues("selected");
         ArrayList<Products> allProducts = db.showAllProducts("/db.properties");
         Products obj = null;
         ArrayList<Products> selectedProducts = new ArrayList();
-        ArrayList<Integer> ID = new ArrayList();
-        for (int i = 0; i < products.length; ++i) {
-            int id = Integer.parseInt(products[i]);
-            for (int j = 0; j < allProducts.size(); ++j) {
-                obj = allProducts.get(j);
-                
-                if (obj.getId() == id) {
-                    selectedProducts.add(obj);
+        String website = "";
+        String errormsg = "";
+        if (!(products == null)) {
+            for (int i = 0; i < products.length; ++i) {
+                int id = Integer.parseInt(products[i]);
+                for (int j = 0; j < allProducts.size(); ++j) {
+                    obj = allProducts.get(j);
+
+                    if (obj.getId() == id) {
+                        selectedProducts.add(obj);
+                    }
                 }
             }
+            website = "BulkEditProducts";
+        } else {
+            ArrayList<Products> viewallproducts = db.showAllProducts("/db.properties");
+            errormsg = "noinput";
+            website = "ShowProducts";
+            request.getSession().setAttribute("viewallproducts", viewallproducts);
         }
-        request.setAttribute("selected", selectedProducts);
-        
-        return "BulkEditProducts";
+        request.getSession().setAttribute("selected", selectedProducts);
+        request.getSession().setAttribute("errormsg", "noinput");
+        return website;
     }
-    
+
 }
