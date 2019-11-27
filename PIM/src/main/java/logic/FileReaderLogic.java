@@ -9,10 +9,10 @@ import java.io.File;
 public class FileReaderLogic {
 
     public String FileCheck(String path) throws Exception {
-        String test = "C:\\Users\\Frederik\\Desktop\\apache-tomcat-8.5.47\\webapps\\pictures\\"+path+".jpg";
+        String fullpath = "C:\\Users\\Frederik\\Desktop\\apache-tomcat-8.5.47\\webapps\\pictures\\"+path+".jpg";
         String returnpath = "";
         
-        File file = new File(test);
+        File file = new File(fullpath);
         if(file.exists()) {
             returnpath = "http://localhost:8080/pictures/"+path+".jpg";
         } else {

@@ -26,7 +26,7 @@
         <br />
         <form action = "UploadImage" method = "POST" enctype = "multipart/form-data">
          <%--<input type = "file" name = "file" size = "50" required/>--%>
-         <input <input name="file" type="file" id="file" multiple required accept="image/*">
+         <input <input name="file" type="file" id="file" multiple required accept=".JPG">
          <br />
          <input type = "submit" value = "Upload File to Website" />
       </form>

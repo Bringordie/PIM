@@ -37,6 +37,7 @@ public class GoToAddProductCommand extends Command {
         } else {
             request.getSession().setAttribute("minorCategories", null);
         }
+        request.getSession().setAttribute("returnproductvalue", "empty"); 
         return "AddProduct";
     }
     

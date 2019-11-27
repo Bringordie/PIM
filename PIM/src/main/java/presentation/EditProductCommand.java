@@ -19,7 +19,6 @@ public class EditProductCommand extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) 
        throws ServletException, IOException, SQLException, ClassNotFoundException{
-        //TODO
 
        int id = Integer.parseInt(request.getParameter("ProductId"));
        String productname = (request.getParameter("ProductName"));

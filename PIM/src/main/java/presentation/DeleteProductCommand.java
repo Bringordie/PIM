@@ -19,7 +19,6 @@ public class DeleteProductCommand extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) 
        throws ServletException, IOException, SQLException, ClassNotFoundException{
-        //TODO
         
         String returnvalue = "";
         
