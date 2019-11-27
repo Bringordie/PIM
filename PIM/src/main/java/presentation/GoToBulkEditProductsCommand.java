@@ -47,6 +47,7 @@ public class GoToBulkEditProductsCommand extends Command {
         }
         request.getSession().setAttribute("selected", selectedProducts);
         request.getSession().setAttribute("errormsg", "noinput");
+        Products.setProductTempholder(selectedProducts);
         return website;
     }
 

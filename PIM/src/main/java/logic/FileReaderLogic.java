@@ -9,10 +9,7 @@ import java.io.File;
 public class FileReaderLogic {
 
     public String FileCheck(String path) throws Exception {
-        //String directoryname = "http://localhost:8080/pictures/";
-        ///String directoryname = "C:\\Users\\Frederik\\Desktop\\apache-tomcat-8.5.47\\webapps\\pictures\\";
         String test = "C:\\Users\\Frederik\\Desktop\\apache-tomcat-8.5.47\\webapps\\pictures\\"+path+".jpg";
-        //System.out.println(directoryname);
         String returnpath = "";
         
         File file = new File(test);
@@ -21,7 +18,6 @@ public class FileReaderLogic {
         } else {
             returnpath = "http://localhost:8080/pictures/noimage.jpg";
         }
-        System.out.println(returnpath);
         return returnpath;
 
     }

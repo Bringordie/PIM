@@ -571,5 +571,21 @@ public class ProductMapper implements ProductMapperInterface {
         }
         return searchResults;
     }
+    
+    public void BulkEditProducts(String attribute, String changeValue, ArrayList<Products> products, String propertyname) 
+            throws SQLException, ClassNotFoundException {
+
+        try {
+            for (Products product : products) {
+                
+                String sql = ("UPDATE products SET " + attribute + " = '" + changeValue +"' WHERE productid = " + product.getId());
+                
+                PreparedStatement statement = getConnection((propertyname)).prepareStatement(sql);
+                statement.executeUpdate();
+           }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
 }

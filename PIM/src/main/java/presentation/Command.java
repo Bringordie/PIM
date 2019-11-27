@@ -40,6 +40,7 @@ public abstract class Command {
         commands.put("gotoViewSingleProduct", new GoToSingleProductViewCommand());
         commands.put("searchResults", new SearchProductCommand());
         commands.put("gotoBulkEditProducts", new GoToBulkEditProductsCommand());
+        commands.put("bulkEditProducts", new BulkEditProductsCommand());
     }
 
     static Command from(HttpServletRequest request) {

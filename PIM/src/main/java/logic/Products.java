@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.ArrayList;
+
 public class Products {
 
     private final int ProductID;
@@ -13,6 +15,7 @@ public class Products {
     private final boolean PublishedStatus;
     private final String MinorCategory;
     private final String MainCategory;
+    private static ArrayList<Products> productTempholder;
 
     public Products(int ProductID, String ProductName, String ProductNameDescription, 
              String ProductDescription, String CompanyName, double Price, int Quantity, 
@@ -76,6 +79,14 @@ public class Products {
 
     public int getQty() {
         return Quantity;
+    }
+
+    public static ArrayList<Products> getProductTempholder() {
+        return productTempholder;
+    }
+
+    public static void setProductTempholder(ArrayList<Products> productTempholder) {
+        Products.productTempholder = productTempholder;
     }
 
     @Override
