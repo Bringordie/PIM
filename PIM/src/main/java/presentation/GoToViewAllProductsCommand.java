@@ -42,7 +42,9 @@ public class GoToViewAllProductsCommand extends Command {
             }
         }
         request.getSession().setAttribute("errormsg", "empty");
+        request.getSession().setAttribute("resulthits", "empty");
         request.getSession().setAttribute("viewallproducts", viewallproducts);
+        request.getSession().setAttribute("resultDBhits", 0);
 
         return "ShowProducts";
     }

@@ -1,0 +1,22 @@
+.table {
+  border : 2px solid black;
+  table-layout: fixed;
+}
+
+.tr {
+  height: 50px;
+}
+
+.tr td {
+  border: 1px solid black;
+  overflow: hidden;
+  max-width: 250px;
+  text-overflow: ellipsis;
+  
+  white-space: nowrap;
+}
+
+.tr.expanded td {
+    overflow: initial;
+    white-space: normal;
+}

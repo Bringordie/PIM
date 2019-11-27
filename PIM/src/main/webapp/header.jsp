@@ -24,6 +24,7 @@
                             <li><a href="http://localhost:8080/PIM/FrontController?cmd=gotoAddProduct">Add Products</a>
                             <li><a href="http://localhost:8080/PIM/FrontController?cmd=gotoEditProduct">Edit Products</a>
                             <li><a href="http://localhost:8080/PIM/FrontController?cmd=gotoDeleteProduct">Remove Products</a>
+                            <li><a href="http://localhost:8080/PIM/FrontController?cmd=gotoViewAllProducts">View Products</a>
                         </ul>
                     </li>
 

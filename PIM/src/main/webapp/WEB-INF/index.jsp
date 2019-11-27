@@ -15,15 +15,6 @@
 
     <body>
 
-        <form action="FrontController">
-            <input type="hidden" name="cmd" value="gotoSearchProducts">
-            <input type="Submit" value="Go to search" />
-        </form>
-        
-        <form action="FrontController">
-            <input type="hidden" name="cmd" value="gotoViewAllProducts">
-            <input type="Submit" value="Go to view all products" />
-        </form>
 
     </body>
 </html>

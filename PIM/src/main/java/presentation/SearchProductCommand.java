@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logic.FileReaderLogic;
 import logic.Products;
 import presentation.UploadFiles;
 
@@ -23,77 +24,89 @@ public class SearchProductCommand extends Command {
         String dropdown = request.getParameter("searchCriteria");
         String search = request.getParameter("searchInput");
 
-        ArrayList<Products> searchresults = new ArrayList();
+        ArrayList<Products> viewallproducts = new ArrayList();
         switch (dropdown) {
             case "ProductID":
                 dropdown = "productid";
-                searchresults = dbSearch(search, dropdown);
+                viewallproducts = dbSearch(search, dropdown);
                 break;
             case "Product Name":
                 dropdown = "name";
-                searchresults = dbSearch(search, dropdown);
+                viewallproducts = dbSearch(search, dropdown);
                 break;
             case "Product Name Description":
                 dropdown = "nameDescription";
-                searchresults = dbSearch(search, dropdown);
+                viewallproducts = dbSearch(search, dropdown);
                 break;
             case "Product Description":
                 dropdown = "description";
-                searchresults = dbSearch(search, dropdown);
+                viewallproducts = dbSearch(search, dropdown);
                 break;
             case "Company Name":
                 dropdown = "companyName";
-                searchresults = dbSearch(search, dropdown);
+                viewallproducts = dbSearch(search, dropdown);
                 break;
             case "Price":
                 dropdown = "price";
-                searchresults = dbSearch(search, dropdown);
+                viewallproducts = dbSearch(search, dropdown);
                 break;
             case "Quantity":
                 dropdown = "quantity";
-                searchresults = dbSearch(search, dropdown);
+                viewallproducts = dbSearch(search, dropdown);
                 break;
             case "Picture Name (associated with product)":
                 dropdown = "pictureName";
-                searchresults = dbSearch(search, dropdown);
+                viewallproducts = dbSearch(search, dropdown);
                 break;
             case "Published Status":
                 dropdown = "publishedStatus";
                 if (search.toLowerCase().contains("yes") || search.contains("1")|| search.toLowerCase().contains("true")) {
-                    searchresults = dbSearch("1", dropdown);
+                    viewallproducts = dbSearch("1", dropdown);
                 } else if (search.toLowerCase().contains("no") || search.contains("0") || search.toLowerCase().contains("false"))
-                    searchresults = dbSearch("0", dropdown);
+                    viewallproducts = dbSearch("0", dropdown);
                 break;
             case "Main Category":
                 dropdown = "mainCategoryName";
-                searchresults = dbSearch(search, dropdown);
+                viewallproducts = dbSearch(search, dropdown);
                 break;
             case "Minor Category":
                 dropdown = "minorCategoryName";
-                searchresults = dbSearch(search, dropdown);
+                viewallproducts = dbSearch(search, dropdown);
                 break;
             default:
                 System.err.print("Something went wrong");
         }
 
-        int resulthits = searchresults.size();
+        int resulthits = viewallproducts.size();
 
-        if (searchresults.isEmpty()) {
+        if (viewallproducts.isEmpty()) {
             results = "empty";
-        } else if (searchresults.size() > 0) {
+        } else if (viewallproducts.size() > 0) {
             results = "hit";
         }
+        
+        FileReaderLogic filechecker = new FileReaderLogic();
+        for (Products viewallproduct : viewallproducts) {
+            viewallproduct.getPictureName();
+            try {
+                String picturestatus = filechecker.FileCheck(viewallproduct.getPictureName());
+                viewallproduct.setPictureName(picturestatus);
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+        }
+        request.getSession().setAttribute("errormsg", "empty");
         request.getSession().setAttribute("resulthits", results);
-        request.getSession().setAttribute("searchresults", searchresults);
+        request.getSession().setAttribute("viewallproducts", viewallproducts);
         request.getSession().setAttribute("resultDBhits", resulthits);
 
-        return "Search";
+        return "ShowProducts";
     }
 
     private ArrayList<Products> dbSearch(String search, String dropdown) throws SQLException, ClassNotFoundException {
-        ArrayList<Products> searchresults;
-        searchresults = db.showSearchedProduct(search, dropdown, "/db.properties");
-        return searchresults;
+        ArrayList<Products> viewallproducts;
+        viewallproducts = db.showSearchedProduct(search, dropdown, "/db.properties");
+        return viewallproducts;
     }
 
 }
