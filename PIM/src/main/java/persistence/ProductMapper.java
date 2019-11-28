@@ -495,7 +495,6 @@ public class ProductMapper implements ProductMapperInterface {
         returnvalue = "deletealreadyexists";
         return returnvalue;
     }
-// throw new IllegalArgumentException("Collection of users must not be null");
 
     /**
      *
@@ -572,9 +571,11 @@ public class ProductMapper implements ProductMapperInterface {
         return searchResults;
     }
     
-    public void BulkEditProducts(String attribute, String changeValue, ArrayList<Products> products, String propertyname) 
+    @Override
+    public String BulkEditProducts(String attribute, String changeValue, ArrayList<Products> products, String propertyname) 
             throws SQLException, ClassNotFoundException {
-
+        
+        String callback = "";
         try {
             for (Products product : products) {
                 
@@ -582,10 +583,36 @@ public class ProductMapper implements ProductMapperInterface {
                 
                 PreparedStatement statement = getConnection((propertyname)).prepareStatement(sql);
                 statement.executeUpdate();
+                
+                callback = "success";
            }
         } catch (SQLException e) {
             System.out.println(e);
+            callback = "error";
         }
+        return callback;
+    }
+    
+    @Override
+    public String BulkEditPublished(String attribute, boolean changeValue, ArrayList<Products> products, String propertyname) 
+            throws SQLException, ClassNotFoundException {
+        
+        String callback = "";
+        try {
+            for (Products product : products) {
+                
+                String sql = ("UPDATE products SET " + attribute + " = " + changeValue +" WHERE productid = " + product.getId());
+                
+                PreparedStatement statement = getConnection((propertyname)).prepareStatement(sql);
+                statement.executeUpdate();
+                
+                callback = "success";
+           }
+        } catch (SQLException e) {
+            System.out.println(e);
+            callback = "error";
+        }
+        return callback;
     }
 
 }

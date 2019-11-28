@@ -20,7 +20,7 @@
          <form action="FrontController" method="POST">
              <input type="hidden" name="cmd" value="editProductSearch" />
              <p>Please enter the ID of the product you want to edit:</p>
-             <input type="number" name="ProductID" value="" />
+             <input type="number" name="ProductID" value="" required />
              <input type="submit" value="Submit" />
          </form>
          

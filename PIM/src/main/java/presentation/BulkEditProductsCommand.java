@@ -26,7 +26,8 @@ public class BulkEditProductsCommand extends Command {
         ProductMapper pm = new ProductMapper();
         String dropdown = request.getParameter("chosenAttribute");
         String edit = request.getParameter("bulkEditProducts");
-
+        String callback = "";
+        
         ArrayList<Products> searchresults = new ArrayList();
         switch (dropdown) {
             case "ProductID":
@@ -55,10 +56,10 @@ public class BulkEditProductsCommand extends Command {
                 break;
             case "Published Status":
                 dropdown = "publishedStatus";
-//                if (search.toLowerCase().contains("yes") || search.contains("1")|| search.toLowerCase().contains("true")) {
-//                    searchresults = dbSearch("1", dropdown);
-//                } else if (search.toLowerCase().contains("no") || search.contains("0") || search.toLowerCase().contains("false"))
-//                    searchresults = dbSearch("0", dropdown);
+                if (edit.toLowerCase().contains("yes") || edit.contains("1")|| edit.toLowerCase().contains("true")) {
+                    edit = "true";
+                } else if (edit.toLowerCase().contains("no") || edit.contains("0") || edit.toLowerCase().contains("false"))
+                    edit = "false";
                 break;
             case "Main Category":
                 dropdown = "mainCategory";
@@ -66,13 +67,18 @@ public class BulkEditProductsCommand extends Command {
                 break;
             case "Minor Category":
                 dropdown = "minorCategory";
-//                searchresults = dbSearch(edit, dropdown);
                 edit = String.valueOf(cm.getMinorValuesFromDBFile(edit, "/db.properties"));
                 break;
             default:
                 System.err.print("Something went wrong");
         }
-        pm.BulkEditProducts(dropdown, edit, selectedProducts, "/db.properties");
+        if (edit.equals("true") || edit.equals("false")) {
+            callback = pm.BulkEditPublished(dropdown, Boolean.parseBoolean(edit), selectedProducts, "/db.properties");
+        } else {
+            callback = pm.BulkEditProducts(dropdown, edit, selectedProducts, "/db.properties");
+        }
+        
+        request.getSession().setAttribute("callback", callback);
         
         return "BulkEditProducts";
     }

@@ -54,7 +54,6 @@ public class CategoryMapper implements CategoryMapperInterface {
             PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
             statement.setString(1, category);
             statement.executeUpdate();
-            //int id = getMainMaxID();
 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CategoryMapper.class.getName()).log(Level.SEVERE, null, ex);
@@ -95,7 +94,6 @@ public class CategoryMapper implements CategoryMapperInterface {
         try {
             while (result.next()) {
                 minorID = result.getInt(1);
-                //hashminor.add(minorName);
                 minorName = result.getString(2);
                 Categories test = new Categories(minorID, minorName);
                 hashminor.add(test);
@@ -110,7 +108,6 @@ public class CategoryMapper implements CategoryMapperInterface {
     public ArrayList<Categories> getMainValuesFromDB(String propertyname) throws SQLException, ClassNotFoundException {
         String mainName = "";
         int mainID;
-        //HashSet<String> hashmain = new HashSet();
         ArrayList<Categories> hashmain = new ArrayList();
         String sql = "select * from mainCategories ORDER BY mainCategoryName ASC";
         ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();

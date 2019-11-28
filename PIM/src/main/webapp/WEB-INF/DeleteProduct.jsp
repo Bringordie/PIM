@@ -21,7 +21,7 @@
             <input type="hidden" name="cmd" value="deleteProduct" /><br>
             
              Delete ProductID: <br />
-            <input type="text" name="ProductId" value="" /><br>
+            <input type="text" name="ProductId" value="" required/><br>
              
             
             <input type="submit" value="Submit" />

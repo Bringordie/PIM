@@ -13,6 +13,12 @@
         <title>Bulk Edit Products</title>
     </head>
     <%@ include file = "header.jsp" %>
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script src="ShowProducts.js"></script>
+    <link rel="stylesheet" href="ShowProducts.css">
     <body>
         <h1>Bulk Edit Multiple Products:</h1>
         <p>Choose which attribute you want to edit for all selected products: </p>
@@ -35,7 +41,14 @@
             <p>New input:</p>
             <input type="hidden" name="cmd" value="bulkEditProducts" />
             <input type="text" name="bulkEditProducts" value="" />
-                <input type="submit" value="Apply Edit" />
+            <input type="submit" value="Apply Edit" />
+            <% if (session.getAttribute("callback").toString().equals("success")) { %>
+            <p>Edit successfully applied!</p>
+            <%} else if (session.getAttribute("callback").toString().equals("error")) { %>
+            <p>Error: Something went wrong. Please contact IT support.</p>
+            <%} else if (session.getAttribute("callback").toString().equals("empty")) {
+                    }%>
+            <br>
             <br>
             <br>
             <table width = "50%" boder="1" align="center">
@@ -56,7 +69,7 @@
                 </thead>
                 <tbody>
                     <c:forEach var="selected" items="${selected}">
-                        <tr>
+                        <tr class="tr">
                             <td><c:out value="${selected.getId()}" /></td>
                             <td><c:out value="${selected.getName()}" /></td>
                             <td><c:out value="${selected.getNameDescription()}" /></td>
@@ -74,4 +87,4 @@
             </table>
         </form>
     </body>
-</html>e
+</html>
