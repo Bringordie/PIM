@@ -14,9 +14,7 @@ public class DBConnection {
 
     public static Connection getConnection(String propertiesfilelink) throws ClassNotFoundException, SQLException {
 
-        String resourcelink = propertiesfilelink;
         if (singleton == null) {
-            //try (InputStream sa = DBConnection.class.getResourceAsStream("/db.properties")) {
             try (InputStream sa = DBConnection.class.getResourceAsStream(propertiesfilelink)) {
 
                 // load the properties file

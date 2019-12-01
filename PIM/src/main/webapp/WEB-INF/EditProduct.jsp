@@ -1,9 +1,3 @@
-<%-- 
-    Document   : ProductAdd
-    Created on : 13-11-2019, 12:46:29
-    Author     : ClausFindinge - Claus Mikkelsen Findinge
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>

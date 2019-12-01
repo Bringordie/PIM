@@ -1,9 +1,3 @@
-<%-- 
-    Document   : header
-    Created on : 19-11-2019, 15:47:49
-    Author     : Frederik
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

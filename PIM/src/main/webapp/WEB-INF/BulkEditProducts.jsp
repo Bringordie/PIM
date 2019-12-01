@@ -1,9 +1,3 @@
-<%-- 
-    Document   : BulkEditProducts
-    Created on : Nov 25, 2019, 9:54:20 AM
-    Author     : Malthe
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

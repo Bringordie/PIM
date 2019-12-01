@@ -51,6 +51,5 @@ public class JsonWriter {
         } catch (IOException e) {
             System.out.println(e);
         }
-        System.out.println("JSON file created......");
     }
 }

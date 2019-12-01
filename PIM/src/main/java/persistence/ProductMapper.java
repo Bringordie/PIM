@@ -23,8 +23,6 @@ public class ProductMapper implements ProductMapperInterface {
      * @author - Bringordie - Frederik Braagaard
      * @param list holds all the values of the products
      * @param propertyname used for checking to execute in production or test.
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
      */
     @Override
     public void jsonInsertOrUpdateToDB(ArrayList<Products> list, String propertyname) throws SQLException, ClassNotFoundException {
@@ -165,7 +163,7 @@ public class ProductMapper implements ProductMapperInterface {
     /**
      *
      * @author - Bringordie - Frederik Braagaard
-     * @param string
+     * @param string - the product logic it takes in.
      * @return Used for when uploading to set null so it doesn't show "" in db.
      */
     public String ifElseString(String string) {
@@ -190,8 +188,6 @@ public class ProductMapper implements ProductMapperInterface {
      * @author - Bringordie - Frederik Braagaard
      * @param list holds all the values of the products
      * @param propertyname used for checking to execute in production or test.
-     * @throws java.lang.ClassNotFoundException
-     * @throws java.sql.SQLException
      */
     @Override
     public void excelInsertOrUpdateToDB(ArrayList<Products> list, String propertyname) throws ClassNotFoundException, NumberFormatException, SQLException {
@@ -340,8 +336,6 @@ public class ProductMapper implements ProductMapperInterface {
      * @param productid the id of the product
      * @param propertyname for db connection
      * @return returns true or false depending on if product exists.
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
      */
     @Override
     public boolean checkIfProductExists(String productid, String propertyname) throws SQLException, ClassNotFoundException {
@@ -412,8 +406,6 @@ public class ProductMapper implements ProductMapperInterface {
      * @param productid the id of the product
      * @param propertyname - for connection to db
      * @return returns an arraylist of the searched product
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
      */
     @Override
     public ArrayList<Products> getSearchResults(int productid, String propertyname) throws SQLException, ClassNotFoundException {
@@ -459,8 +451,6 @@ public class ProductMapper implements ProductMapperInterface {
      * @author - Bringordie - Frederik Braagaard
      * @param propertyname - for db connection
      * @return returns an arraylist of all the products from the db
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
      */
     @Override
     public ArrayList<Products> showAllProducts(String propertyname) throws SQLException, ClassNotFoundException {
@@ -504,8 +494,6 @@ public class ProductMapper implements ProductMapperInterface {
      * @param id - the product id
      * @param product - the product
      * @param propertyname - for db connection
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
      */
     @Override
     public void editProduct(int id, Products product, String propertyname) throws SQLException, ClassNotFoundException {
@@ -572,8 +560,6 @@ public class ProductMapper implements ProductMapperInterface {
      * @param propertyname - for db connection
      * @return - shows a wildcard arraylist search of all the products that
      * matches.
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
      */
     @Override
     public ArrayList<Products> showSearchedProduct(String search, String attribute, String propertyname) throws SQLException, ClassNotFoundException {
@@ -617,8 +603,6 @@ public class ProductMapper implements ProductMapperInterface {
      * @author - Bringordie - Frederik Braagaard
      * @param propertyname - for db connection
      * @return - returns all products as an arraylist used for Json download
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
      */
     @Override
     public ArrayList<Products> dbDownload(String propertyname) throws SQLException, ClassNotFoundException {

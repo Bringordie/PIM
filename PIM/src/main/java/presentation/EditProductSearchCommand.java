@@ -13,10 +13,10 @@ import logic.Products;
  *
  * When we are at the EditProduct.jsp we have to enter a product id.
  * When we have the ID we do a search to the DB to check that it exists
- * @see search = db.searchProduct(idsearch, "/db.properties");
+ * "search = db.searchProduct(idsearch, "/db.properties");"
  * If it exists we will then see a product on the .jsp page. If it doesn't exist
- * we will return empty back to show a message.
- * @see request.getSession().setAttribute("productupdated", "empty");
+ * we will return empty back to show a message
+ * "request.getSession().setAttribute("productupdated", "empty");".
  * We do a for loop with all the categories from the DB in order to remove the
  * one that matches with what the product already has (if it has one).
  * 

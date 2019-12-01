@@ -1,9 +1,3 @@
-<%--
-    Document   : AddCategory
-    Created on : Nov 11, 2019, 11:27:45 AM
-    Author     : Malthe
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

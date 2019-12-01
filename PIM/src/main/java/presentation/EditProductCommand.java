@@ -11,7 +11,6 @@ import logic.Products;
  *
  * Once the .jsp page has found a product and the necessary changes has been 
  * made we grab the attributes and do an update on the product.
- * @see db.editProduct
  * 
  * @author Bringordie - Frederik Braagaard
  */

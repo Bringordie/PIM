@@ -29,7 +29,7 @@ import logic.ExcelWriter;
 /**
  *
  * Takes an ExcelWriter that takes all of the products in DB via
- * @see excelwriter.DataBaseToExcel("/db.properties");
+ * "excelwriter.DataBaseToExcel("/db.properties");"
  * once that is done we save the file as a temp in the property file path.
  * When that is done we stream the file to the user, we get the relativePath
  * where the file should be downloaded in depending on what browser the user
@@ -37,7 +37,7 @@ import logic.ExcelWriter;
  * We then get the mine type of the file TODO WRITE MORE
  * Once that is done we create a response and force the download of the file.
  * And when the file has been downloaded we delete the temp file again.
- * @see Files.deleteIfExists(Paths.get(path+"Products.xlsx")); 
+ * "Files.deleteIfExists(Paths.get(path+"Products.xlsx"));"
  * 
  * @author Bringordie - Frederik Braagaard
  */

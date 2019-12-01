@@ -1,9 +1,3 @@
-<%-- 
-    Document   : UploadFile
-    Created on : 08-11-2019, 17:04:22
-    Author     : Frederik Braagaard - Bringordie
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

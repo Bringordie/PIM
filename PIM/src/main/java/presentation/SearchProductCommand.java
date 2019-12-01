@@ -17,8 +17,8 @@ import logic.Products;
  * that checks what dropdown was choosen and correct the dropdown value.
  * And then we call the dbSearch method to check if a product with those
  * criteria actually exists. If it exists an arraylist will be populated
- * and depending on if the arraylist is 0 or >0 we either give show all hits
- * or give an error message.
+ * and depending on if the arraylist is 0 or less than0 we either give show all 
+ * hits or give an error message.
  * For publicstatus we do it a little different as we are using a boolean so 
  * that the user doesn't "have" to write true or false. But have several options.
  * When that is done we use a FileReaderLogic in order to show the picture 

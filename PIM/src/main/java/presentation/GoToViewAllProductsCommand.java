@@ -18,14 +18,14 @@ import logic.Products;
  *
  * Used to show all products that we have in the database and it's attributes.
  * First we get all the products
- * @see viewallproducts = db.showAllProducts("/db.properties");
+ * "viewallproducts = db.showAllProducts("/db.properties");"
  * once that is done we do a for each loop of all of the products to check
  * their pictureName we then check it with FileReaderLogic to see if the 
- * picture exists or if we need to use a default "not found" picture.
- * @see String picturestatus = filechecker.FileCheck(viewallproduct.getPictureName());
- * if it exists we modify it so that it can show the picture, and if it doesn't
+ * picture exists or if we need to use a default "not found" picture
+ * "String picturestatus = filechecker.FileCheck(viewallproduct.getPictureName());".
+ * If it exists we modify it so that it can show the picture, and if it doesn't
  * we modify the picturename completely with a setter
- * @see viewallproduct.setPictureName(picturestatus);
+ * "viewallproduct.setPictureName(picturestatus);"
  * 
  * @author Bringordie - Frederik Braagaard
  */

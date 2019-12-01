@@ -100,8 +100,6 @@ public class CategoryMapper implements CategoryMapperInterface {
      * @author - Bringordie - Frederik Braagaard
      * @param propertyname - for db connection
      * @return - returns all the minor values in an ascending order.
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
      */
     @Override
     public ArrayList<Categories> getMinorValuesFromDB(String propertyname) throws SQLException, ClassNotFoundException {
@@ -133,8 +131,6 @@ public class CategoryMapper implements CategoryMapperInterface {
      * @author - Bringordie - Frederik Braagaard
      * @param propertyname - for db connection
      * @return - returns all the main values in an ascending order.
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
      */
     @Override
     public ArrayList<Categories> getMainValuesFromDB(String propertyname) throws SQLException, ClassNotFoundException {
@@ -168,8 +164,6 @@ public class CategoryMapper implements CategoryMapperInterface {
      * @param minorname - category minorname
      * @param propertyname - for db connection
      * @return returns the ID of the matching name
-     * @throws java.sql.SQLException 
-     * @throws java.lang.ClassNotFoundException 
      */
     @Override
     public int getMinorValuesFromDBFile(String minorname, String propertyname) throws SQLException, ClassNotFoundException {
@@ -203,8 +197,6 @@ public class CategoryMapper implements CategoryMapperInterface {
      * @param mainname - category mainname
      * @param propertyname - for db connection
      * @return returns the ID of the matching name
-     * @throws java.sql.SQLException 
-     * @throws java.lang.ClassNotFoundException 
      */
     @Override
     public int getMainValuesFromDBFile(String mainname, String propertyname) throws SQLException, ClassNotFoundException {
@@ -239,8 +231,6 @@ public class CategoryMapper implements CategoryMapperInterface {
      * @param mainname - category mainname
      * @param propertyname - for db connection
      * @return returns the ID value of the newly created category.
-     * @throws java.sql.SQLException 
-     * @throws java.lang.ClassNotFoundException
      */
     @Override
     public int createMainIDInDB(String mainname, String propertyname) throws SQLException, ClassNotFoundException {
@@ -279,8 +269,6 @@ public class CategoryMapper implements CategoryMapperInterface {
      * @param minorname - category minorname
      * @param propertyname - for db connection
      * @return returns the ID value of the newly created category.
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
      */
     @Override
     public int createMinorIDInDB(String minorname, String propertyname) throws SQLException, ClassNotFoundException {
@@ -317,8 +305,6 @@ public class CategoryMapper implements CategoryMapperInterface {
      * @param mainid  - category mainid
      * @param minorid  - category minorid
      * @param propertyname - for db connection
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
      */
     @Override
     public void checkOrCreateLinkminormain(int mainid, int minorid, String propertyname) throws SQLException, ClassNotFoundException {
