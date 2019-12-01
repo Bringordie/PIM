@@ -4,8 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import logic.Products;
 import static persistence.DBConnection.getConnection;
 
@@ -15,9 +13,18 @@ public class ProductMapper implements ProductMapperInterface {
 
     /**
      *
+     * Once the json file has been uploaded we need to add the information to
+     * the database. This method will either create or update the product
+     * information that is in the database. The method will also make calls to
+     * other mappers in order to check if a product has already been added, if a
+     * category already exists or needs to be created.
+     *
+     *
      * @author - Bringordie - Frederik Braagaard
      * @param list holds all the values of the products
      * @param propertyname used for checking to execute in production or test.
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
     @Override
     public void jsonInsertOrUpdateToDB(ArrayList<Products> list, String propertyname) throws SQLException, ClassNotFoundException {
@@ -158,6 +165,8 @@ public class ProductMapper implements ProductMapperInterface {
     /**
      *
      * @author - Bringordie - Frederik Braagaard
+     * @param string
+     * @return Used for when uploading to set null so it doesn't show "" in db.
      */
     public String ifElseString(String string) {
         String returnvalue;
@@ -172,9 +181,17 @@ public class ProductMapper implements ProductMapperInterface {
 
     /**
      *
+     * Once the excel file has been uploaded we need to add the information to
+     * the database. This method will either create or update the product
+     * information that is in the database. The method will also make calls to
+     * other mappers in order to check if a product has already been added, if a
+     * category already exists or needs to be created.
+     *
      * @author - Bringordie - Frederik Braagaard
      * @param list holds all the values of the products
      * @param propertyname used for checking to execute in production or test.
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.sql.SQLException
      */
     @Override
     public void excelInsertOrUpdateToDB(ArrayList<Products> list, String propertyname) throws ClassNotFoundException, NumberFormatException, SQLException {
@@ -315,13 +332,22 @@ public class ProductMapper implements ProductMapperInterface {
 
     /**
      *
+     * Used to see if a product already exists. If it does the previous 
+     * method will either update if it's an upload of a file. Or send an error
+     * if it's for creating a product with an already existing productid.
+     * 
      * @author - Bringordie - Frederik Braagaard
+     * @param productid the id of the product
+     * @param propertyname for db connection
+     * @return returns true or false depending on if product exists.
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
     @Override
-    public boolean checkIfProductExists(String s, String propertyname) throws SQLException, ClassNotFoundException {
+    public boolean checkIfProductExists(String productid, String propertyname) throws SQLException, ClassNotFoundException {
         Boolean returnvalue = false;
         int tempholder;
-        String sql = "select COUNT(productid) from products where productid = '" + s + "'";
+        String sql = "select COUNT(productid) from products where productid = '" + productid + "'";
         ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
 
         try {
@@ -339,6 +365,10 @@ public class ProductMapper implements ProductMapperInterface {
         return returnvalue;
     }
 
+    /**
+     *
+     * @author - Slantefar
+     */
     @Override
     public String addProduct(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException {
         String returnvalue = "";
@@ -374,16 +404,26 @@ public class ProductMapper implements ProductMapperInterface {
         return returnvalue;
     }
 
+    /**
+     *
+     * Used for searching for a product via it's id.
+     * 
+     * @author - Bringordie - Frederik Braagaard
+     * @param productid the id of the product
+     * @param propertyname - for connection to db
+     * @return returns an arraylist of the searched product
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+     */
     @Override
-    public void deleteProduct(int ProductID) throws SQLException, ClassNotFoundException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ArrayList<Products> getSearchResults(int i, String propertyname) throws SQLException, ClassNotFoundException {
+    public ArrayList<Products> getSearchResults(int productid, String propertyname) throws SQLException, ClassNotFoundException {
 
         ArrayList<Products> searchResults = new ArrayList();
-        String sql = "SELECT * FROM products WHERE productid =" + i;
+        String sql = "select products.*, maincategories.mainCategoryName, minorcategories.minorCategoryName "
+                + "from products "
+                + "inner join maincategories on products.mainCategory = maincategories.categoryid "
+                + "inner join minorcategories on products.minorCategory = minorcategories.categoryid "
+                + "where productid =" + productid;
         ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
 
         try {
@@ -397,8 +437,8 @@ public class ProductMapper implements ProductMapperInterface {
                 int Quantity = result.getInt(7);
                 String PictureName = result.getString(8);
                 boolean PublishedStatus = result.getBoolean(9);
-                String MinorCategory = result.getString(10);
-                String MainCategory = result.getString(11);
+                String MainCategory = result.getString(12);
+                String MinorCategory = result.getString(13);
                 searchResults.add(new Products(ProductID, ProductName, ProductNameDescription, ProductDescription, CompanyName, Price, Quantity, PictureName, PublishedStatus, MinorCategory, MainCategory));
             }
 
@@ -410,7 +450,17 @@ public class ProductMapper implements ProductMapperInterface {
 
     /**
      *
+     * Shows all the products in the database that exists.
+     * It does a join on the categoryIDs in order to get the category names
+     * for the user. The result.next skips 10 and 11 because these are the
+     * IDs of the categories and we have no need to see these as this is only
+     * used for the backend.
+     * 
      * @author - Bringordie - Frederik Braagaard
+     * @param propertyname - for db connection
+     * @return returns an arraylist of all the products from the db
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
     @Override
     public ArrayList<Products> showAllProducts(String propertyname) throws SQLException, ClassNotFoundException {
@@ -433,7 +483,6 @@ public class ProductMapper implements ProductMapperInterface {
                 double Price = result.getDouble(6);
                 int Quantity = result.getInt(7);
                 String PictureName = result.getString(8);
-                //This one will just be ignored.
                 boolean PublishedStatus = result.getBoolean(9);
                 //Skipping 2 because of join
                 String MainCategory = result.getString(12);
@@ -447,7 +496,19 @@ public class ProductMapper implements ProductMapperInterface {
         return searchResults;
     }
 
-    public void EditProduct(int id, Products product, String propertyname) throws SQLException, ClassNotFoundException {
+    /**
+     *
+     * Used for editing a product from it's id. 
+     * 
+     * @author - Bringordie - Frederik Braagaard
+     * @param id - the product id
+     * @param product - the product
+     * @param propertyname - for db connection
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+     */
+    @Override
+    public void editProduct(int id, Products product, String propertyname) throws SQLException, ClassNotFoundException {
 
         try {
             {
@@ -473,24 +534,28 @@ public class ProductMapper implements ProductMapperInterface {
         }
     }
 
-    public String DeleteProduct(int id, String propertyname) throws SQLException, ClassNotFoundException {
+    /**
+     *
+     * @author - Slantefar
+     */
+    @Override
+    public String deleteProduct(int id, String propertyname) throws SQLException, ClassNotFoundException {
 
         String returnvalue = "";
         Boolean booleanIDCheck = checkIfProductExists((Integer.toString(id)), propertyname);
         if (booleanIDCheck == true) {
-            
 
-            try {             
+            try {
                 String sql = "DELETE FROM products WHERE productid = ?";
                 PreparedStatement statement = getConnection((propertyname)).prepareStatement(sql);
                 statement.setInt(1, id);
                 statement.executeUpdate();
                 returnvalue = "deleteproduct";
-                
+
             } catch (SQLException e) {
                 System.out.println(e);
             }
-             return returnvalue;
+            return returnvalue;
         }
         returnvalue = "deletealreadyexists";
         return returnvalue;
@@ -498,16 +563,26 @@ public class ProductMapper implements ProductMapperInterface {
 
     /**
      *
+     * Shows an array of product(s) from a wildcard that has been searched for.
+     * It can contain 0-x depending on the ammount of matches.
+     * 
      * @author - Bringordie - Frederik Braagaard
+     * @param search - search input value
+     * @param attribute - search value from dropdown
+     * @param propertyname - for db connection
+     * @return - shows a wildcard arraylist search of all the products that
+     * matches.
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
     @Override
-    public ArrayList<Products> showSearchedProduct(String s, String attribute, String propertyname) throws SQLException, ClassNotFoundException {
+    public ArrayList<Products> showSearchedProduct(String search, String attribute, String propertyname) throws SQLException, ClassNotFoundException {
         ArrayList<Products> searchResults = new ArrayList();
         String sql = "select products.*, maincategories.mainCategoryName, "
                 + "minorcategories.minorCategoryName from products inner join "
                 + "maincategories on products.mainCategory = maincategories.categoryid "
                 + "inner join minorcategories on products.minorCategory "
-                + "= minorcategories.categoryid where " + attribute + " LIKE '%" + s + "%'";
+                + "= minorcategories.categoryid where " + attribute + " LIKE '%" + search + "%'";
         ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
 
         try {
@@ -535,7 +610,15 @@ public class ProductMapper implements ProductMapperInterface {
 
     /**
      *
+     * When we need to download the content of the database this method is used
+     * for selecting all with a join again and result.get 10/11 is skipped as 
+     * the document we download should consist of readable data so not binary.
+     * 
      * @author - Bringordie - Frederik Braagaard
+     * @param propertyname - for db connection
+     * @return - returns all products as an arraylist used for Json download
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
     @Override
     public ArrayList<Products> dbDownload(String propertyname) throws SQLException, ClassNotFoundException {
@@ -570,44 +653,46 @@ public class ProductMapper implements ProductMapperInterface {
         }
         return searchResults;
     }
-    
+
+    /**
+     *
+     * @author - Malthe
+     */
     @Override
-    public String BulkEditProducts(String attribute, String changeValue, ArrayList<Products> products, String propertyname) 
+    public String bulkEditProducts(String attribute, String changeValue, ArrayList<Products> products, String propertyname)
             throws SQLException, ClassNotFoundException {
-        
+
         String callback = "";
         try {
             for (Products product : products) {
-                
-                String sql = ("UPDATE products SET " + attribute + " = '" + changeValue +"' WHERE productid = " + product.getId());
-                
+                String sql = ("UPDATE products SET " + attribute + " = '" + changeValue + "' WHERE productid = " + product.getId());
                 PreparedStatement statement = getConnection((propertyname)).prepareStatement(sql);
                 statement.executeUpdate();
-                
                 callback = "success";
-           }
+            }
         } catch (SQLException e) {
             System.out.println(e);
             callback = "error";
         }
         return callback;
     }
-    
+
+    /**
+     *
+     * @author - Malthe
+     */
     @Override
-    public String BulkEditPublished(String attribute, boolean changeValue, ArrayList<Products> products, String propertyname) 
+    public String bulkEditPublished(String attribute, boolean changeValue, ArrayList<Products> products, String propertyname)
             throws SQLException, ClassNotFoundException {
-        
+
         String callback = "";
         try {
             for (Products product : products) {
-                
-                String sql = ("UPDATE products SET " + attribute + " = " + changeValue +" WHERE productid = " + product.getId());
-                
+                String sql = ("UPDATE products SET " + attribute + " = " + changeValue + " WHERE productid = " + product.getId());
                 PreparedStatement statement = getConnection((propertyname)).prepareStatement(sql);
                 statement.executeUpdate();
-                
                 callback = "success";
-           }
+            }
         } catch (SQLException e) {
             System.out.println(e);
             callback = "error";

@@ -8,19 +8,26 @@ package presentation;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import logic.Categories;
 import logic.FileReaderLogic;
 import logic.Products;
-import persistence.ProductMapper;
 
 /**
  *
- * @author Slantefar
+ * Used to show all products that we have in the database and it's attributes.
+ * First we get all the products
+ * @see viewallproducts = db.showAllProducts("/db.properties");
+ * once that is done we do a for each loop of all of the products to check
+ * their pictureName we then check it with FileReaderLogic to see if the 
+ * picture exists or if we need to use a default "not found" picture.
+ * @see String picturestatus = filechecker.FileCheck(viewallproduct.getPictureName());
+ * if it exists we modify it so that it can show the picture, and if it doesn't
+ * we modify the picturename completely with a setter
+ * @see viewallproduct.setPictureName(picturestatus);
+ * 
+ * @author Bringordie - Frederik Braagaard
  */
 public class GoToViewAllProductsCommand extends Command {
 
@@ -29,9 +36,8 @@ public class GoToViewAllProductsCommand extends Command {
 
         FileReaderLogic filechecker = new FileReaderLogic();
 
-        ProductMapper productmapper = new ProductMapper();
         ArrayList<Products> viewallproducts = new ArrayList();
-        viewallproducts = productmapper.showAllProducts("/db.properties");
+        viewallproducts = db.showAllProducts("/db.properties");
         for (Products viewallproduct : viewallproducts) {
             viewallproduct.getPictureName();
             try {

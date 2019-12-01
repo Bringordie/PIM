@@ -1,23 +1,20 @@
 package persistence;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logic.Categories;
 import static persistence.DBConnection.getConnection;
 
-/**
- *
- * @author Malthe
- */
 public class CategoryMapper implements CategoryMapperInterface {
 
+    /**
+     *
+     * @author - Malthe
+     */
     @Override
     public String addMainCategory(String category, String propertyname) throws ClassNotFoundException, SQLException {
         String returnvalue = "";
@@ -25,23 +22,26 @@ public class CategoryMapper implements CategoryMapperInterface {
         Boolean booleanNameCheck = checkMainCategory(category, propertyname);
         if (booleanNameCheck == false) {
             returnvalue = "Category added!";
-        
-        try {
 
-            PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
-            statement.setString(1, category);
-            statement.executeUpdate();
-            
+            try {
 
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(CategoryMapper.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
+                statement.setString(1, category);
+                statement.executeUpdate();
+
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(CategoryMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
-            returnvalue = "Category already exists!"; 
+            returnvalue = "Category already exists!";
         }
         return returnvalue;
     }
 
+    /**
+     *
+     * @author - Malthe
+     */
     @Override
     public String addMinorCategory(String category, String propertyname) throws ClassNotFoundException, SQLException {
         String returnvalue = "";
@@ -49,21 +49,25 @@ public class CategoryMapper implements CategoryMapperInterface {
         Boolean booleanNameCheck = checkMinorCategory(category, propertyname);
         if (booleanNameCheck == false) {
             returnvalue = "Category added!";
-        try {
+            try {
 
-            PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
-            statement.setString(1, category);
-            statement.executeUpdate();
+                PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
+                statement.setString(1, category);
+                statement.executeUpdate();
 
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(CategoryMapper.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(CategoryMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
-            returnvalue = "Category already exists!"; 
+            returnvalue = "Category already exists!";
         }
         return returnvalue;
     }
 
+    /**
+     *
+     * @author - Malthe
+     */
     @Override
     public void editMainCategory(int categoryInt, String categoryStr, String propertyname) throws ClassNotFoundException, SQLException {
         String sql = "UPDATE mainCategories SET mainCategoryName = ? WHERE categoryid =" + categoryInt;
@@ -73,6 +77,10 @@ public class CategoryMapper implements CategoryMapperInterface {
         statement.executeUpdate();
     }
 
+    /**
+     *
+     * @author - Malthe
+     */
     @Override
     public void editMinorCategory(int categoryInt, String categoryStr, String propertyname) throws ClassNotFoundException, SQLException {
 
@@ -83,6 +91,18 @@ public class CategoryMapper implements CategoryMapperInterface {
         statement.executeUpdate();
     }
 
+    /**
+     *
+     * Used for getting all the minor categories in an ascending order 
+     * for a more pleasing view for the user when they see the table with
+     * all the different categories that they can choose from.
+     * 
+     * @author - Bringordie - Frederik Braagaard
+     * @param propertyname - for db connection
+     * @return - returns all the minor values in an ascending order.
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+     */
     @Override
     public ArrayList<Categories> getMinorValuesFromDB(String propertyname) throws SQLException, ClassNotFoundException {
         String minorName = "";
@@ -104,6 +124,18 @@ public class CategoryMapper implements CategoryMapperInterface {
         return hashminor;
     }
 
+    /**
+     *
+     * Used for getting all the main categories in an ascending order 
+     * for a more pleasing view for the user when they see the table with
+     * all the different categories that they can choose from.
+     * 
+     * @author - Bringordie - Frederik Braagaard
+     * @param propertyname - for db connection
+     * @return - returns all the main values in an ascending order.
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
+     */
     @Override
     public ArrayList<Categories> getMainValuesFromDB(String propertyname) throws SQLException, ClassNotFoundException {
         String mainName = "";
@@ -126,25 +158,32 @@ public class CategoryMapper implements CategoryMapperInterface {
         return hashmain;
     }
 
-    //NEW
-    
     /**
      *
+     * Used for checking if a minor value already exists in the db.
+     * If it doesn't exist the value 0 will be given back and the 
+     * upload knows it has to create the category.
+     * 
      * @author - Bringordie - Frederik Braagaard
+     * @param minorname - category minorname
+     * @param propertyname - for db connection
+     * @return returns the ID of the matching name
+     * @throws java.sql.SQLException 
+     * @throws java.lang.ClassNotFoundException 
      */
     @Override
-    public int getMinorValuesFromDBFile(String s, String propertyname) throws SQLException, ClassNotFoundException {
+    public int getMinorValuesFromDBFile(String minorname, String propertyname) throws SQLException, ClassNotFoundException {
         String minorName = "";
         int minorID;
         int resturnMinorID = 0;
-        String sql = "select * from minorCategories where minorCategoryName = '" + s + "'";
+        String sql = "select * from minorCategories where minorCategoryName = '" + minorname + "'";
         ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
 
         try {
             while (result.next()) {
                 minorID = result.getInt(1);
                 minorName = result.getString(2);
-                if (minorName.contains(s)) {
+                if (minorName.contains(minorname)) {
                     resturnMinorID = minorID;
                 }
             }
@@ -156,21 +195,30 @@ public class CategoryMapper implements CategoryMapperInterface {
 
     /**
      *
+     * Used for checking if a main value already exists in the db.
+     * If it doesn't exist the value 0 will be given back and the 
+     * upload knows it has to create the category.
+     * 
      * @author - Bringordie - Frederik Braagaard
+     * @param mainname - category mainname
+     * @param propertyname - for db connection
+     * @return returns the ID of the matching name
+     * @throws java.sql.SQLException 
+     * @throws java.lang.ClassNotFoundException 
      */
     @Override
-    public int getMainValuesFromDBFile(String s, String propertyname) throws SQLException, ClassNotFoundException {
+    public int getMainValuesFromDBFile(String mainname, String propertyname) throws SQLException, ClassNotFoundException {
         String mainName = "";
         int mainID;
         int resturnMainID = 0;
-        String sql = "select * from maincategories where mainCategoryName ='" + s + "'";
+        String sql = "select * from maincategories where mainCategoryName ='" + mainname + "'";
         ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
 
         try {
             while (result.next()) {
                 mainID = result.getInt(1);
                 mainName = result.getString(2);
-                if (mainName.contains(s)) {
+                if (mainName.contains(mainname)) {
                     resturnMainID = mainID;
                 }
             }
@@ -182,10 +230,20 @@ public class CategoryMapper implements CategoryMapperInterface {
 
     /**
      *
+     * When adding a product we must know if the category has to be created
+     * what mainid the product should have. This method is used for getting the
+     * count of all maincategories and once it gets the return value it knows
+     * what is next.
+     * 
      * @author - Bringordie - Frederik Braagaard
+     * @param mainname - category mainname
+     * @param propertyname - for db connection
+     * @return returns the ID value of the newly created category.
+     * @throws java.sql.SQLException 
+     * @throws java.lang.ClassNotFoundException
      */
     @Override
-    public int createMainIDInDB(String s, String propertyname) throws SQLException, ClassNotFoundException {
+    public int createMainIDInDB(String mainname, String propertyname) throws SQLException, ClassNotFoundException {
         int newlycreatedID = 0;
         String sqlGetID = "select COUNT(mainCategoryName) from mainCategories";
         ResultSet result = getConnection(propertyname).prepareStatement(sqlGetID).executeQuery();
@@ -202,7 +260,7 @@ public class CategoryMapper implements CategoryMapperInterface {
             String sql = "INSERT INTO mainCategories(mainCategoryName)"
                     + "VALUES(?)";
             PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
-            statement.setString(1, s);
+            statement.setString(1, mainname);
             statement.executeUpdate();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -212,10 +270,20 @@ public class CategoryMapper implements CategoryMapperInterface {
 
     /**
      *
+     * When adding a product we must know if the category has to be created
+     * what minorid the product should have. This method is used for getting the
+     * count of all minorcategories and once it gets the return value it knows
+     * what is next.
+     * 
      * @author - Bringordie - Frederik Braagaard
+     * @param minorname - category minorname
+     * @param propertyname - for db connection
+     * @return returns the ID value of the newly created category.
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
     @Override
-    public int createMinorIDInDB(String s, String propertyname) throws SQLException, ClassNotFoundException {
+    public int createMinorIDInDB(String minorname, String propertyname) throws SQLException, ClassNotFoundException {
         int newlycreatedID = 0;
         String sqlGetID = "select COUNT(minorCategoryName) from minorCategories";
         ResultSet result = getConnection(propertyname).prepareStatement(sqlGetID).executeQuery();
@@ -232,7 +300,7 @@ public class CategoryMapper implements CategoryMapperInterface {
             String sql = "INSERT INTO minorCategories(minorCategoryName)"
                     + "VALUES(?)";
             PreparedStatement statement = getConnection(propertyname).prepareStatement(sql);
-            statement.setString(1, s);
+            statement.setString(1, minorname);
             statement.executeUpdate();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -242,7 +310,15 @@ public class CategoryMapper implements CategoryMapperInterface {
 
     /**
      *
+     * Checked if a link has been created between a minor and main category.
+     * If a link doesn't already exists a link is created in DB.
+     * 
      * @author - Bringordie - Frederik Braagaard
+     * @param mainid  - category mainid
+     * @param minorid  - category minorid
+     * @param propertyname - for db connection
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
     @Override
     public void checkOrCreateLinkminormain(int mainid, int minorid, String propertyname) throws SQLException, ClassNotFoundException {
@@ -270,42 +346,54 @@ public class CategoryMapper implements CategoryMapperInterface {
             }
         }
     }
-    
-        @Override
+
+    /**
+     *
+     * @author - Malthe
+     */
+    @Override
     public void deleteMainCategory(int category, String propertyname) throws ClassNotFoundException, SQLException {
         String sql1 = "update products set publishedStatus = 0 where mainCategory =" + category;
         String sql2 = "update products set mainCategory = NULL where mainCategory =" + category;
         String sql3 = "DELETE FROM linkminormain WHERE mainid=" + category;
         String sql4 = "DELETE FROM mainCategories WHERE categoryid=" + category;
-        
+
         getConnection(propertyname).prepareStatement(sql1).executeUpdate();
         getConnection(propertyname).prepareStatement(sql2).executeUpdate();
         getConnection(propertyname).prepareStatement(sql3).executeUpdate();
         getConnection(propertyname).prepareStatement(sql4).executeUpdate();
-        
+
     }
 
+    /**
+     *
+     * @author - Malthe
+     */
     @Override
     public void deleteMinorCategory(int category, String propertyname) throws ClassNotFoundException, SQLException {
         String sql1 = "update products set publishedStatus = 0 where minorCategory =" + category;
         String sql2 = "update products set minorCategory = NULL where minorCategory =" + category;
         String sql3 = "DELETE FROM linkminormain WHERE minorid=" + category;
         String sql4 = "DELETE FROM minorCategories WHERE categoryid=" + category;
-        
+
         getConnection(propertyname).prepareStatement(sql1).executeUpdate();
         getConnection(propertyname).prepareStatement(sql2).executeUpdate();
         getConnection(propertyname).prepareStatement(sql3).executeUpdate();
         getConnection(propertyname).prepareStatement(sql4).executeUpdate();
-        
+
     }
 
+    /**
+     *
+     * @author - Malthe
+     */
     @Override
     public Boolean checkMainCategory(String category, String propertyname) throws SQLException, ClassNotFoundException {
         Boolean returnvalue = false;
         int tempholder;
         String sql = "select COUNT(categoryid) FROM mainCategories WHERE mainCategoryName = '" + category + "'";
         ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
-        
+
         try {
             while (result.next()) {
                 tempholder = result.getInt(1);
@@ -321,13 +409,17 @@ public class CategoryMapper implements CategoryMapperInterface {
         return returnvalue;
     }
 
+    /**
+     *
+     * @author - Malthe
+     */
     @Override
     public Boolean checkMinorCategory(String category, String propertyname) throws SQLException, ClassNotFoundException {
         Boolean returnvalue = false;
         int tempholder;
         String sql = "select COUNT(categoryid) FROM minorCategories WHERE minorCategoryName = '" + category + "'";
         ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
-        
+
         try {
             while (result.next()) {
                 tempholder = result.getInt(1);

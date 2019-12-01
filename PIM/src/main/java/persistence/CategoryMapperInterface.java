@@ -1,15 +1,10 @@
 package persistence;
 
-import exceptions.CategoryException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import logic.Categories;
 
-/**
- *
- * @author Malthe
- */
+
 public interface CategoryMapperInterface {
     
     public String addMainCategory (String category, String propertyname) throws ClassNotFoundException, SQLException;
@@ -27,16 +22,14 @@ public interface CategoryMapperInterface {
     public ArrayList<Categories> getMinorValuesFromDB(String propertyname) throws SQLException, ClassNotFoundException;
     
     public ArrayList<Categories> getMainValuesFromDB(String propertyname) throws SQLException, ClassNotFoundException;
+        
+    public int getMinorValuesFromDBFile(String minorname, String propertyname) throws SQLException, ClassNotFoundException;
     
-    //NEW
+    public int getMainValuesFromDBFile(String mainname, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public int getMinorValuesFromDBFile(String s, String propertyname) throws SQLException, ClassNotFoundException;
+    public int createMainIDInDB(String mainname, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public int getMainValuesFromDBFile(String s, String propertyname) throws SQLException, ClassNotFoundException;
-    
-    public int createMainIDInDB(String s, String propertyname) throws SQLException, ClassNotFoundException;
-    
-    public int createMinorIDInDB(String s, String propertyname) throws SQLException, ClassNotFoundException;
+    public int createMinorIDInDB(String minorname, String propertyname) throws SQLException, ClassNotFoundException;
     
     public void checkOrCreateLinkminormain(int mainid, int minorid, String propertyname) throws SQLException, ClassNotFoundException;
     

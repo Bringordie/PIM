@@ -21,18 +21,17 @@
             <input type="hidden" name="cmd" value="deleteProduct" /><br>
             
              Delete ProductID: <br />
-            <input type="text" name="ProductId" value="" required/><br>
+            <input type="number" name="ProductId" value="" required onkeydown="return event.keyCode !== 69" step=""/><br>
              
             
             <input type="submit" value="Submit" />
         </form>
-          <% if (session.getAttribute("returndeleteproductvalue") == null){
-                System.out.println("no good!");
-            }
-                else if (session.getAttribute("returndeleteproductvalue").toString().equals("deleteproduct")) { %>
-            <h1> Product has been deleted</h1>                                  
+          <% if (session.getAttribute("returndeleteproductvalue").toString().equals("empty")) {
+                
+            } else if (session.getAttribute("returndeleteproductvalue").toString().equals("deleteproduct")) { %>
+            <p> Product has been deleted</p>                                  
             <%} else if (session.getAttribute("returndeleteproductvalue").toString().equals("deletealreadyexists")) {%>
-            <h1>Productid doesn't exist, and the product has not been deleted!</h1>
+            <p>Product ID doesn't exist, the product has not been deleted!</p>
             <%} else { %>
             <h1>svans</h1>
             <%}%>

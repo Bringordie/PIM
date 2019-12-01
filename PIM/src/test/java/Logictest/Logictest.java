@@ -70,4 +70,19 @@ public class Logictest {
         assertEquals("Frugt og grønt", categoryname);
         assertNotNull(categories.toString());
     }
+    
+    @Test
+    public void TempArrayAndSetter() {
+        ArrayList<Products> products = new ArrayList();
+        products.add(new Products(56, "productname", "productnamedescription", "productdescription", "companyname", 22, 100, "picturename", true, "1", "1"));
+        for (Products product : products) {
+            product.setPictureName("new_picturename");
+        }
+        Products.setProductTempholder(products);
+        
+        ArrayList<Products> getTempProducts = Products.getProductTempholder();
+        
+        assertEquals("new_picturename", getTempProducts.get(0).getPictureName());
+        
+    }
 }

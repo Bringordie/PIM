@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +12,12 @@ import logic.Products;
 
 /**
  *
+ * When you are in ShowProducts.jsp you can click on the ID of a product and be
+ * navigated over to SingleViewProduct.
+ * As we we want to see the full specific product we've selected we run through
+ * all the products in the database and match it with the id to get all 
+ * attributes.
+ * 
  * @author Bringordie - Frederik Braagaard
  */
 public class GoToSingleProductViewCommand extends Command {

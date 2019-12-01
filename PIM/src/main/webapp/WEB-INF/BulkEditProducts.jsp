@@ -24,7 +24,6 @@
         <p>Choose which attribute you want to edit for all selected products: </p>
         <form action="FrontController">
             <select id="chosenAttribute" name="chosenAttribute">
-                <tr> 
                 <option>Product Name</option>
                 <option>Product Name Description</option>
                 <option>Product Description</option>
@@ -34,7 +33,6 @@
                 <option>Published Status</option>
                 <option>Minor Category</option>
                 <option>Main Category</option>
-                </tr>
             </select>
             <br>
             <br>

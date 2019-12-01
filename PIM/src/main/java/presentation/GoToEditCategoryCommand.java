@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentation;
 
 import java.io.IOException;
@@ -26,7 +21,7 @@ public class GoToEditCategoryCommand extends Command {
         
          ArrayList<Categories> mainCategories = new ArrayList();
         mainCategories = db.getMainCategories("/db.properties");
-        if (mainCategories.size() != 0) {
+        if (!mainCategories.isEmpty()) {
             request.getSession().setAttribute("mainCategories", mainCategories);
         } else {
             request.getSession().setAttribute("mainCategories", null);
@@ -34,7 +29,7 @@ public class GoToEditCategoryCommand extends Command {
         
         ArrayList<Categories> minorCategories = new ArrayList();
         minorCategories = db.getMinorCategories("/db.properties");
-        if (minorCategories.size() != 0) {
+        if (!minorCategories.isEmpty()) {
             request.getSession().setAttribute("minorCategories", minorCategories);
         } else {
             request.getSession().setAttribute("minorCategories", null);

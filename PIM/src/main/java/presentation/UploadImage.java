@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.*;
 import java.sql.*;
 import java.util.*;
@@ -18,10 +17,15 @@ import java.util.regex.*;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.*;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+/**
+ *
+ * //TODO
+ * 
+ * @author Frederik Braagaard - Bringordie
+ */
 @WebServlet(name = "UploadImage", urlPatterns = {"/UploadImage"})
 public class UploadImage extends HttpServlet {
 

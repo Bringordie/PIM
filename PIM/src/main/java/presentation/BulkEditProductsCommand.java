@@ -7,28 +7,24 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.Products;
-import persistence.CategoryMapper;
-import persistence.ProductMapper;
+
 
 /**
  *
  * @author Malthe
+ * @author Bringordie - Frederik Braagaard
  */
-
 public class BulkEditProductsCommand extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         
-        CategoryMapper cm = new CategoryMapper();
         ArrayList<Products> selectedProducts = Products.getProductTempholder();
-        ProductMapper pm = new ProductMapper();
         String dropdown = request.getParameter("chosenAttribute");
         String edit = request.getParameter("bulkEditProducts");
         String callback = "";
         
-        ArrayList<Products> searchresults = new ArrayList();
         switch (dropdown) {
             case "ProductID":
                 dropdown = "productid";
@@ -63,19 +59,19 @@ public class BulkEditProductsCommand extends Command {
                 break;
             case "Main Category":
                 dropdown = "mainCategory";
-                edit = String.valueOf(cm.getMainValuesFromDBFile(edit, "/db.properties"));
+                edit = String.valueOf(db.getMainCategoriesID(edit, "/db.properties"));
                 break;
             case "Minor Category":
                 dropdown = "minorCategory";
-                edit = String.valueOf(cm.getMinorValuesFromDBFile(edit, "/db.properties"));
+                edit = String.valueOf(db.getMinorCategoriesID(edit, "/db.properties"));
                 break;
             default:
                 System.err.print("Something went wrong");
         }
         if (edit.equals("true") || edit.equals("false")) {
-            callback = pm.BulkEditPublished(dropdown, Boolean.parseBoolean(edit), selectedProducts, "/db.properties");
+            callback = db.bulkEditPublished(dropdown, Boolean.parseBoolean(edit), selectedProducts, "/db.properties");
         } else {
-            callback = pm.BulkEditProducts(dropdown, edit, selectedProducts, "/db.properties");
+            callback = db.bulkEditProducts(dropdown, edit, selectedProducts, "/db.properties");
         }
         
         request.getSession().setAttribute("callback", callback);

@@ -65,6 +65,16 @@ public class DBFacade implements Facade {
     }
     
     @Override
+    public int getMainCategoriesID(String mainname, String propertyname) throws ClassNotFoundException, SQLException {
+        return categoryMapper.getMainValuesFromDBFile(mainname, propertyname);
+    }
+    
+    @Override
+    public int getMinorCategoriesID(String mainname, String propertyname) throws ClassNotFoundException, SQLException {
+        return categoryMapper.getMinorValuesFromDBFile(mainname, propertyname);
+    }
+    
+    @Override
     public ArrayList<Products> searchProduct(int i, String propertyname) throws ClassNotFoundException, SQLException {
         return productMapper.getSearchResults(i, propertyname);
     }
@@ -75,25 +85,36 @@ public class DBFacade implements Facade {
     }
     
     @Override
-    public void EditProduct (int id, Products product, String propertyname) throws SQLException, ClassNotFoundException {
-        productMapper.EditProduct(id, product, propertyname);
-    } 
-    
-    
-    @Override
-    public String DeleteProduct (int id, String propertyname) throws SQLException, ClassNotFoundException {
-      return productMapper.DeleteProduct(id, propertyname);
+    public void editProduct (int id, Products product, String propertyname) throws SQLException, ClassNotFoundException {
+        productMapper.editProduct(id, product, propertyname);
     } 
     
     @Override
-    public ArrayList<Products> showSearchedProduct(String s, String attribute, String propertyname) throws SQLException, ClassNotFoundException {
-        return productMapper.showSearchedProduct(s, attribute, propertyname);
+    public String deleteProduct (int id, String propertyname) throws SQLException, ClassNotFoundException {
+      return productMapper.deleteProduct(id, propertyname);
+    } 
+    
+    @Override
+    public ArrayList<Products> showSearchedProduct(String search, String attribute, String propertyname) throws SQLException, ClassNotFoundException {
+        return productMapper.showSearchedProduct(search, attribute, propertyname);
     }
 
     @Override
     public ArrayList<Products> dbDownload(String propertyname) throws SQLException, ClassNotFoundException {
         return productMapper.dbDownload(propertyname);
     }
+
+    @Override
+    public String bulkEditPublished(String attribute, boolean changeValue, ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException {
+        return productMapper.bulkEditPublished(attribute, changeValue, products, propertyname);
+    }
+
+    @Override
+    public String bulkEditProducts(String attribute, String changeValue, ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException {
+        return productMapper.bulkEditProducts(attribute, changeValue, products, propertyname);
+    }
+    
+    
 
         
 }

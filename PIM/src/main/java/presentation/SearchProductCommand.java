@@ -8,10 +8,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.FileReaderLogic;
 import logic.Products;
-import presentation.UploadFiles;
 
 /**
  *
+ * When we search for a product we have a drowndown list.
+ * This list is on the jsp page showed for a viewers eyes and are therefor
+ * not the attributes that we have in the database. Therefor we use a switch
+ * that checks what dropdown was choosen and correct the dropdown value.
+ * And then we call the dbSearch method to check if a product with those
+ * criteria actually exists. If it exists an arraylist will be populated
+ * and depending on if the arraylist is 0 or >0 we either give show all hits
+ * or give an error message.
+ * For publicstatus we do it a little different as we are using a boolean so 
+ * that the user doesn't "have" to write true or false. But have several options.
+ * When that is done we use a FileReaderLogic in order to show the picture 
+ * correctly if it exists and a standard picture if it doesn't.
+ * 
  * @author Bringordie - Frederik Braagaard
  */
 public class SearchProductCommand extends Command {

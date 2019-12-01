@@ -2,13 +2,8 @@ package persistence;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Vector;
 import logic.Categories;
 import logic.Products;
-
-
 
 public interface Facade { 
     
@@ -34,16 +29,23 @@ public interface Facade {
     
     public ArrayList<Categories> getMinorCategories (String propertyname) throws ClassNotFoundException, SQLException;
     
+    public int getMainCategoriesID(String mainname, String propertyname) throws ClassNotFoundException, SQLException;
+    
+    public int getMinorCategoriesID(String mainname, String propertyname) throws ClassNotFoundException, SQLException;
+    
     public ArrayList<Products> searchProduct(int i, String propertyname) throws ClassNotFoundException, SQLException;
     
     public ArrayList<Products> showAllProducts(String propertyname) throws SQLException, ClassNotFoundException;
         
-    public void EditProduct(int id, Products product, String propertyname) throws SQLException, ClassNotFoundException;
+    public void editProduct(int id, Products product, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public String DeleteProduct(int id, String propertyname) throws SQLException, ClassNotFoundException;
+    public String deleteProduct(int id, String propertyname) throws SQLException, ClassNotFoundException;
     
-    public ArrayList<Products> showSearchedProduct(String s, String attribute, String propertyname) throws SQLException, ClassNotFoundException;
+    public ArrayList<Products> showSearchedProduct(String search, String attribute, String propertyname) throws SQLException, ClassNotFoundException;
     
     public ArrayList<Products> dbDownload(String propertyname) throws SQLException, ClassNotFoundException;
-
+    
+    public String bulkEditPublished(String attribute, boolean changeValue, ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
+    
+    public String bulkEditProducts(String attribute, String changeValue, ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException;
 }

@@ -7,7 +7,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/**
+ * Used to show a #404 page when someone tries to modify the "cmd=" on the http.
+ * 
+ * @author Frederik Braagaard - Bringordie
+ */
 public class UnknownCommand extends Command {
 
     @Override

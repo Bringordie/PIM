@@ -20,7 +20,6 @@
         <form action="FrontController">
             <select id="searchCriteria" name="searchCriteria">
 
-                <tr> 
                 <option>ProductID</option>
                 <option>Product Name</option>
                 <option>Product Name Description</option>
@@ -32,7 +31,6 @@
                 <option>Published Status</option>
                 <option>Minor Category</option>
                 <option>Main Category</option>
-                </tr>
             </select>
             <h4> Search: </h4>
             <input type="text" name="searchInput" value="" required/>

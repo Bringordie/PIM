@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentation;
 
 import java.io.IOException;
@@ -20,6 +15,7 @@ public class GotoDeleteProductCommand extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
      
+        request.getSession().setAttribute("returndeleteproductvalue", "empty");
         return "DeleteProduct";
     }
     

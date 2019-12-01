@@ -22,11 +22,10 @@
             <input type="hidden" name="cmd" value="addProduct" required /><br>
 
             Add ProductID: <br />
-            <input type="number" name="ProductId" value="" required /><br>
+            <input type="number" name="ProductId" value="" required onkeydown="return event.keyCode !== 69" step=""/><br>
 
             Add Productname: <br />
             <input type="text" name="ProductName" value="" required /><br>
-
 
             Add ProductnameDescription: <br />
             <input type="text" name="ProductNameDescription" value="" required /><br>
@@ -38,10 +37,10 @@
             <input type="text" name="CompanyName" value="" required /><br>
 
             Add Price: <br />
-            <input type="number" step="0.01" name="Price" value="" required /><br>
+            <input type="number" step="0.01" name="Price" value="" required onkeydown="return event.keyCode !== 69" step=".01"/><br>
 
             Add Quantity: <br />
-            <input type="number" name="Quantity" value="" required /><br>
+            <input type="number" name="Quantity" value="" required onkeydown="return event.keyCode !== 69" step=""/><br>
 
             Add Picturename: <br />
             <input type="text" name="PictureName" value="" required /><br>

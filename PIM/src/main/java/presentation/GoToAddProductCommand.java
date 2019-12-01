@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentation;
 
 import java.io.IOException;
@@ -15,6 +10,13 @@ import logic.Categories;
 
 /**
  *
+ * Used for the JSP page AddProduct.jsp
+ * When we enter the page we check if there are any main or minor categories.
+ * As a newly created product via the webpage must have all information if it
+ * will give an "empty" response back if there aren't any and the submit button
+ * will be hidden untill categories are created.
+ * 
+ * @author Bringordie - Frederik Braagaard
  * @author Slantefar
  */
 public class GoToAddProductCommand extends Command {
@@ -24,7 +26,7 @@ public class GoToAddProductCommand extends Command {
      
         ArrayList<Categories> mainCategories = new ArrayList();
         mainCategories = db.getMainCategories("/db.properties");
-        if (mainCategories.size() != 0) {
+        if (!mainCategories.isEmpty()) {
             request.getSession().setAttribute("mainCategories", mainCategories);
         } else {
             request.getSession().setAttribute("mainCategories", null);
@@ -32,7 +34,7 @@ public class GoToAddProductCommand extends Command {
         
         ArrayList<Categories> minorCategories = new ArrayList();
         minorCategories = db.getMinorCategories("/db.properties");
-        if (minorCategories.size() != 0) {
+        if (!minorCategories.isEmpty()) {
             request.getSession().setAttribute("minorCategories", minorCategories);
         } else {
             request.getSession().setAttribute("minorCategories", null);

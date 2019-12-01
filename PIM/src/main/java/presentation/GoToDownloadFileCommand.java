@@ -5,15 +5,14 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Malthe
+ * @author Bringordie - Frederik Braagaard
  */
-public class GoToAddCategoryCommand extends Command {
+public class GoToDownloadFileCommand extends Command {
     
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) {
-        request.getSession().setAttribute("mainResponse", "");
-        request.getSession().setAttribute("minorResponse", "");
-        return "AddCategory";
+               
+        return "DownloadFile";
     }
     
 }

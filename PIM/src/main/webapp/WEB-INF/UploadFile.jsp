@@ -13,7 +13,7 @@
     </head>
     <%@ include file = "header.jsp" %>
     <body>
-        <h3>File Upload:</h3>
+        <h3>Upload File</h3>
         Select a <b>JSON</b> or <b>EXCEL</b> file to upload: 
         <br />
         <form action = "Upload" method = "POST" enctype = "multipart/form-data">
@@ -21,22 +21,13 @@
          <br />
          <input type = "submit" value = "Upload File to Website" />
       </form>
-        <h3>File Picture</h3>
+        <h3>Upload Picture</h3>
         Select pictures to upload: 
         <br />
         <form action = "UploadImage" method = "POST" enctype = "multipart/form-data">
-         <%--<input type = "file" name = "file" size = "50" required/>--%>
          <input <input name="file" type="file" id="file" multiple required accept=".JPG">
          <br />
          <input type = "submit" value = "Upload File to Website" />
-      </form>
-         <h3>Download products as .json file</h3>
-        <form action = "DownloadJson">
-         <input type = "submit" value = "Download File" />
-      </form>
-         <h3>Download products as .xlsx file</h3>
-        <form action = "DownloadExcel">
-         <input type = "submit" value = "Download File" />
       </form>
     </body>
 </html>

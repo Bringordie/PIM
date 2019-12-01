@@ -2,21 +2,15 @@ package presentation;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
- 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +19,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.JsonWriter;
  
+/**
+ *
+ * Takes an JsonWriter that takes all of the products in DB via
+ * @see jsonwriter.DataBaseToJson("/db.properties");
+ * once that is done we save the file as a temp in the property file path.
+ * When that is done we stream the file to the user, we get the relativePath
+ * where the file should be downloaded in depending on what browser the user
+ * uses.
+ * We then get the mine type of the file TODO WRITE MORE
+ * Once that is done we create a response and force the download of the file.
+ * And when the file has been downloaded we delete the temp file again.
+ * @see Files.deleteIfExists(Paths.get(path+"Products.json")); 
+ * 
+ * @author Bringordie - Frederik Braagaard
+ */
 @WebServlet(name = "DownloadJson", urlPatterns = {"/DownloadJson"})
 public class DownloadJsonFile extends HttpServlet {
  

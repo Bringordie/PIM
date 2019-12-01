@@ -10,13 +10,14 @@
 .tr td {
   border: 1px solid black;
   overflow: hidden;
-  max-width: 250px;
+  max-width: 150px;
   text-overflow: ellipsis;
   
   white-space: nowrap;
 }
 
-.tr.expanded td {
+td.expanded {
     overflow: initial;
     white-space: normal;
+    height: 50px;
 }
