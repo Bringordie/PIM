@@ -30,7 +30,7 @@ public abstract class Command {
         commands.put("editProductSearch", new EditProductSearchCommand());
         commands.put("gotoAddProduct", new GoToAddProductCommand());
         commands.put("gotoDeleteMainCategory", new GoToDeleteCategoryCommand());
-        commands.put("gotoDeleteProduct", new GotoDeleteProductCommand());
+        commands.put("gotoDeleteProduct", new GoToDeleteProductCommand());
         commands.put("gotoEditProduct", new GoToEditProductCommand());
         commands.put("gotoUploadFile", new GoToUploadFileCommand());
         commands.put("gotoDownloadFile", new GoToDownloadFileCommand());

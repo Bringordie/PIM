@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Slantefar
  */
-public class GotoDeleteProductCommand extends Command {
+public class GoToDeleteProductCommand extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {

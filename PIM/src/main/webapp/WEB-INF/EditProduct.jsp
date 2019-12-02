@@ -14,7 +14,7 @@
          <form action="FrontController" method="POST">
              <input type="hidden" name="cmd" value="editProductSearch" />
              <p>Please enter the ID of the product you want to edit:</p>
-             <input type="number" name="ProductID" value="" required onkeydown="return event.keyCode !== 69"/>
+             <input type="number" min="1" name="ProductID" value="" required onkeydown="return event.keyCode !== 69"/>
              <input type="submit" value="Submit" />
          </form>
          
@@ -45,10 +45,10 @@
             <input type="text" name="CompanyName" value="${productarray.getCompanyName()}" required/><br>
             
              Edit Price: <br />
-            <input type="number" step="0.01" name="Price" value="${productarray.getPrice()}" onkeydown="return event.keyCode !== 69" step=".01" required/><br>
+            <input type="number" min="0" step="0.01" name="Price" value="${productarray.getPrice()}" onkeydown="return event.keyCode !== 69" step=".01" required/><br>
             
              Edit Quantity: <br />
-            <input type="number" name="Quantity" value="${productarray.getQty()}" onkeydown="return event.keyCode !== 69" step="" required/><br>
+            <input type="number" min="0" name="Quantity" value="${productarray.getQty()}" onkeydown="return event.keyCode !== 69" step="" required/><br>
             
              Edit Picturename: <br />
             <input type="text" name="PictureName" value="${productarray.getPictureName()}" required/><br>
