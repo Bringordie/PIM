@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Delete Category</title>
     </head>
-    <%@ include file = "header.jsp" %>
+    <%@ include file = "../header.jsp" %>
     <body>
         <h1>Delete a main or a minor category:</h1>
         <table>

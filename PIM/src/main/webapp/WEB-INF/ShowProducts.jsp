@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>All Products</title>
     </head>
-    <%@ include file = "header.jsp" %>
+    <%@ include file = "../header.jsp" %>
     <script src="sorttable.js"></script>
     <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"

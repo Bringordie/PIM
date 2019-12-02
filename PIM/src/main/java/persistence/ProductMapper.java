@@ -1,9 +1,13 @@
 package persistence;
 
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import logic.Products;
 import static persistence.DBConnection.getConnection;
 
@@ -25,7 +29,7 @@ public class ProductMapper implements ProductMapperInterface {
      * @param propertyname used for checking to execute in production or test.
      */
     @Override
-    public void jsonInsertOrUpdateToDB(ArrayList<Products> list, String propertyname) throws SQLException, ClassNotFoundException {
+    public void jsonInsertOrUpdateToDB(ArrayList<Products> list, String propertyname) throws ClassNotFoundException, SQLException, IOException {
         int ProductID;
         String ProductName;
         String ProductNameDescription;
@@ -190,7 +194,7 @@ public class ProductMapper implements ProductMapperInterface {
      * @param propertyname used for checking to execute in production or test.
      */
     @Override
-    public void excelInsertOrUpdateToDB(ArrayList<Products> list, String propertyname) throws ClassNotFoundException, NumberFormatException, SQLException {
+    public void excelInsertOrUpdateToDB(ArrayList<Products> list, String propertyname) throws ClassNotFoundException, NumberFormatException, SQLException, IOException {
         int ProductID;
         String ProductName;
         String ProductNameDescription;
@@ -338,7 +342,7 @@ public class ProductMapper implements ProductMapperInterface {
      * @return returns true or false depending on if product exists.
      */
     @Override
-    public boolean checkIfProductExists(String productid, String propertyname) throws SQLException, ClassNotFoundException {
+    public boolean checkIfProductExists(String productid, String propertyname) throws ClassNotFoundException, SQLException, IOException {
         Boolean returnvalue = false;
         int tempholder;
         String sql = "select COUNT(productid) from products where productid = '" + productid + "'";
@@ -364,7 +368,7 @@ public class ProductMapper implements ProductMapperInterface {
      * @author - Slantefar
      */
     @Override
-    public String addProduct(ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException {
+    public String addProduct(ArrayList<Products> products, String propertyname) throws ClassNotFoundException, SQLException, IOException {
         String returnvalue = "";
         for (Products product : products) {
             Boolean booleanIDCheck = checkIfProductExists(String.valueOf(product.getId()), propertyname);
@@ -408,7 +412,7 @@ public class ProductMapper implements ProductMapperInterface {
      * @return returns an arraylist of the searched product
      */
     @Override
-    public ArrayList<Products> getSearchResults(int productid, String propertyname) throws SQLException, ClassNotFoundException {
+    public ArrayList<Products> getSearchResults(int productid, String propertyname) throws ClassNotFoundException, SQLException, IOException {
 
         ArrayList<Products> searchResults = new ArrayList();
         String sql = "select products.*, maincategories.mainCategoryName, minorcategories.minorCategoryName "
@@ -453,7 +457,7 @@ public class ProductMapper implements ProductMapperInterface {
      * @return returns an arraylist of all the products from the db
      */
     @Override
-    public ArrayList<Products> showAllProducts(String propertyname) throws SQLException, ClassNotFoundException {
+    public ArrayList<Products> showAllProducts(String propertyname) throws ClassNotFoundException, SQLException, IOException {
         ArrayList<Products> searchResults = new ArrayList();
         //String sql = "SELECT * FROM products ORDER BY minorCategory ASC";
         String sql = "select products.*, maincategories.mainCategoryName, "
@@ -496,7 +500,7 @@ public class ProductMapper implements ProductMapperInterface {
      * @param propertyname - for db connection
      */
     @Override
-    public void editProduct(int id, Products product, String propertyname) throws SQLException, ClassNotFoundException {
+    public void editProduct(int id, Products product, String propertyname) throws ClassNotFoundException, SQLException, IOException {
 
         try {
             {
@@ -527,7 +531,7 @@ public class ProductMapper implements ProductMapperInterface {
      * @author - Slantefar
      */
     @Override
-    public String deleteProduct(int id, String propertyname) throws SQLException, ClassNotFoundException {
+    public String deleteProduct(int id, String propertyname) throws ClassNotFoundException, SQLException, IOException {
 
         String returnvalue = "";
         Boolean booleanIDCheck = checkIfProductExists((Integer.toString(id)), propertyname);
@@ -562,7 +566,7 @@ public class ProductMapper implements ProductMapperInterface {
      * matches.
      */
     @Override
-    public ArrayList<Products> showSearchedProduct(String search, String attribute, String propertyname) throws SQLException, ClassNotFoundException {
+    public ArrayList<Products> showSearchedProduct(String search, String attribute, String propertyname) throws ClassNotFoundException, SQLException, IOException {
         ArrayList<Products> searchResults = new ArrayList();
         String sql = "select products.*, maincategories.mainCategoryName, "
                 + "minorcategories.minorCategoryName from products inner join "
@@ -605,7 +609,7 @@ public class ProductMapper implements ProductMapperInterface {
      * @return - returns all products as an arraylist used for Json download
      */
     @Override
-    public ArrayList<Products> dbDownload(String propertyname) throws SQLException, ClassNotFoundException {
+    public ArrayList<Products> dbDownload(String propertyname) throws ClassNotFoundException, SQLException, IOException {
         ArrayList<Products> searchResults = new ArrayList();
         String sql = "select products.*, maincategories.mainCategoryName, "
                 + "minorcategories.minorCategoryName from products inner join "
@@ -644,7 +648,7 @@ public class ProductMapper implements ProductMapperInterface {
      */
     @Override
     public String bulkEditProducts(String attribute, String changeValue, ArrayList<Products> products, String propertyname)
-            throws SQLException, ClassNotFoundException {
+            throws ClassNotFoundException, SQLException, IOException {
 
         String callback = "";
         try {
@@ -667,7 +671,7 @@ public class ProductMapper implements ProductMapperInterface {
      */
     @Override
     public String bulkEditPublished(String attribute, boolean changeValue, ArrayList<Products> products, String propertyname)
-            throws SQLException, ClassNotFoundException {
+            throws ClassNotFoundException, SQLException, IOException {
 
         String callback = "";
         try {
@@ -682,6 +686,59 @@ public class ProductMapper implements ProductMapperInterface {
             callback = "error";
         }
         return callback;
+    }
+    
+    public List<Map<Object, Object>> chartPublishedStatus(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+        HashMap<Object, Object> map = null;
+        List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
+        int total = getProductCount(propertyname);
+        String sqlfalse = "select COUNT(publishedStatus) from products where publishedStatus = false";
+        String sqltrue = "select COUNT(publishedStatus) from products where publishedStatus = true";
+        ResultSet result = getConnection(propertyname).prepareStatement(sqlfalse).executeQuery();
+
+        try {
+            while (result.next()) {
+                map = new HashMap<Object, Object>();
+                map.put("label", "Not ready for publish");
+                map.put("y", String.valueOf((result.getInt(1) * 100) / total));
+                list.add(map);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        
+        ResultSet result2 = getConnection(propertyname).prepareStatement(sqltrue).executeQuery();
+        try {
+            while (result2.next()) {
+                map = new HashMap<Object, Object>();
+                map.put("label", "Ready for publish");
+                map.put("y", String.valueOf((result2.getInt(1) * 100) / total));
+                list.add(map);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        
+        return list;
+    }
+    
+    /**
+     *
+     * @author - Bringordie - Frederik Braagaard
+     */
+    public int getProductCount(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+        int total = 0;
+        String sql = "select COUNT(productid) from products";
+        ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
+        try {
+            while (result.next()) {
+                total += result.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return total;
+        
     }
 
 }

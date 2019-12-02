@@ -1,5 +1,6 @@
 package persistence;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import logic.Categories;
@@ -7,33 +8,33 @@ import logic.Categories;
 
 public interface CategoryMapperInterface {
     
-    public String addMainCategory (String category, String propertyname) throws ClassNotFoundException, SQLException;
+    public String addMainCategory (String category, String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public String addMinorCategory (String category, String propertyname) throws ClassNotFoundException, SQLException;
+    public String addMinorCategory (String category, String propertyname) throws ClassNotFoundException, SQLException, IOException;
         
-    public void deleteMainCategory (int category, String propertyname) throws ClassNotFoundException, SQLException;
+    public void deleteMainCategory (int category, String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public void deleteMinorCategory (int category, String propertyname) throws ClassNotFoundException, SQLException;
+    public void deleteMinorCategory (int category, String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public void editMainCategory (int categoryInt, String categoryStr, String propertyname) throws ClassNotFoundException, SQLException;
+    public void editMainCategory (int categoryInt, String categoryStr, String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public void editMinorCategory (int categoryInt, String categoryStr, String propertyname) throws ClassNotFoundException, SQLException;
+    public void editMinorCategory (int categoryInt, String categoryStr, String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public ArrayList<Categories> getMinorValuesFromDB(String propertyname) throws SQLException, ClassNotFoundException;
+    public ArrayList<Categories> getMinorValuesFromDB(String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public ArrayList<Categories> getMainValuesFromDB(String propertyname) throws SQLException, ClassNotFoundException;
+    public ArrayList<Categories> getMainValuesFromDB(String propertyname) throws ClassNotFoundException, SQLException, IOException;
         
-    public int getMinorValuesFromDBFile(String minorname, String propertyname) throws SQLException, ClassNotFoundException;
+    public int getMinorValuesFromDBFile(String minorname, String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public int getMainValuesFromDBFile(String mainname, String propertyname) throws SQLException, ClassNotFoundException;
+    public int getMainValuesFromDBFile(String mainname, String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public int createMainIDInDB(String mainname, String propertyname) throws SQLException, ClassNotFoundException;
+    public int createMainIDInDB(String mainname, String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public int createMinorIDInDB(String minorname, String propertyname) throws SQLException, ClassNotFoundException;
+    public int createMinorIDInDB(String minorname, String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public void checkOrCreateLinkminormain(int mainid, int minorid, String propertyname) throws SQLException, ClassNotFoundException;
+    public void checkOrCreateLinkminormain(int mainid, int minorid, String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public Boolean checkMainCategory(String category, String propertyname) throws SQLException, ClassNotFoundException;
+    public Boolean checkMainCategory(String category, String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public Boolean checkMinorCategory(String category, String propertyname) throws SQLException, ClassNotFoundException;
+    public Boolean checkMinorCategory(String category, String propertyname) throws ClassNotFoundException, SQLException, IOException;
 }

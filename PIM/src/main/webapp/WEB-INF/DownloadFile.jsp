@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Upload File</title>
     </head>
-    <%@ include file = "header.jsp" %>
+    <%@ include file = "../header.jsp" %>
     <body>
          <h3>Download products as a .json file</h3>
         <form action = "DownloadJson">

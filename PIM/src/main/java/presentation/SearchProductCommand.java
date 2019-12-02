@@ -115,7 +115,7 @@ public class SearchProductCommand extends Command {
         return "ShowProducts";
     }
 
-    private ArrayList<Products> dbSearch(String search, String dropdown) throws SQLException, ClassNotFoundException {
+    private ArrayList<Products> dbSearch(String search, String dropdown) throws SQLException, ClassNotFoundException, IOException {
         ArrayList<Products> viewallproducts;
         viewallproducts = db.showSearchedProduct(search, dropdown, "/db.properties");
         return viewallproducts;

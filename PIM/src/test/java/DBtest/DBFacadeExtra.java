@@ -5,6 +5,7 @@
  */
 package DBtest;
 
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +22,7 @@ public class DBFacadeExtra {
 
     DBConnection DBConnection = new DBConnection();
 
-    public String getCustomDataFromDB(String s) throws SQLException, ClassNotFoundException {
+    public String getCustomDataFromDB(String s) throws ClassNotFoundException, SQLException, IOException {
         String output = "";
         String sql = s;
         ResultSet result = getConnection("/dbtest.properties").prepareStatement(sql).executeQuery();
@@ -36,7 +37,7 @@ public class DBFacadeExtra {
         return output;
     }
 
-    public void droptable(String propertylink) throws SQLException, ClassNotFoundException {
+    public void droptable(String propertylink) throws ClassNotFoundException, SQLException, IOException {
 
         String sql = "DROP TABLE if exists products;";
         String sql1 = "DROP TABLE if exists linkMinorMain;";
@@ -57,7 +58,7 @@ public class DBFacadeExtra {
         }
     }
 
-    public void createtable(String propertylink) throws SQLException, ClassNotFoundException {
+    public void createtable(String propertylink) throws ClassNotFoundException, SQLException, IOException {
 
         String mainCategories = "CREATE TABLE mainCategories (" +
 "                categoryid INTEGER not null AUTO_INCREMENT unique," +

@@ -28,23 +28,16 @@ public class DBtest {
     ExcelHandler excelhandler = new ExcelHandler();
     String DBPROPERTYTEST = "/dbtest.properties";
 
+    
     @Before
-    public void setUp() throws SQLException, ClassNotFoundException {
+    public void setUp() throws SQLException, ClassNotFoundException, IOException {
         dbextra.droptable(DBPROPERTYTEST);
         dbextra.createtable(DBPROPERTYTEST);
 
     }
-
     
     @Test
-    public void connectionTest() throws SQLException, ClassNotFoundException {
-        assertNotNull(DBConnection.getConnection(DBPROPERTYTEST));
-
-    }
-
-    
-    @Test
-    public void uploadOfExcelUploadEmptyRow() throws SQLException, ClassNotFoundException, IOException {
+    public void uploadOfExcelUploadEmptyRow() throws SQLException, ClassNotFoundException, IOException, IOException {
         String fileName = "src/test/java/files/linewithemptyrow.xlsx";
         ArrayList<Products> product = excelhandler.extractInfo(fileName);
         dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
@@ -62,7 +55,7 @@ public class DBtest {
 
     
     @Test
-    public void uploadOfExcelUpload() throws SQLException, ClassNotFoundException, IOException {
+    public void uploadOfExcelUpload() throws SQLException, ClassNotFoundException, IOException, IOException {
         String fileName = "src/test/java/files/linewithoutemptyrow.xlsx";
         ArrayList<Products> product = excelhandler.extractInfo(fileName);
         dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
@@ -75,7 +68,7 @@ public class DBtest {
     
     
     @Test
-    public void updateOfExcelUpload() throws SQLException, ClassNotFoundException, IOException {
+    public void updateOfExcelUpload() throws SQLException, ClassNotFoundException, IOException, IOException {
         String fileName = "src/test/java/files/linewithoutemptyrow.xlsx";
         ArrayList<Products> product = excelhandler.extractInfo(fileName);
         dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
@@ -91,7 +84,7 @@ public class DBtest {
     
     
     @Test
-    public void creationOfLinkedMMOfExcelUpload() throws SQLException, ClassNotFoundException, IOException {
+    public void creationOfLinkedMMOfExcelUpload() throws SQLException, ClassNotFoundException, IOException, IOException {
         String fileName = "src/test/java/files/linewithoutemptyrow.xlsx";
         ArrayList<Products> product = excelhandler.extractInfo(fileName);
         dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
@@ -108,7 +101,7 @@ public class DBtest {
     
     
     @Test
-    public void uploadOfJsonUpload() throws SQLException, ClassNotFoundException, FileNotFoundException {
+    public void uploadOfJsonUpload() throws SQLException, ClassNotFoundException, IOException, FileNotFoundException {
         String fileName = "src/test/java/files/singledata.json";
         ArrayList<Products> product = jsonhandler.makeJSonFileIntoArray(fileName);
         dbfacade.jsonInsertOrUpdateToDB(product, DBPROPERTYTEST);
@@ -122,7 +115,7 @@ public class DBtest {
     
     
     @Test
-    public void updateOfJsonUpload() throws SQLException, ClassNotFoundException, FileNotFoundException {
+    public void updateOfJsonUpload() throws SQLException, ClassNotFoundException, IOException, FileNotFoundException {
         String fileName = "src/test/java/files/singledata.json";
         ArrayList<Products> product = jsonhandler.makeJSonFileIntoArray(fileName);
         dbfacade.jsonInsertOrUpdateToDB(product, DBPROPERTYTEST);
@@ -139,7 +132,7 @@ public class DBtest {
 
     
     @Test
-    public void emptyRowIsNullExcel() throws SQLException, ClassNotFoundException, IOException {
+    public void emptyRowIsNullExcel() throws SQLException, ClassNotFoundException, IOException, IOException {
         String fileName = "src/test/java/files/linewithemptyrow.xlsx";
         ArrayList<Products> product = excelhandler.extractInfo(fileName);
         dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
@@ -152,7 +145,7 @@ public class DBtest {
 
     
     @Test
-    public void creationOfMainCategory() throws SQLException, ClassNotFoundException {
+    public void creationOfMainCategory() throws SQLException, ClassNotFoundException, IOException {
         dbfacade.addMainCategory("Frost", DBPROPERTYTEST);
 
         String dbcall = dbextra.getCustomDataFromDB("select mainCategoryName from mainCategories");
@@ -163,7 +156,7 @@ public class DBtest {
 
     
     @Test
-    public void creationOfMinorCategory() throws SQLException, ClassNotFoundException {
+    public void creationOfMinorCategory() throws SQLException, ClassNotFoundException, IOException {
         dbfacade.addMinorCategory("Salat", DBPROPERTYTEST);
 
         String dbcall = dbextra.getCustomDataFromDB("select minorCategoryName from minorCategories");
@@ -174,7 +167,7 @@ public class DBtest {
 
     
     @Test
-    public void deletionOfMainCategory() throws SQLException, ClassNotFoundException {
+    public void deletionOfMainCategory() throws SQLException, ClassNotFoundException, IOException {
         dbfacade.addMainCategory("Salat", DBPROPERTYTEST);
 
         String dbcall = dbextra.getCustomDataFromDB("select COUNT(mainCategoryName) from mainCategories");
@@ -189,7 +182,7 @@ public class DBtest {
 
     
     @Test
-    public void deletionOfMinorCategory() throws SQLException, ClassNotFoundException {
+    public void deletionOfMinorCategory() throws SQLException, ClassNotFoundException, IOException {
         dbfacade.addMinorCategory("Salat", DBPROPERTYTEST);
 
         String dbcall = dbextra.getCustomDataFromDB("select COUNT(minorCategoryName) from minorCategories");
@@ -204,7 +197,7 @@ public class DBtest {
 
     
     @Test
-    public void editMainCategory() throws SQLException, ClassNotFoundException {
+    public void editMainCategory() throws SQLException, ClassNotFoundException, IOException {
         dbfacade.addMainCategory("Oksekød", DBPROPERTYTEST);
 
         dbfacade.editMainCategory(1, "Svinekød", DBPROPERTYTEST);
@@ -215,7 +208,7 @@ public class DBtest {
 
     
     @Test
-    public void editMinorCategory() throws SQLException, ClassNotFoundException {
+    public void editMinorCategory() throws SQLException, ClassNotFoundException, IOException {
         dbfacade.addMinorCategory("Salat", DBPROPERTYTEST);
         dbfacade.editMinorCategory(1, "Frugt", DBPROPERTYTEST);
         String dbcall = dbextra.getCustomDataFromDB("select minorCategoryName from minorCategories");
@@ -225,7 +218,7 @@ public class DBtest {
     
     
     @Test
-    public void addProductManually() throws SQLException, ClassNotFoundException {
+    public void addProductManually() throws SQLException, ClassNotFoundException, IOException {
         dbfacade.addMainCategory("Frugt", DBPROPERTYTEST);
         dbfacade.addMinorCategory("Økologisk", DBPROPERTYTEST);
         ArrayList<Products> products = new ArrayList();
@@ -239,7 +232,7 @@ public class DBtest {
     
     
     @Test
-    public void getMainCategories() throws SQLException, ClassNotFoundException {
+    public void getMainCategories() throws SQLException, ClassNotFoundException, IOException {
         dbfacade.addMainCategory("Salat", DBPROPERTYTEST);
         dbfacade.addMainCategory("Frugt og Grønt", DBPROPERTYTEST);
         dbfacade.addMainCategory("Is", DBPROPERTYTEST);
@@ -252,7 +245,7 @@ public class DBtest {
     
     
     @Test
-    public void getMinorCategories() throws SQLException, ClassNotFoundException {
+    public void getMinorCategories() throws SQLException, ClassNotFoundException, IOException {
         dbfacade.addMinorCategory("Frost", DBPROPERTYTEST);
         dbfacade.addMinorCategory("Drikkevarer", DBPROPERTYTEST);
         dbfacade.addMinorCategory("Kød", DBPROPERTYTEST);
@@ -266,7 +259,7 @@ public class DBtest {
     
     
     @Test
-    public void searchProductByID() throws SQLException, ClassNotFoundException {
+    public void searchProductByID() throws SQLException, ClassNotFoundException, IOException {
         dbfacade.addMainCategory("Frugt", DBPROPERTYTEST);
         dbfacade.addMinorCategory("Økologisk", DBPROPERTYTEST);
         ArrayList<Products> products = new ArrayList();
@@ -288,7 +281,7 @@ public class DBtest {
     
     
     @Test
-    public void showAllProducts() throws SQLException, ClassNotFoundException {
+    public void showAllProducts() throws SQLException, ClassNotFoundException, IOException {
         dbfacade.addMainCategory("Frugt", DBPROPERTYTEST);
         dbfacade.addMinorCategory("Økologisk", DBPROPERTYTEST);
         ArrayList<Products> products = new ArrayList();
@@ -312,7 +305,7 @@ public class DBtest {
     
     
     @Test
-    public void checkOrCreateLinkedMM() throws SQLException, ClassNotFoundException, IOException {
+    public void checkOrCreateLinkedMM() throws SQLException, ClassNotFoundException, IOException, IOException {
         dbfacade.addMainCategory("Frugt", DBPROPERTYTEST);
         dbfacade.addMainCategory("Økologisk", DBPROPERTYTEST);
 
@@ -334,7 +327,7 @@ public class DBtest {
     
     
     @Test
-    public void checkCreationOfSeveralLinkMM() throws SQLException, ClassNotFoundException, IOException {
+    public void checkCreationOfSeveralLinkMM() throws SQLException, ClassNotFoundException, IOException, IOException {
         dbfacade.addMainCategory("Frugt", DBPROPERTYTEST);
         dbfacade.addMainCategory("Økologisk", DBPROPERTYTEST);
 

@@ -12,7 +12,7 @@ public class DBConnection {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static Connection singleton;
 
-    public static Connection getConnection(String propertiesfilelink) throws ClassNotFoundException, SQLException {
+    public static Connection getConnection(String propertiesfilelink) throws ClassNotFoundException, SQLException, IOException {
 
         if (singleton == null) {
             try (InputStream sa = DBConnection.class.getResourceAsStream(propertiesfilelink)) {
@@ -28,8 +28,9 @@ public class DBConnection {
 
                 // create a connection to the database
                 singleton = DriverManager.getConnection(url + "?serverTimezone=UTC&useUnicode=yes&characterEncoding=UTF-8", user, password);
-            } catch (IOException e) {
+            } catch (SQLException| IOException e) {
                 System.out.println(e.getMessage());
+                throw e;
             }
         }
         return singleton;
