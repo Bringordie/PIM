@@ -66,16 +66,16 @@
                     <c:forEach var="viewallproducts" items="${viewallproducts}">
                         <tr class="tr">
                             <td><a href="http://localhost:8080/PIM/FrontController?cmd=gotoViewSingleProduct&selected=${viewallproducts.getId()}">${viewallproducts.getId()}</a></td>
-                            <td><c:out value="${viewallproducts.getName()}" /></td>
-                            <td><c:out value="${viewallproducts.getNameDescription()}" /></td>
-                            <td class="description"><c:out value="${viewallproducts.getDescription()}" /></td>
-                            <td><c:out value="${viewallproducts.getCompanyName()}" /></td>
-                            <td><c:out value="${viewallproducts.getPrice()}" /></td>
-                            <td><c:out value="${viewallproducts.getQty()}" /></td>
+                            <td class="expan"><c:out value="${viewallproducts.getName()}" /></td>
+                            <td class="expan"><c:out value="${viewallproducts.getNameDescription()}" /></td>
+                            <td class="expan"><c:out value="${viewallproducts.getDescription()}" /></td>
+                            <td class="expan"><c:out value="${viewallproducts.getCompanyName()}" /></td>
+                            <td class="expan"><c:out value="${viewallproducts.getPrice()}" /></td>
+                            <td class="expan"><c:out value="${viewallproducts.getQty()}" /></td>
                             <td><img src="${viewallproducts.getPictureName()}" border="0" with=70px height=70px></td>
                             <td><c:out value="${viewallproducts.getPublishedStatus()}" /></td>
-                            <td><c:out value="${viewallproducts.getMinorCategory()}" /></td>
-                            <td><c:out value="${viewallproducts.getMainCategory()}" /></td>
+                            <td class="expan"><c:out value="${viewallproducts.getMinorCategory()}" /></td>
+                            <td class="expan"><c:out value="${viewallproducts.getMainCategory()}" /></td>
                             <td><input type="checkbox" name="selected" value="${viewallproducts.getId()}"></td>
                         </tr>
                     </c:forEach>
