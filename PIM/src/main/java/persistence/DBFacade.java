@@ -3,6 +3,8 @@ package persistence;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import logic.Categories;
 import logic.Products;
 
@@ -113,6 +115,31 @@ public class DBFacade implements Facade {
     @Override
     public String bulkEditProducts(String attribute, String changeValue, ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException, IOException {
         return productMapper.bulkEditProducts(attribute, changeValue, products, propertyname);
+    }
+
+    @Override
+    public List<Map<Object, Object>> chartMinorCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+        return categoryMapper.chartMinorCategory(propertyname);
+    }
+
+    @Override
+    public List<Map<Object, Object>> chartMainCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+        return categoryMapper.chartMainCategory(propertyname);
+    }
+
+    @Override
+    public List<Map<Object, Object>> chartPublishedStatusDiagram(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+        return productMapper.chartPublishedStatusDiagram(propertyname);
+    }
+
+    @Override
+    public List<Map<Object, Object>> getProductCountChart(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+        return productMapper.getProductCountChart(propertyname);
+    }
+
+    @Override
+    public void checkOrCreateLinkminormain(int mainid, int minorid, String propertyname) throws ClassNotFoundException, SQLException, IOException {
+        categoryMapper.checkOrCreateLinkminormain(mainid, minorid, propertyname);
     }
     
     

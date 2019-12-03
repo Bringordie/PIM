@@ -10,11 +10,13 @@ import logic.Products;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import org.junit.Ignore;
 import org.junit.Test;
 import persistence.DBConnection;
 
 public class ConnectionTest {
     
+    @Ignore
     @Test(expected = SQLException.class)
     public void connectionFailTest() throws ClassNotFoundException, SQLException, IOException {
         DBConnection.getConnection("/dberror.properties");

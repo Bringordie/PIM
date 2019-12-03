@@ -688,7 +688,46 @@ public class ProductMapper implements ProductMapperInterface {
         return callback;
     }
     
-    public List<Map<Object, Object>> chartPublishedStatus(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+//    public List<Map<Object, Object>> chartPublishedStatus(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+//        HashMap<Object, Object> map = null;
+//        List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
+//        int total = getProductCount(propertyname);
+//        String sqlfalse = "select COUNT(publishedStatus) from products where publishedStatus = false";
+//        String sqltrue = "select COUNT(publishedStatus) from products where publishedStatus = true";
+//        ResultSet result = getConnection(propertyname).prepareStatement(sqlfalse).executeQuery();
+//
+//        try {
+//            while (result.next()) {
+//                map = new HashMap<Object, Object>();
+//                map.put("label", "Not ready for publish");
+//                map.put("y", String.valueOf((result.getInt(1) * 100) / total));
+//                list.add(map);
+//            }
+//        } catch (SQLException e) {
+//            System.out.println(e);
+//        }
+//        
+//        ResultSet result2 = getConnection(propertyname).prepareStatement(sqltrue).executeQuery();
+//        try {
+//            while (result2.next()) {
+//                map = new HashMap<Object, Object>();
+//                map.put("label", "Ready for publish");
+//                map.put("y", String.valueOf((result2.getInt(1) * 100) / total));
+//                list.add(map);
+//            }
+//        } catch (SQLException e) {
+//            System.out.println(e);
+//        }
+//        
+//        return list;
+//    }
+    
+    /**
+     *
+     * @author - Bringordie - Frederik Braagaard
+     */
+    @Override
+    public List<Map<Object, Object>> chartPublishedStatusDiagram(String propertyname) throws ClassNotFoundException, SQLException, IOException {
         HashMap<Object, Object> map = null;
         List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
         int total = getProductCount(propertyname);
@@ -699,8 +738,9 @@ public class ProductMapper implements ProductMapperInterface {
         try {
             while (result.next()) {
                 map = new HashMap<Object, Object>();
-                map.put("label", "Not ready for publish");
-                map.put("y", String.valueOf((result.getInt(1) * 100) / total));
+                map.put("x", 10);
+                map.put("y", (result.getInt(1)));
+                map.put("indexLabel", "Not ready for publish");
                 list.add(map);
             }
         } catch (SQLException e) {
@@ -711,8 +751,9 @@ public class ProductMapper implements ProductMapperInterface {
         try {
             while (result2.next()) {
                 map = new HashMap<Object, Object>();
-                map.put("label", "Ready for publish");
-                map.put("y", String.valueOf((result2.getInt(1) * 100) / total));
+                map.put("x", 20);
+                map.put("y", (result2.getInt(1)));
+                map.put("indexLabel", "Ready for publish");
                 list.add(map);
             }
         } catch (SQLException e) {
@@ -726,6 +767,7 @@ public class ProductMapper implements ProductMapperInterface {
      *
      * @author - Bringordie - Frederik Braagaard
      */
+    @Override
     public int getProductCount(String propertyname) throws ClassNotFoundException, SQLException, IOException {
         int total = 0;
         String sql = "select COUNT(productid) from products";
@@ -738,7 +780,30 @@ public class ProductMapper implements ProductMapperInterface {
             System.out.println(e);
         }
         return total;
-        
+    }
+    
+    /**
+     *
+     * @author - Bringordie - Frederik Braagaard
+     */
+    @Override
+    public List<Map<Object, Object>>  getProductCountChart(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+        HashMap<Object, Object> map = null;
+        List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
+        String sql = "select COUNT(productid) from products where quantity > 0";
+        ResultSet result = getConnection(propertyname).prepareStatement(sql).executeQuery();
+        try {
+            while (result.next()) {
+                map = new HashMap<Object, Object>();
+                map.put("x", 10);
+                map.put("y", (result.getInt(1)));
+                map.put("indexLabel", "Total of products");
+                list.add(map);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
     }
 
 }

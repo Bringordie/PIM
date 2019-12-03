@@ -3,6 +3,8 @@ package persistence;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import logic.Products;
 
 
@@ -31,4 +33,10 @@ public interface ProductMapperInterface {
     public String bulkEditProducts(String attribute, String changeValue, ArrayList<Products> products, String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
     public void editProduct(int id, Products product, String propertyname) throws ClassNotFoundException, SQLException, IOException;
+    
+    public List<Map<Object, Object>>  getProductCountChart(String propertyname) throws ClassNotFoundException, SQLException, IOException;
+    
+    public int getProductCount(String propertyname) throws ClassNotFoundException, SQLException, IOException;
+    
+    public List<Map<Object, Object>> chartPublishedStatusDiagram(String propertyname) throws ClassNotFoundException, SQLException, IOException;
 }

@@ -3,6 +3,8 @@ package persistence;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import logic.Categories;
 
 
@@ -37,4 +39,14 @@ public interface CategoryMapperInterface {
     public Boolean checkMainCategory(String category, String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
     public Boolean checkMinorCategory(String category, String propertyname) throws ClassNotFoundException, SQLException, IOException;
+    
+    public int getMainAmount(String propertyname) throws ClassNotFoundException, SQLException, IOException;
+    
+    public List<Map<Object, Object>> chartMainCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException;
+    
+    public int getMinorAmount(String propertyname) throws ClassNotFoundException, SQLException, IOException;
+    
+    public List<Map<Object, Object>> chartMinorCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException;
+    
+    
 }

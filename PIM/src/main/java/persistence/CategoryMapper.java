@@ -430,6 +430,7 @@ public class CategoryMapper implements CategoryMapperInterface {
      * @author - Bringordie - Frederik Braagaard
      * @param propertyname - for db connection
      */
+   @Override
     public List<Map<Object, Object>> chartMinorCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException {
         HashMap<Object, Object> map = null;
         List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
@@ -460,6 +461,7 @@ public class CategoryMapper implements CategoryMapperInterface {
      * @author - Bringordie - Frederik Braagaard
      * @param propertyname - for db connection
      */
+    @Override
     public int getMinorAmount(String propertyname) throws ClassNotFoundException, SQLException, IOException {
         int total = 0;
         String sql = "SELECT minorcategories.minorCategoryName, COUNT(*)"
@@ -484,6 +486,7 @@ public class CategoryMapper implements CategoryMapperInterface {
      * @author - Bringordie - Frederik Braagaard
      * @param propertyname - for db connection
      */
+    @Override
     public List<Map<Object, Object>> chartMainCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException {
         HashMap<Object, Object> map = null;
         List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
@@ -514,6 +517,7 @@ public class CategoryMapper implements CategoryMapperInterface {
      * @author - Bringordie - Frederik Braagaard
      * @param propertyname - for db connection
      */
+    @Override
     public int getMainAmount(String propertyname) throws ClassNotFoundException, SQLException, IOException {
         int total = 0;
         String sql = "SELECT maincategories.mainCategoryName, COUNT(*)"
