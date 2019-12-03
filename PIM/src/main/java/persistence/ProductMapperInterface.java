@@ -34,9 +34,9 @@ public interface ProductMapperInterface {
     
     public void editProduct(int id, Products product, String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public List<Map<Object, Object>>  getProductCountChart(String propertyname) throws ClassNotFoundException, SQLException, IOException;
+    public String getProductCountChart(String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
     public int getProductCount(String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public List<Map<Object, Object>> chartPublishedStatusDiagram(String propertyname) throws ClassNotFoundException, SQLException, IOException;
+    public String chartPublishedStatusDiagram(String propertyname) throws ClassNotFoundException, SQLException, IOException;
 }

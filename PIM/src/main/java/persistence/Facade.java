@@ -3,8 +3,6 @@ package persistence;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import logic.Categories;
 import logic.Products;
 
@@ -52,13 +50,13 @@ public interface Facade {
     
     public String bulkEditProducts(String attribute, String changeValue, ArrayList<Products> products, String propertyname) throws SQLException, ClassNotFoundException, IOException;
     
-    public List<Map<Object, Object>> chartMinorCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException;
+    public String chartMinorCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public List<Map<Object, Object>> chartMainCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException;
+    public String chartMainCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public List<Map<Object, Object>> chartPublishedStatusDiagram(String propertyname) throws ClassNotFoundException, SQLException, IOException;
+    public String chartPublishedStatusDiagram(String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public List<Map<Object, Object>>  getProductCountChart(String propertyname) throws ClassNotFoundException, SQLException, IOException;
+    public String getProductCountChart(String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
     public void checkOrCreateLinkminormain(int mainid, int minorid, String propertyname) throws ClassNotFoundException, SQLException, IOException;
 }

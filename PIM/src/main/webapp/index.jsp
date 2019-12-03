@@ -1,38 +1,27 @@
-<%@page import="persistence.ProductMapper"%>
 <!DOCTYPE HTML>
 <html>
-    <%@page import="persistence.CategoryMapper"%>
+    <%@page import="persistence.DBFacade"%>
     <%@ page import="java.util.*" %>
     <%@ page import="com.google.gson.Gson"%>
     <%@ page import="com.google.gson.JsonObject"%>
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="index.css">
     <%
+        DBFacade db = new DBFacade();
     //Minor
-        Gson gsonObj = new Gson();
-        CategoryMapper category = new CategoryMapper();
-        List<Map<Object, Object>> list = category.chartMinorCategory("/db.properties");
-        String dataPoints = gsonObj.toJson(list);
+        String minorvalue = db.chartMinorCategory("/db.properties");
     // Minor
 
     //Main
-        Gson gsonObj2 = new Gson();
-        CategoryMapper category2 = new CategoryMapper();
-        List<Map<Object, Object>> list2 = category.chartMainCategory("/db.properties");
-        String dataPoints2 = gsonObj.toJson(list2);
+        String mainvalue = db.chartMainCategory("/db.properties");
     //Main
 
     //PublishedStatusDataGraph
-        Gson gsonObj4 = new Gson();
-        ProductMapper product = new ProductMapper();
-        List<Map<Object, Object>> list4 = product.chartPublishedStatusDiagram("/db.properties");
-        String dataPoints4 = gsonObj.toJson(list4);
+        String publishedStatus = db.chartPublishedStatusDiagram("/db.properties");
     //PublishedStatus
     
     //Count of all products
-        Gson gsonObj5 = new Gson();
-        List<Map<Object, Object>> list5 = product.getProductCountChart("/db.properties");
-        String dataPoints5 = gsonObj.toJson(list5);
+        String allProducts = db.getProductCountChart("/db.properties");
     //Count of all products
     %>
     <head>
@@ -53,7 +42,7 @@
                             toolTipContent: "<b>{label}</b>: {y}%",
                             indexLabelFontSize: 16,
                             indexLabel: "{label} - {y}%",
-                           dataPoints: <%out.print(dataPoints);%>
+                           dataPoints: <%out.print(minorvalue);%>
                         }]
                 });
                 chart.render();
@@ -70,12 +59,13 @@
                             toolTipContent: "<b>{label}</b>: {y}%",
                             indexLabelFontSize: 16,
                             indexLabel: "{label} - {y}%",
-                           dataPoints: <%out.print(dataPoints2);%>
+                           dataPoints: <%out.print(mainvalue);%>
                         }]
                 });
                 chart2.render();
 
                 var chart = new CanvasJS.Chart("publishedstatusData", {
+                theme: "light2",
                     animationEnabled: true,
                     exportEnabled: true,
                     title: {
@@ -86,12 +76,13 @@
                             //indexLabel: "{y}", //Shows y value on all Data Points
                             indexLabelFontColor: "#5A5757",
                            indexLabelPlacement: "outside" ,
-                            dataPoints: <%out.print(dataPoints4);%>
+                            dataPoints: <%out.print(publishedStatus);%>
                         }]
                 });
                 chart.render();
                 
                 var chart = new CanvasJS.Chart("uniqueavailableproducts", {
+                theme: "light2",
                     animationEnabled: true,
                     exportEnabled: true,
                     title: {
@@ -102,7 +93,7 @@
                             //indexLabel: "{y}", //Shows y value on all Data Points
                             indexLabelFontColor: "#5A5757",
                            indexLabelPlacement: "outside" ,
-                            dataPoints: <%out.print(dataPoints5);%>
+                            dataPoints: <%out.print(allProducts);%>
                         }]
                 });
                 chart.render();

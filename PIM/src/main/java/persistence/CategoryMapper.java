@@ -1,5 +1,6 @@
 package persistence;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -431,7 +432,8 @@ public class CategoryMapper implements CategoryMapperInterface {
      * @param propertyname - for db connection
      */
    @Override
-    public List<Map<Object, Object>> chartMinorCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+    public String chartMinorCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+        Gson gsonObj = new Gson();
         HashMap<Object, Object> map = null;
         List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
         int total = getMinorAmount(propertyname);
@@ -453,7 +455,8 @@ public class CategoryMapper implements CategoryMapperInterface {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return list;
+        String minorvalue = gsonObj.toJson(list);
+        return minorvalue;
     }
 
     /**
@@ -487,7 +490,8 @@ public class CategoryMapper implements CategoryMapperInterface {
      * @param propertyname - for db connection
      */
     @Override
-    public List<Map<Object, Object>> chartMainCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+    public String chartMainCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+        Gson gsonObj = new Gson();
         HashMap<Object, Object> map = null;
         List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
         int total = getMainAmount(propertyname);
@@ -509,7 +513,8 @@ public class CategoryMapper implements CategoryMapperInterface {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return list;
+        String mainvalue = gsonObj.toJson(list);
+        return mainvalue;
     }
 
     /**
