@@ -347,4 +347,125 @@ public class DBtest {
         assertEquals(expected, actually);
     }
     
+    @Test
+    public void editProduct() throws SQLException, ClassNotFoundException, IOException {
+
+        dbfacade.addMainCategory("Frugt", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Økologisk", DBPROPERTYTEST);
+        ArrayList<Products> products = new ArrayList();
+        products.add(new Products(69, "Agurk", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true, "1", "1"));
+        dbfacade.addProduct(products, DBPROPERTYTEST);
+
+        dbfacade.editProduct(69, new Products(69, "Squash", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true, "1", "1"), DBPROPERTYTEST);
+        String dbcall = dbextra.getCustomDataFromDB("SELECT name FROM products WHERE productid = 69");
+        String expected = "Squash";
+        assertEquals(expected, dbcall);
+    }
+
+    @Test
+    public void deleteProduct() throws SQLException, ClassNotFoundException, IOException {
+
+        dbfacade.addMainCategory("Frugt", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Økologisk", DBPROPERTYTEST);
+        ArrayList<Products> products = new ArrayList();
+        products.add(new Products(69, "Agurk", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true, "1", "1"));
+        dbfacade.addProduct(products, DBPROPERTYTEST);
+        
+        String dbcall = dbextra.getCustomDataFromDB("select COUNT(name) from products");
+        String expected = "1";
+        assertEquals(expected, dbcall);
+        
+        dbfacade.deleteProduct(69, DBPROPERTYTEST);
+        String dbcall2 = dbextra.getCustomDataFromDB("select COUNT(name) from products");
+        String expected2 = "0";
+        assertEquals(expected2, dbcall2);
+    }
+    
+    @Test
+    public void showSearchedProduct() throws SQLException, ClassNotFoundException, IOException {
+
+        dbfacade.addMainCategory("Frugt", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Økologisk", DBPROPERTYTEST);
+        ArrayList<Products> products = new ArrayList();
+        products.add(new Products(34, "Gulerødder øko.", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true, "1", "1"));
+        products.add(new Products(35, "Solsikkeskud øko.", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true, "1", "1"));
+        products.add(new Products(55, "Radisemix øko.", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true, "1", "1"));
+        products.add(new Products(500, "Kaki frugter", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true, "1", "1"));
+        dbfacade.addProduct(products, DBPROPERTYTEST);
+        
+        ArrayList<Products> dbcall = dbfacade.showSearchedProduct("5", "productid", DBPROPERTYTEST);
+        int actual = dbcall.size();
+        int expected = 3;
+        assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void dbDownload() throws SQLException, ClassNotFoundException, IOException {
+
+        dbfacade.addMainCategory("Frugt", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Økologisk", DBPROPERTYTEST);
+        ArrayList<Products> products = new ArrayList();
+        products.add(new Products(69, "Agurk", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true, "1", "1"));
+        dbfacade.addProduct(products, DBPROPERTYTEST);
+        
+        ArrayList<Products> dbcall = dbfacade.dbDownload(DBPROPERTYTEST);
+        String expected = "Frugt";
+        String actual = "";
+        for (Products productsdb : dbcall) {
+            
+            actual = productsdb.getMainCategory();
+        }
+        
+        assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void bulkEditProducts() throws SQLException, ClassNotFoundException, IOException {
+
+        dbfacade.addMainCategory("Frugt", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Økologisk", DBPROPERTYTEST);
+        ArrayList<Products> products = new ArrayList();
+        products.add(new Products(34, "Gulerødder øko.", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true, "1", "1"));
+        products.add(new Products(35, "Solsikkeskud øko.", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true, "1", "1"));
+        products.add(new Products(55, "Radisemix øko.", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true, "1", "1"));
+        products.add(new Products(500, "Kaki frugter", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true, "1", "1"));
+        dbfacade.addProduct(products, DBPROPERTYTEST);
+        
+        dbfacade.bulkEditProducts("price", "29.99", products, DBPROPERTYTEST);
+        String dbcall = dbextra.getCustomDataFromDB("SELECT COUNT(name) FROM products WHERE price = 29.99");
+        String expected = "4";
+        assertEquals(expected, dbcall);
+        
+        String dbcall2 = dbfacade.bulkEditProducts("price", "hejsa", products, DBPROPERTYTEST);
+        String expected2 = "error";
+        assertEquals(expected2, dbcall2);
+    }
+    
+    @Test
+    public void bulkEditPublished() throws SQLException, ClassNotFoundException, IOException {
+
+        dbfacade.addMainCategory("Frugt", DBPROPERTYTEST);
+        dbfacade.addMinorCategory("Økologisk", DBPROPERTYTEST);
+        ArrayList<Products> products = new ArrayList();
+        products.add(new Products(34, "Gulerødder øko.", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", false, "1", "1"));
+        products.add(new Products(35, "Solsikkeskud øko.", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", false, "1", "1"));
+        products.add(new Products(55, "Radisemix øko.", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", false, "1", "1"));
+        products.add(new Products(500, "Kaki frugter", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", false, "1", "1"));
+        dbfacade.addProduct(products, DBPROPERTYTEST);
+        
+        String dbcall = dbextra.getCustomDataFromDB("SELECT COUNT(name) FROM products WHERE publishedStatus = false");
+        String expected = "4";
+        assertEquals(expected, dbcall);
+        
+        
+        dbfacade.bulkEditPublished("publishedStatus", true, products, DBPROPERTYTEST);
+        String dbcall2 = dbextra.getCustomDataFromDB("SELECT COUNT(name) FROM products WHERE publishedStatus = true");
+        String expected2 = "4";
+        assertEquals(expected2, dbcall2);
+        
+//        String dbcall3 = dbfacade.bulkEditPublished("publishedStatus", "yarr", products, DBPROPERTYTEST);
+//        String expected3 = "error";
+//        assertEquals(expected3, dbcall3);
+    }
+    
 }
