@@ -1,0 +1,51 @@
+/* 
+    Created on : Dec 4, 2019, 11:37:30 AM
+    Author     : Malthe
+*/
+h1 {
+    
+    text-align: center;
+    
+}
+
+.nameAndInput {
+    
+    text-align: center;
+    line-height: 1.6;
+}
+
+.left {
+    
+    float: left;
+    margin-left: 28%;
+    
+}
+
+.right {
+    
+    float: right;
+    margin-right: 28%;
+    
+}
+
+.buttonAlign {
+    margin: 40px;
+    text-align: center;
+}
+
+.button {
+    font-size: 20px;
+    color: #444;
+    padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color: #55d6aa;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    
+}
+
+.button:hover {
+    color: #000;
+}

@@ -27,10 +27,13 @@ public class AddProductCommand extends Command {
         double price = Double.parseDouble(request.getParameter("Price"));
         int quantity = Integer.parseInt(request.getParameter("Quantity"));
         String picturename = (request.getParameter("PictureName"));
-        String minorcategory = request.getParameter("minorid");
-        String maincategory = request.getParameter("mainid");
+        String minorcategory = request.getParameter("minorcategory");
+        String maincategory = request.getParameter("maincategory");
         
         String returnvalue = "";
+        
+        minorcategory = String.valueOf(db.getMinorCategoriesID(minorcategory, "/db.properties"));
+        maincategory = String.valueOf(db.getMainCategoriesID(maincategory, "/db.properties"));
         
         products.add(new Products(id, productname, productnamedescription, productdescription, companyname, price, quantity, picturename, true, minorcategory, maincategory));
         returnvalue = db.addProduct(products, "/db.properties");

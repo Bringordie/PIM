@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logic.FileReaderLogic;
 import logic.Products;
 
 /**
@@ -26,8 +27,18 @@ public class GoToSingleProductViewCommand extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         
+        FileReaderLogic filechecker = new FileReaderLogic();
         String[] products = request.getParameterValues("selected");
         ArrayList<Products> allProducts = db.showAllProducts("/db.properties");
+        for (Products allProduct : allProducts) {
+            allProduct.getPictureName();
+            try {
+                String picturestatus = filechecker.FileCheck(allProduct.getPictureName());
+                allProduct.setPictureName(picturestatus);
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+        }
         ArrayList<Products> selectedProduct = new ArrayList();
         
         Products obj = null;
