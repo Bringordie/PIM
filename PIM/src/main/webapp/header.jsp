@@ -7,7 +7,7 @@
     </head>
     <header>
         <div class="container">
-            <h1> <img src="https://inco.dk/app/images/inco/logo_small.png" alt="logo" class="logo"> </h1>
+            <img src="https://inco.dk/app/images/inco/logo_small.png" alt="logo" class="logo">
             <nav>
                 <ul>
                     <li><a href="index.jsp">Home</a></li>
