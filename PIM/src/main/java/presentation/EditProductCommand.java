@@ -35,7 +35,9 @@ public class EditProductCommand extends Command {
         maincategory = String.valueOf(db.getMainCategoriesID(maincategory, "/db.properties"));
 
         db.editProduct(id, new Products(id, productname, productnamedescription, productdescription, companyname, price, quantity, picturename, true, minorcategory, maincategory), "/db.properties");
-
+        
+        db.checkOrCreateLinkminormain(Integer.parseInt(maincategory), Integer.parseInt(minorcategory), "/db.properties");
+        
         String productupdated = "Productupdated";
         request.getSession().setAttribute("productupdated", productupdated);
 

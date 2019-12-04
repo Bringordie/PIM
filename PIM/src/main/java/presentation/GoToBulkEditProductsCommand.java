@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logic.Categories;
 import logic.FileReaderLogic;
 import logic.Products;
 
@@ -24,6 +25,8 @@ public class GoToBulkEditProductsCommand extends Command {
 
         String[] products = request.getParameterValues("selected");
         ArrayList<Products> allProducts = db.showAllProducts("/db.properties");
+        ArrayList<Categories> maincategories = db.getMainCategories("/db.properties");
+        ArrayList<Categories> minorcategories = db.getMinorCategories("/db.properties");
         Products obj = null;
         ArrayList<Products> selectedProducts = new ArrayList();
         String website = "";
@@ -58,6 +61,8 @@ public class GoToBulkEditProductsCommand extends Command {
         }
         
         request.getSession().setAttribute("selected", selectedProducts);
+        request.getSession().setAttribute("maincategories", maincategories);
+        request.getSession().setAttribute("minorcategories", minorcategories);
         request.getSession().setAttribute("errormsg", "noinput");
         request.getSession().setAttribute("callback", "empty");
         Products.setProductTempholder(selectedProducts);

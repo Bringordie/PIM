@@ -60,10 +60,24 @@ public class BulkEditProductsCommand extends Command {
             case "Main Category":
                 dropdown = "mainCategory";
                 edit = String.valueOf(db.getMainCategoriesID(edit, "/db.properties"));
+                for (Products selectedProduct : selectedProducts) {
+                    String minorcategory = selectedProduct.getMinorCategory();
+                    String maincategory = edit;
+                    int minorID = db.getMinorCategoriesID(minorcategory, "/db.properties");
+                    int mainID = db.getMainCategoriesID(maincategory, "/db.properties");
+                    db.checkOrCreateLinkminormain(minorID, mainID, "/db.properties");
+                }
                 break;
             case "Minor Category":
                 dropdown = "minorCategory";
                 edit = String.valueOf(db.getMinorCategoriesID(edit, "/db.properties"));
+                for (Products selectedProduct : selectedProducts) {
+                    String minorcategory = edit;
+                    String maincategory = selectedProduct.getMainCategory();
+                    int minorID = db.getMinorCategoriesID(minorcategory, "/db.properties");
+                    int mainID = db.getMainCategoriesID(maincategory, "/db.properties");
+                    db.checkOrCreateLinkminormain(minorID, mainID, "/db.properties");
+                }
                 break;
             default:
                 System.err.print("Something went wrong");

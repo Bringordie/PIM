@@ -13,11 +13,13 @@
         crossorigin="anonymous"></script>
     <script src="ShowProducts.js"></script>
     <link rel="stylesheet" href="ShowProducts.css">
+    <script src="BulkEditProducts.js"></script>
+    <link rel="stylesheet" href="BulkEditProducts.css">
     <body>
         <h1>Bulk Edit Multiple Products:</h1>
         <p>Choose which attribute you want to edit for all selected products: </p>
         <form action="FrontController">
-            <select id="chosenAttribute" name="chosenAttribute">
+            <select id="chosenAttribute" name="chosenAttribute" onchange="myFunction(event)">
                 <option>Product Name</option>
                 <option>Product Name Description</option>
                 <option>Product Description</option>
@@ -31,8 +33,24 @@
             <br>
             <br>
             <p>New input:</p>
+            <div class="main">
+            <select id="maincategories" name="maincategories" style="display:none;">
+                <c:forEach var="maincategories" items="${maincategories}">
+                <option>${maincategories.getName()}</option>
+                </c:forEach>
+            </select>
+            </div>
+            <div class="minor">
+            <select id="minorcategories" name="minorcategories" style="display:none;">
+                <c:forEach var="minorcategories" items="${minorcategories}">
+                <option>${minorcategories.getName()}</option>
+                </c:forEach>
+            </select>
+            </div>
             <input type="hidden" name="cmd" value="bulkEditProducts" />
-            <input type="text" name="bulkEditProducts" value="" />
+            <div class="normalinput">
+            <input type="text" id="normalinput" name="bulkEditProducts" value="" />
+            </div>
             <input type="submit" value="Apply Edit" />
             <% if (session.getAttribute("callback").toString().equals("success")) { %>
             <p>Edit successfully applied!</p>
