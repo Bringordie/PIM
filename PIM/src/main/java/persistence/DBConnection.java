@@ -35,5 +35,10 @@ public class DBConnection {
         }
         return singleton;
     }
+    
+    //Used for tests
+    public void closeConnection() throws ClassNotFoundException, SQLException, IOException {
+        singleton = null;
+    }
 
 }

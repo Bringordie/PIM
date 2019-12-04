@@ -118,22 +118,22 @@ public class DBFacade implements Facade {
     }
 
     @Override
-    public List<Map<Object, Object>> chartMinorCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+    public String chartMinorCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException {
         return categoryMapper.chartMinorCategory(propertyname);
     }
 
     @Override
-    public List<Map<Object, Object>> chartMainCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+    public String chartMainCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException {
         return categoryMapper.chartMainCategory(propertyname);
     }
 
     @Override
-    public List<Map<Object, Object>> chartPublishedStatusDiagram(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+    public String chartPublishedStatusDiagram(String propertyname) throws ClassNotFoundException, SQLException, IOException {
         return productMapper.chartPublishedStatusDiagram(propertyname);
     }
 
     @Override
-    public List<Map<Object, Object>> getProductCountChart(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+    public String getProductCountChart(String propertyname) throws ClassNotFoundException, SQLException, IOException {
         return productMapper.getProductCountChart(propertyname);
     }
 

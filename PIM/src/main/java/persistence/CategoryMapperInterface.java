@@ -42,11 +42,11 @@ public interface CategoryMapperInterface {
     
     public int getMainAmount(String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public List<Map<Object, Object>> chartMainCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException;
+    public String chartMainCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
     public int getMinorAmount(String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
-    public List<Map<Object, Object>> chartMinorCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException;
+    public String chartMinorCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException;
     
     
 }

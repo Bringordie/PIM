@@ -1,5 +1,6 @@
 package persistence;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -687,47 +688,14 @@ public class ProductMapper implements ProductMapperInterface {
         }
         return callback;
     }
-    
-//    public List<Map<Object, Object>> chartPublishedStatus(String propertyname) throws ClassNotFoundException, SQLException, IOException {
-//        HashMap<Object, Object> map = null;
-//        List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
-//        int total = getProductCount(propertyname);
-//        String sqlfalse = "select COUNT(publishedStatus) from products where publishedStatus = false";
-//        String sqltrue = "select COUNT(publishedStatus) from products where publishedStatus = true";
-//        ResultSet result = getConnection(propertyname).prepareStatement(sqlfalse).executeQuery();
-//
-//        try {
-//            while (result.next()) {
-//                map = new HashMap<Object, Object>();
-//                map.put("label", "Not ready for publish");
-//                map.put("y", String.valueOf((result.getInt(1) * 100) / total));
-//                list.add(map);
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        
-//        ResultSet result2 = getConnection(propertyname).prepareStatement(sqltrue).executeQuery();
-//        try {
-//            while (result2.next()) {
-//                map = new HashMap<Object, Object>();
-//                map.put("label", "Ready for publish");
-//                map.put("y", String.valueOf((result2.getInt(1) * 100) / total));
-//                list.add(map);
-//            }
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//        }
-//        
-//        return list;
-//    }
-    
+        
     /**
      *
      * @author - Bringordie - Frederik Braagaard
      */
     @Override
-    public List<Map<Object, Object>> chartPublishedStatusDiagram(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+    public String chartPublishedStatusDiagram(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+        Gson gsonObj = new Gson();
         HashMap<Object, Object> map = null;
         List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
         int total = getProductCount(propertyname);
@@ -744,7 +712,7 @@ public class ProductMapper implements ProductMapperInterface {
                 list.add(map);
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            throw e;
         }
         
         ResultSet result2 = getConnection(propertyname).prepareStatement(sqltrue).executeQuery();
@@ -757,10 +725,10 @@ public class ProductMapper implements ProductMapperInterface {
                 list.add(map);
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            throw e;
         }
-        
-        return list;
+        String publishedStatus = gsonObj.toJson(list);
+        return publishedStatus;
     }
     
     /**
@@ -787,7 +755,8 @@ public class ProductMapper implements ProductMapperInterface {
      * @author - Bringordie - Frederik Braagaard
      */
     @Override
-    public List<Map<Object, Object>>  getProductCountChart(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+    public String getProductCountChart(String propertyname) throws ClassNotFoundException, SQLException, IOException {
+        Gson gsonObj = new Gson();
         HashMap<Object, Object> map = null;
         List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
         String sql = "select COUNT(productid) from products where quantity > 0";
@@ -803,7 +772,8 @@ public class ProductMapper implements ProductMapperInterface {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return list;
+        String allProducts = gsonObj.toJson(list);
+        return allProducts;
     }
 
 }
