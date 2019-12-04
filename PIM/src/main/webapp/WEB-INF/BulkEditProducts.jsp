@@ -17,8 +17,12 @@
     <link rel="stylesheet" href="BulkEditProducts.css">
     <body>
         <h1>Bulk Edit Multiple Products:</h1>
-        <p>Choose which attribute you want to edit for all selected products: </p>
+        <p class="chooseheader">Choose which attribute you want to edit for all selected products: </p>
         <form action="FrontController">
+        <div class="wrapper">
+        
+        
+            <div class="dropdownattributes">
             <select id="chosenAttribute" name="chosenAttribute" onchange="myFunction(event)">
                 <option>Product Name</option>
                 <option>Product Name Description</option>
@@ -30,9 +34,9 @@
                 <option>Minor Category</option>
                 <option>Main Category</option>
             </select>
-            <br>
-            <br>
-            <p>New input:</p>
+            </div> 
+            <div class="label">New input:</div>
+            
             <div class="main">
             <select id="maincategories" name="maincategories" style="display:none;">
                 <c:forEach var="maincategories" items="${maincategories}">
@@ -48,20 +52,25 @@
             </select>
             </div>
             <input type="hidden" name="cmd" value="bulkEditProducts" />
-            <div class="normalinput">
-            <input type="text" id="normalinput" name="bulkEditProducts" value="" />
-            </div>
-            <input type="submit" value="Apply Edit" />
+            <div class="normalinputtest">
+            <input type="text" id="normalinput" name="bulkEditProducts" value="" required/>
+            </div> 
+       </div>
+       <div class="button-wrapper">
+         <input class="button" type="submit" value="Apply Edit" />
+       </div>
             <% if (session.getAttribute("callback").toString().equals("success")) { %>
+            <div class="responserequest">
             <p>Edit successfully applied!</p>
+            </div>
             <%} else if (session.getAttribute("callback").toString().equals("error")) { %>
+            <div class="responserequest">
             <p>Error: Something went wrong. Please contact IT support.</p>
+            </div>
             <%} else if (session.getAttribute("callback").toString().equals("empty")) {
                     }%>
-            <br>
-            <br>
-            <br>
-            <table width = "50%" boder="1" align="center">
+            <br><br><br>
+            <table width = "50%" border = "1" align = "center">
                 <thead>
                     <tr>
                         <td>ID</td>

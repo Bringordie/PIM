@@ -21,3 +21,24 @@ td.expanded {
     white-space: normal;
     height: 50px;
 }
+
+div.binder {
+  text-align: right;
+}
+
+div.scrollbutton {
+    position: fixed;
+  left: 0%;
+  bottom: 80%;
+  z-index: 1000;
+  transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+  text-align: center;
+  text-decoration: none;
+}
+
+div.responserequest {
+    text-align: center;
+}

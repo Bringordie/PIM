@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="ShowProducts.css">
     <body>
         <br>
+        <div class="binder">
         <h4> What do you want to search for?: </h4>
         <form action="FrontController">
             <select id="searchCriteria" name="searchCriteria">
@@ -32,17 +33,23 @@
                 <option>Minor Category</option>
                 <option>Main Category</option>
             </select>
-            <h4> Search: </h4>
-            <input type="text" name="searchInput" value="" required/>
+            <br><br>
+            Search: 
+            <input size="23" type="text" name="searchInput" value="" required/>
             <input type="hidden" name="cmd" value="searchResults">
             <input type="submit" value="Search" />
         </form>
+        </div>
         <br>
         <form action="FrontController">
             <input type="hidden" name="cmd" value="gotoBulkEditProducts">
+            <div class ="scrollbutton">
             <input type="submit" value="Edit Selected Products">
+            </div>
             <% if (session.getAttribute("errormsg").toString().equals("noinput")) { %>
-            <h3>Please select at least one product to edit.</h3>
+            <div class="responserequest">
+            <p>Please select at least one product to edit.</p>
+            </div>
             <%} else if (session.getAttribute("errormsg").toString().equals("empty")) { %>
             <%}%>
             <table width = "50%" border = "1" align = "center" class="sortable">

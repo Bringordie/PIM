@@ -6,7 +6,11 @@
         <title>Upload File</title>
     </head>
     <%@ include file = "../header.jsp" %>
+    <link rel="stylesheet" href="UploadFile.css">
     <body>
+        <div class="fullbinder">
+    
+    <div class="binder">
         <h3>Upload File</h3>
         Select a <b>JSON</b> or <b>EXCEL</b> file to upload: 
         <br />
@@ -15,13 +19,18 @@
          <br />
          <input type = "submit" value = "Upload File to Website" />
       </form>
+          </div>
+          
+          <div class="binder2">
         <h3>Upload Picture</h3>
         Select pictures to upload: 
         <br />
         <form action = "UploadImage" method = "POST" enctype = "multipart/form-data">
-         <input <input name="file" type="file" id="file" multiple required accept=".JPG">
+         <input name="file" type="file" id="file" multiple required accept=".JPG">
          <br />
          <input type = "submit" value = "Upload File to Website" />
       </form>
+      </div>
+      </div>
     </body>
 </html>

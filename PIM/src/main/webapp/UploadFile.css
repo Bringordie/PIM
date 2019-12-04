@@ -1,0 +1,14 @@
+div.binder {
+    margin-left: 18%;
+}
+
+div.binder2 {
+    margin-right: 18%;
+}
+
+div.fullbinder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 30px;
+}
