@@ -37,6 +37,9 @@
             </head>
             <body>
                 <%@ include file = "header.jsp" %>
+                <% if (minorvalue.equals("[]")) {
+                    //do nothing
+                } else {%>
                 <div class="roughcontainer">
                     <div class="graph" id="minorcategory" style="height: 370px; width: 500px;"></div>
                     <div class="graph" id="maincategory" style="height: 370px; width: 500px;"></div>
@@ -45,5 +48,6 @@
                     <div class="diagram" id="publishedstatusData" style="height: 370px; width: 500px;"></div>
                     <div class="diagram" id="uniqueavailableproducts" style="height: 370px; width: 500px;"></div>
                 </div>
+                <% } %>
             </body>
         </html>                  
