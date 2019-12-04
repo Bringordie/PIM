@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import logic.Categories;
 import logic.ExcelHandler;
 import logic.JsonHandler;
 import logic.Products;
@@ -562,5 +563,99 @@ public class DBtest {
         assertNotNull(returnvalue);
         assertEquals(expected, returnvalue);
     }
+    
+    
+    
+    
+    @Test
+    public void creationOfDuplicateMainCategory() throws SQLException, ClassNotFoundException, IOException {
+        dbfacade.addMainCategory("Frost", DBPROPERTYTEST);
+        String response = dbfacade.addMainCategory("Frost", DBPROPERTYTEST);
 
+        assertEquals("Category already exists!", response);
+    
+    }
+    
+     @Test
+    public void creationOfDuplicateMinorCategory() throws SQLException, ClassNotFoundException, IOException {
+        dbfacade.addMinorCategory("Frost", DBPROPERTYTEST);
+        String response = dbfacade.addMinorCategory("Frost", DBPROPERTYTEST);
+        assertEquals("Category already exists!", response);
+
+    }
+    
+    
+    @Test
+     public void showNamesFromMinorCategories() throws SQLException, ClassNotFoundException, IOException {
+        
+           ArrayList<Categories> cate = new ArrayList();
+         cate.add(new Categories(2,"Agurk"));
+         String str = cate.toString();
+       
+         categorymapper.getMinorValuesFromDB(DBPROPERTYTEST);
+
+        final StringBuilder builder = new StringBuilder();
+         String expected = "Agurk"; 
+          for (Categories minorcategory : cate) {
+            builder.append(minorcategory.getName());
+        }
+        String concatenatedString = builder.toString();       
+        assertEquals(expected, concatenatedString);
+    }
+     @Test
+      public void showNamesFromMainCategories() throws SQLException, ClassNotFoundException, IOException {
+        
+         ArrayList<Categories> category = new ArrayList();
+         category.add(new Categories(1,"Hvidvarer"));
+         String str = category.toString();
+       
+         categorymapper.getMainValuesFromDB(DBPROPERTYTEST);
+
+        final StringBuilder builder = new StringBuilder();
+         String expected = "Hvidvarer"; 
+          for (Categories categorydb : category) {
+            builder.append(categorydb.getName());
+        }
+        String concatenatedString = builder.toString(); 
+        assertEquals(expected, concatenatedString);
+      }
+
+     @Test
+    public void showIDsFromMinorCategories() throws SQLException, ClassNotFoundException, IOException {
+        
+         ArrayList<Categories> category = new ArrayList();
+         category.add(new Categories(2,"Agurk"));
+         
+       
+         categorymapper.getMinorValuesFromDB(DBPROPERTYTEST);
+
+        final StringBuilder builder = new StringBuilder();
+         String expected = "2"; 
+          for (Categories categorydb : category) {
+            builder.append(categorydb.getID());
+          }
+        String concatenatedString = builder.toString();   
+        assertEquals(expected, concatenatedString);
+   
 }
+   
+      @Test
+    public void showIDsFromMainCategories() throws SQLException, ClassNotFoundException, IOException {
+        
+         ArrayList<Categories> category = new ArrayList();
+         category.add(new Categories(1,"Hvidvarer"));
+              
+         categorymapper.getMainValuesFromDB(DBPROPERTYTEST);
+
+        final StringBuilder builder = new StringBuilder();
+         String expected = "1"; 
+          for (Categories categorydb : category) {
+            builder.append(categorydb.getID());
+          }
+        String concatenatedString = builder.toString();
+        
+        assertEquals(expected, concatenatedString);
+   }}
+
+
+
