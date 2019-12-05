@@ -1,7 +1,6 @@
 package presentation;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;

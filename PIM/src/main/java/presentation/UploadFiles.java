@@ -31,7 +31,13 @@ import java.nio.file.Paths;
 
 /**
  *
- *  //TODO
+ * Used for uploading an .xlsx or .json document.
+ * First we read the file to see that it isn't too big, then we read the file
+ * with a factory and upload it to a ServletFileUpload.
+ * Once that is done we read the attributes of the file. And save the file
+ * in the resource package filepath. We then call uploadToDB to upload the file
+ * before we delete the temp file again, and redirect the user to a upload
+ * page that says if the upload went good or bad.
  * 
  * @author Frederik Braagaard - Bringordie
  */

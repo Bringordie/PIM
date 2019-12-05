@@ -10,6 +10,16 @@ import java.util.Arrays;
 
 /**
  *
+ * Used for uploading a .json document. This will only work if the .json document
+ * has the structure of the class Products. This method would have been changed 
+ * in the future if there were more time as it would fail to any other .json
+ * documment that doesn't have it in the same grid. That means that the 
+ * .json file you can download you can't upload straight away.
+ * But the mathod takes the location of the file where it has been uploaded
+ * and then uses a filereader to read the file. We then use gson to read
+ * the file into an array list of products.
+ * 
+ * 
  * @author Frederik Braagaard - Bringordie
  */
 public class JsonHandler {

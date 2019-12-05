@@ -428,8 +428,14 @@ public class CategoryMapper implements CategoryMapperInterface {
 
     /**
      *
+     * Used for displaying a count of different minor categories with count 
+     * on the chart on the index frontpage.
+     * We get the info and read them into a gsonObj.toJson as this is how 
+     * or charts work.
+     * 
      * @author - Bringordie - Frederik Braagaard
      * @param propertyname - for db connection
+     * @return returns gsonObj.toJson as this is needed for the chart to display the information.
      */
    @Override
     public String chartMinorCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException {
@@ -461,8 +467,11 @@ public class CategoryMapper implements CategoryMapperInterface {
 
     /**
      *
+     * Used for chartMinorCategory to get a count of a category name.
+     * 
      * @author - Bringordie - Frederik Braagaard
      * @param propertyname - for db connection
+     * @return returns an int value of the ammount of minor categories that is above 0.
      */
     @Override
     public int getMinorAmount(String propertyname) throws ClassNotFoundException, SQLException, IOException {
@@ -486,8 +495,14 @@ public class CategoryMapper implements CategoryMapperInterface {
 
     /**
      *
+     * Used for displaying a count of different main categories with count 
+     * on the chart on the index frontpage.
+     * We get the info and read them into a gsonObj.toJson as this is how 
+     * or charts work.
+     * 
      * @author - Bringordie - Frederik Braagaard
      * @param propertyname - for db connection
+     * @return returns gsonObj.toJson as this is needed for the chart to display the information.
      */
     @Override
     public String chartMainCategory(String propertyname) throws ClassNotFoundException, SQLException, IOException {
@@ -519,8 +534,11 @@ public class CategoryMapper implements CategoryMapperInterface {
 
     /**
      *
+     * Used for chartMainCategory to get a count of a category name.
+     * 
      * @author - Bringordie - Frederik Braagaard
      * @param propertyname - for db connection
+     * @return returns an int value of the ammount of minor categories that is above 0.
      */
     @Override
     public int getMainAmount(String propertyname) throws ClassNotFoundException, SQLException, IOException {

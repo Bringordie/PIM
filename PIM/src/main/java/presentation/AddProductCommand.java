@@ -11,6 +11,7 @@ import logic.Products;
 /**
  *
  * @author ClausFindinge - Claus Mikkelsen Findinge
+ * @author Bringordie - Frederik Braagaard
  */
 public class AddProductCommand extends Command {
 

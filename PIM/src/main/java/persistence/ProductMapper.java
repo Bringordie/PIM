@@ -691,7 +691,12 @@ public class ProductMapper implements ProductMapperInterface {
         
     /**
      *
+     * Used for displaying the count of published and non published products
+     * in a chart on the index page.
+     * 
      * @author - Bringordie - Frederik Braagaard
+     * @param propertyname used for DB access
+     * @return returns and gson.Obj.toJson as this is how the charts reads data.
      */
     @Override
     public String chartPublishedStatusDiagram(String propertyname) throws ClassNotFoundException, SQLException, IOException {
@@ -733,7 +738,11 @@ public class ProductMapper implements ProductMapperInterface {
     
     /**
      *
+     * Gets the product count. Used for chartPublishedStatusDiagram.
+     * 
      * @author - Bringordie - Frederik Braagaard
+     * @param propertyname used for DB Connection.
+     * @return retuns the count of all products.
      */
     @Override
     public int getProductCount(String propertyname) throws ClassNotFoundException, SQLException, IOException {
@@ -752,6 +761,9 @@ public class ProductMapper implements ProductMapperInterface {
     
     /**
      *
+     * Used for displaying the count of products that the firm has in stock.
+     * Used for the chart on the index page.
+     * 
      * @author - Bringordie - Frederik Braagaard
      */
     @Override
