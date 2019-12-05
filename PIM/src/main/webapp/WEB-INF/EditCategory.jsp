@@ -4,6 +4,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         <link rel="stylesheet" type="text/css" href="AddProduct.css"/>
+        <link rel="stylesheet" type="text/css" href="AddCategory.css"/>
         <title>Edit Category</title>
     </head>
     <%@ include file = "../header.jsp" %>
@@ -35,13 +37,18 @@
                         <br>
                         Enter new name:
                         <input type="text" name="MainName" required>
-                        <input type="submit" value="Submit">
+                        
+                        
+                        input type="submit" value="Submit">
                         <% } else {%>
                         <p>There are no main categories!</p>
                         <% }%>
                     </form>
                     <br>
+                    <div class="isertmaincategory">
                     <h3>Edit a minor category:</h3>
+                    </div>
+                    <div 
                     <form name="editMinorCategory" action="FrontController" method="POST">
                         <input type="hidden" name="cmd" value="editMinorCategory">
                         <% if (session.getAttribute("minorCategories") != null) { %>
@@ -64,7 +71,10 @@
                         <br>
                         Enter new name:
                         <input type="text" name="MinorName" required>
-                        <input type="submit" value="Submit">
+                        
+                        <div class="buttonposition2">
+                            <input class="button"
+                            input type="submit" value="Submit">
                         <% } else {%>
                         <p>There are no minor categories!</p>
                         <% }%>
