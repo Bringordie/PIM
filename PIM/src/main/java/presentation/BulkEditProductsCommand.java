@@ -17,7 +17,7 @@ import logic.Products;
 public class BulkEditProductsCommand extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) 
+    protected String execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         
         ArrayList<Products> selectedProducts = Products.getProductTempholder();

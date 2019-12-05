@@ -16,7 +16,7 @@ import logic.Categories;
 public class EditMinorCategoryCommand extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) 
+    protected String execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("id"));
         String MinorName = request.getParameter("MinorName");

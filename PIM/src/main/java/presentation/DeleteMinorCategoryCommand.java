@@ -15,7 +15,7 @@ import logic.Categories;
 public class DeleteMinorCategoryCommand extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response)
+    protected String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         int id = Integer.parseInt(request.getParameter("id"));
         db.deleteMinorCategory(id, "/db.properties");

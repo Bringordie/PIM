@@ -1,4 +1,4 @@
-package presentation;
+package presentation.gotoCommand;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import logic.Categories;
 import logic.FileReaderLogic;
 import logic.Products;
+import presentation.Command;
 
 /**
  *
@@ -20,7 +21,7 @@ import logic.Products;
 public class GoToBulkEditProductsCommand extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response)
+    protected String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
 
         String[] products = request.getParameterValues("selected");

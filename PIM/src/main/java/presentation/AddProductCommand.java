@@ -15,7 +15,7 @@ import logic.Products;
 public class AddProductCommand extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response)
+    protected String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException {
 
         ArrayList<Products> products = new ArrayList();

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package presentation;
+package presentation.gotoCommand;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.FileReaderLogic;
 import logic.Products;
+import presentation.Command;
 
 /**
  *
@@ -32,7 +33,7 @@ import logic.Products;
 public class GoToViewAllProductsCommand extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
+    protected String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, ClassNotFoundException {
 
         FileReaderLogic filechecker = new FileReaderLogic();
 

@@ -1,7 +1,8 @@
-package presentation;
+package presentation.gotoCommand;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import presentation.Command;
 
 /**
  *
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GoToAddMainCategoryCommand extends Command {
     
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) {
+    protected String execute(HttpServletRequest request, HttpServletResponse response) {
         
         return "AddMainCategory";
     }

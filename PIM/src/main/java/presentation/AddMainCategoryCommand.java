@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AddMainCategoryCommand extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) 
+    protected String execute(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException, SQLException, ClassNotFoundException {
         
         String categoryResponse;

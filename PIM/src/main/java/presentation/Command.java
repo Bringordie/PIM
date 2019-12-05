@@ -7,10 +7,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import persistence.DBFacade;
+import presentation.gotoCommand.*;
 
 public abstract class Command {
 
-    DBFacade db = new DBFacade();
+    public DBFacade db = new DBFacade();
 
     private static HashMap<String, Command> commands;
 
@@ -49,6 +50,6 @@ public abstract class Command {
         return commands.getOrDefault(commandName, new UnknownCommand());
     }
 
-    abstract String execute(HttpServletRequest request, HttpServletResponse response)
+    protected abstract String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException, ClassNotFoundException;
 }

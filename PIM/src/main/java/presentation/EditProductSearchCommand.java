@@ -27,7 +27,7 @@ public class EditProductSearchCommand extends Command {
     
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) 
+    protected String execute(HttpServletRequest request, HttpServletResponse response) 
        throws ServletException, IOException, SQLException, ClassNotFoundException{
 
         String results = "empty";

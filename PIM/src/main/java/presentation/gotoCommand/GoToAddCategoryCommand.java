@@ -1,7 +1,9 @@
-package presentation;
+package presentation.gotoCommand;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import presentation.Command;
+import presentation.*;
 
 /**
  *
@@ -10,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GoToAddCategoryCommand extends Command {
     
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) {
+    protected String execute(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().setAttribute("mainResponse", "");
         request.getSession().setAttribute("minorResponse", "");
         return "AddCategory";
