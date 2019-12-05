@@ -71,7 +71,7 @@
                     }%>
             <br><br><br>
             <table width = "50%" border = "1" align = "center">
-                <thead>
+                <thead bgcolor="#C0C0C0">
                     <tr>
                         <td>ID</td>
                         <td>Name</td>

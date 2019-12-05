@@ -12,8 +12,8 @@
   overflow: hidden;
   max-width: 150px;
   text-overflow: ellipsis;
-  
   white-space: nowrap;
+  
 }
 
 td.expanded {
@@ -24,12 +24,14 @@ td.expanded {
 
 div.binder {
   text-align: right;
+  margin-right: 17.1%;
 }
 
 div.scrollbutton {
     position: fixed;
   left: 0%;
   bottom: 80%;
+  margin-left: 3%;
   z-index: 1000;
   transform: rotate(360deg);
   -webkit-transform: rotate(360deg);
@@ -41,4 +43,16 @@ div.scrollbutton {
 
 div.responserequest {
     text-align: center;
+}
+
+thead {
+    color: white;
+}
+
+.searchInput {
+    font-size: 16px;
+    border-radius: 10px;
+    text-align: center;
+    margin-left: 3.9%;
+    border: 1px solid #848484;
 }

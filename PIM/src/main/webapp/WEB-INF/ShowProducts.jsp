@@ -34,8 +34,7 @@
                 <option>Main Category</option>
             </select>
             <br><br>
-            Search: 
-            <input size="23" type="text" name="searchInput" value="" required/>
+            <input class="searchInput" size="19.8" type="text" name="searchInput" value="" required/>
             <input type="hidden" name="cmd" value="searchResults">
             <input type="submit" value="Search" />
         </form>
@@ -53,7 +52,7 @@
             <%} else if (session.getAttribute("errormsg").toString().equals("empty")) { %>
             <%}%>
             <table width = "50%" border = "1" align = "center" class="sortable">
-                <thead>
+                <thead bgcolor="#C0C0C0">
                     <tr>
                         <td>ID</td>
                         <td>Name</td>
