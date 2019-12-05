@@ -15,7 +15,7 @@
                 <div class="binder">
                     Name of new main category:
                     <br>
-                    <input type="text" name="MainName" required>
+                    <input size="26" type="text" name="MainName" required>
                     <br><br>
                     <input class="apply" type="submit" value="Submit">
                 </div>
@@ -26,7 +26,7 @@
                 <div class="binder2">
                     Name of new minor category:
                     <br>
-                    <input type="text" name="MinorName" required>
+                    <input size="26" type="text" name="MinorName" required>
                     <br><br>
                     <input class="apply" type="submit" value="Submit">
                 </div>

@@ -33,7 +33,7 @@
                             </tbody>
                         </table>
                         <p>Enter new name:</p>
-                        <input class="enternewtext" type="text" name="MainName" required>
+                        <input class="enternewtext" size="26" type="text" name="MainName" required>
                         <br><br>
                         <input class="apply" type="submit" value="Submit">
                         <% } else {%>
@@ -63,7 +63,7 @@
                             </tbody>
                         </table>
                         <p>Enter new name:</p>
-                        <input class="enternewtext" type="text" name="MinorName" required>
+                        <input class="enternewtext" size="26" type="text" name="MinorName" required>
                         <br><br>
                         <input class="apply" type="submit" value="Submit">
                         <% } else {%>
