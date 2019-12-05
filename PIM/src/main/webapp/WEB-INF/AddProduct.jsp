@@ -11,44 +11,51 @@
     <body>
 
         <h1>Add a product</h1>
+        <% if (session.getAttribute("returnproductvalue") == null) {
+            } else if (session.getAttribute("returnproductvalue").toString().equals("productadded")) { %>
+        <h2>Product created!</h2>
+        <%} else if (session.getAttribute("returnproductvalue").toString().equals("alreadyexists")) {%>
+        <h2>Unable to execute request: Product with this ID already exists.</h2>
+        <%} else {
+                }%>
 
         <form action="FrontController" name="addProduct" method="POST">
-
-            <input type="hidden" name="cmd" value="addProduct" required /><br>
-            
-            <div class="nameAndInput">
-            Add Product ID: <br />
-            <input type="number" min="1" name="ProductId" value="" required onkeydown="return event.keyCode !== 69" step=""/><br>
-            <br>
-            
-            Add Product Name: <br />
-            <input type="text" name="ProductName" value="" required /><br>
-            <br>
-            
-            Add Product Name Description: <br />
-            <input type="text" name="ProductNameDescription" value="" required /><br>
-            <br>
-            
-            Add Product Description: <br />
-            <input type="text" name="ProductDescription" value="" required /><br>
-            <br>
-            
-            Add Company Name: <br />
-            <input type="text" name="CompanyName" value="" required /><br>
-            <br>
-            
-            Add Price: <br />
-            <input type="number" min="0" step="0.01" name="Price" value="" required onkeydown="return event.keyCode !== 69" step=".01"/><br>
-            <br>
-            
-            Add Quantity: <br />
-            <input type="number" min="0" name="Quantity" value="" required onkeydown="return event.keyCode !== 69" step=""/><br>
-            <br>
-            
-            Add Picturename: <br />
-            <input type="text" name="PictureName" value="" required /><br>
-            </div>
-            <br>
+ 
+            <input type="hidden" name="cmd" value="addProduct" required />
+            <div class="backgroundColor">
+            <ul class="nameAndInput">
+                <li class="form-row">
+                    <label for="productid">Add Product ID:</label>
+                    <input type="number" min="1" id="productid" name="ProductId" value="" required onkeydown="return event.keyCode !== 69" step=""/>
+                </li>
+                <li class="form-row">
+                    <label for="productname">Add Product Name:</label>
+                    <input type="text" id="productname" name="ProductName" value="" required />
+                </li>
+                <li class="form-row">
+                    <label for="productnamedesc">Add Product Name Description:</label>
+                    <input type="text" id="productnamedesc" name="ProductNameDescription" value="" required />
+                </li>
+                <li class="form-row">
+                    <label for="productdesc">Add Product Description:</label>
+                    <input type="text" id="productdesc" name="ProductDescription" value="" />
+                </li>
+                <li class="form-row">
+                    <label for="companyname">Add Company Name:</label>
+                    <input type="text" id="companyname" name="CompanyName" value="" required />
+                </li>
+                <li class="form-row">
+                    <label for="price">Add Price:</label>
+                    <input type="number" id="price" min="0" step="0.01" name="Price" value="" required onkeydown="return event.keyCode !== 69" step=".01"/>
+                </li>
+                <li class="form-row">
+                    <label for="quantity">Add Quantity:</label>
+                    <input type="number" id="quantity" min="0" name="Quantity" value="" required onkeydown="return event.keyCode !== 69" step=""/>
+                </li>
+                <li class="form-row">
+                    <label for="quantity">Add Picture Name:</label>
+                    <input type="text" name="PictureName" value="" required />
+            </ul>
             
             <div class="left">
             Choose Main category: <br />
@@ -72,7 +79,7 @@
                 </c:forEach>
             </select>
             </div>
-            <br>
+            </div>
             <br>
             <div class="buttonAlign">
             <input class="button" type="submit" value="Submit" />
@@ -81,12 +88,5 @@
             <p>There are no minor categories!</p>
             <% }%>
         </form>
-        <% if (session.getAttribute("returnproductvalue") == null) {
-            } else if (session.getAttribute("returnproductvalue").toString().equals("productadded")) { %>
-        <h1>Product created!</h1>
-        <%} else if (session.getAttribute("returnproductvalue").toString().equals("alreadyexists")) {%>
-        <h1>Unable to execute request. Product with this ID already exists.</h1>
-        <%} else {
-                }%>
     </body>
 </html>

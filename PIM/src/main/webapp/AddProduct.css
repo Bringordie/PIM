@@ -8,23 +8,86 @@ h1 {
     
 }
 
-.nameAndInput {
+h2 {
     
     text-align: center;
-    line-height: 1.6;
+    
 }
+
+/*.nameAndInput {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}*/
+
+/*.nameAndInput {
+    
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+    
+}*/
+
+.backgroundColor {
+    background-color: whitesmoke;
+    border-radius: 5px;
+}
+
+.nameAndInput {
+    
+    list-style-type: none;
+    padding: 2%;
+    
+}
+
+.form-row {
+    display: flex;
+    justify-content: flex-end;
+    padding: .5em;
+  }
+  .form-row > label {
+    padding: 0.5em 8em 0.5em 5%;
+    flex: 1
+  }
+  .form-row > input {
+    flex: 2;
+  }
+  .form-row > input,
+  .form-row > button {
+    padding: 0.5em 0.5px;
+    margin-right: 32%;
+  }
+  .form-row > button {
+   background: gray;
+   color: white;
+   border: 0;
+  }
+  
+/*  .leftAndRight {
+      
+    background-color: whitesmoke;
+    list-style-type: none;
+    padding: 0%;
+    border-radius: 5px;
+      
+  }*/
 
 .left {
     
     float: left;
-    margin-left: 28%;
+    margin-left: 30%;
     
 }
 
 .right {
     
     float: right;
-    margin-right: 28%;
+    margin-right: 30%;
     
 }
 

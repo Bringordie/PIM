@@ -36,14 +36,14 @@
             <br><br>
             <input class="searchInput" size="19.8" type="text" name="searchInput" value="" required/>
             <input type="hidden" name="cmd" value="searchResults">
-            <input type="submit" value="Search" />
+            <input class="search" type="submit" value="Search" />
         </form>
         </div>
         <br>
         <form action="FrontController">
             <input type="hidden" name="cmd" value="gotoBulkEditProducts">
             <div class ="scrollbutton">
-            <input type="submit" value="Edit Selected Products">
+            <input class="editButton" type="submit" value="Edit Selected Products">
             </div>
             <% if (session.getAttribute("errormsg").toString().equals("noinput")) { %>
             <div class="responserequest">
