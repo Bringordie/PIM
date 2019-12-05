@@ -28,6 +28,7 @@ h1 {
     border: none;
     border-radius: 3px;
     font-weight: bold;
+    cursor:pointer;
 }
 
 .delete:hover {

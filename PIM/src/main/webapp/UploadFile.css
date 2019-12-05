@@ -33,6 +33,7 @@ img.lazyImgThumb {
     border: none;
     border-radius: 4px;
     font-weight: bold;
+    cursor:pointer;
 }
 
 .apply:hover {

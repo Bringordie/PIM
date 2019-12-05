@@ -20,7 +20,7 @@
                 </div>
                <br>
                 <form class="form-centered" action = "DownloadJson">
-                    <input type = "submit" value = "Download File" />
+                    <input class="apply" type = "submit" value = "Download File" />
                 </form>
             </div>
 
@@ -31,7 +31,7 @@
                 </div>
                 <br>
                 <form class="form-centered" action = "DownloadExcel">
-                    <input type = "submit" value = "Download File" />
+                    <input class="apply" type = "submit" value = "Download File" />
                 </form>
             </div>
         </div>

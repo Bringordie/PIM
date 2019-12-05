@@ -141,6 +141,14 @@ public class UploadFiles extends HttpServlet {
             out.println("</body>");
             out.println("</html>");
         } catch (Exception ex) {
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet upload</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("Something went wrong. Your file did not match the criterias."+"<br>");
+            out.println("</body>");
+            out.println("</html>");
             System.out.println(ex);
         }
     }
