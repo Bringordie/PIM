@@ -11,12 +11,12 @@
     <body>
         <h3>Edit the name of a main or minor category:</h3>
         <div class="fullbinder">
-                    <div class="binder3">
+                    <div class="binder">
                     <h3>Edit a main category:</h3>
                     <form name="editMainCategory" action="FrontController" method="POST">
                         <input type="hidden" name="cmd" value="editMainCategory">
                         <% if (session.getAttribute("mainCategories") != null) { %>
-                        <table width = "50%" border = "1" align = "center">
+                        <table width = "220px" border = "1" align = "center">
                             <thead>
                                 <tr>
                                     <td>Name</td>
@@ -41,12 +41,12 @@
                         <% }%>
                     </form>
                     </div>
-                    <div class="binder4">
+                    <div class="binder2">
                     <h3>Edit a minor category:</h3>
                     <form name="editMinorCategory" action="FrontController" method="POST">
                         <input type="hidden" name="cmd" value="editMinorCategory">
                         <% if (session.getAttribute("minorCategories") != null) { %>
-                        <table width = "50%" border = "1" align = "center">
+                        <table width = "220px" border = "1" align = "center">
                             <thead>
                                 <tr>
                                     <td>Name</td>
