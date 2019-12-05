@@ -22,8 +22,11 @@ div.binder2 {
     margin-left: 17px;
 }
 */
-input.enternewtext {
-    /*margin-left: 21px;*/
+.enternewtext {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
 }
 
 .apply {

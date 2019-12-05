@@ -32,9 +32,11 @@
                                 </c:forEach>
                             </tbody>
                         </table>
+                        <div class="enternewtext">
                         <p>Enter new name:</p>
-                        <input class="enternewtext" size="26" type="text" name="MainName" required>
-                        <br><br>
+                        <input size="26" type="text" name="MainName" required>
+                        </div>
+                        <br>
                         <input class="apply" type="submit" value="Submit">
                         <% } else {%>
                         <p>There are no main categories!</p>
@@ -62,9 +64,11 @@
                                 </c:forEach>
                             </tbody>
                         </table>
+                        <div class="enternewtext">
                         <p>Enter new name:</p>
-                        <input class="enternewtext" size="26" type="text" name="MinorName" required>
-                        <br><br>
+                        <input size="26" type="text" name="MinorName" required>
+                        </div>
+                        <br>
                         <input class="apply" type="submit" value="Submit">
                         <% } else {%>
                         <p>There are no minor categories!</p>

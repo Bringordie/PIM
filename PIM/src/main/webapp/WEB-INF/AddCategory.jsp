@@ -13,10 +13,12 @@
             <form name="addMainCategory" action="FrontController" method="POST">
                 <input type="hidden" name="cmd" value="addMainCategory">
                 <div class="binder">
+                    <div class="enternewtext">
                     Name of new main category:
                     <br>
-                    <input size="26" type="text" name="MainName" required>
-                    <br><br>
+                    <input type="text" name="MainName" required>
+                    </div>
+                    <br>
                     <input class="apply" type="submit" value="Submit">
                 </div>
             </form>
@@ -24,10 +26,12 @@
             <form name="addMinorCategory" action="FrontController" method="POST">
                 <input type="hidden" name="cmd" value="addMinorCategory">
                 <div class="binder2">
+                    <div class="enternewtext">
                     Name of new minor category:
                     <br>
-                    <input size="26" type="text" name="MinorName" required>
-                    <br><br>
+                    <input type="text" name="MinorName" required>
+                    </div>
+                    <br>
                     <input class="apply" type="submit" value="Submit">
                 </div>
             </form>
