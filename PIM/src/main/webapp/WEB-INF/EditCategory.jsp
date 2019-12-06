@@ -4,21 +4,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         <link rel="stylesheet" type="text/css" href="AddProduct.css"/>
-        <link rel="stylesheet" type="text/css" href="AddCategory.css"/>
+        <link rel="stylesheet" href="Category.css">
         <title>Edit Category</title>
     </head>
     <%@ include file = "../header.jsp" %>
     <body>
-        <h1>Edit the name of a main or minor category:</h1>
-        <table>
-            <tr>
-                <td>
+        <h3>Edit the name of a main or minor category:</h3>
+        <div class="fullbinder">
+            <div class="binder">
                     <h3>Edit a main category:</h3>
                     <form name="editMainCategory" action="FrontController" method="POST">
                         <input type="hidden" name="cmd" value="editMainCategory">
                         <% if (session.getAttribute("mainCategories") != null) { %>
-                        <table width = "50%" border = "1" align = "center">
+                        <table width= "220px" width = "50%" border = "1" align = "center">
                             <thead>
                                 <tr>
                                     <td>Name</td>
@@ -37,22 +35,22 @@
                         <br>
                         Enter new name:
                         <input type="text" name="MainName" required>
-                        
-                        
-                        <input type="submit" value="Submit">
+                        <br><br>
+                        <input class="apply3" type="submit" value="Submit">
                         <% } else {%>
                         <p>There are no main categories!</p>
                         <% }%>
                     </form>
+            </div>
+        
+                    
                     <br>
-                    <div class="isertmaincategory">
+                    <div class="binder2">
                     <h3>Edit a minor category:</h3>
-                    </div>
-                    <div 
                     <form name="editMinorCategory" action="FrontController" method="POST">
                         <input type="hidden" name="cmd" value="editMinorCategory">
                         <% if (session.getAttribute("minorCategories") != null) { %>
-                        <table width = "50%" border = "1" align = "center">
+                        <table width= "220px" width = "50%" border = "1" align = "center">
                             <thead>
                                 <tr>
                                     <td>Name</td>
@@ -71,19 +69,15 @@
                         <br>
                         Enter new name:
                         <input type="text" name="MinorName" required>
-                        
-                        <div class="buttonposition2">
-                            <input class="button">
-                            <input type="submit" value="Submit">
-                        </div>
+                        <br><br>
+                            <input class="apply3" type="submit" value="Submit">
                         <% } else {%>
                         <p>There are no minor categories!</p>
                         <% }%>
                         <br>
                         <br>
                     </form>
-                </td>
-            </tr>
-        </table>
+                        </div>
+                        </div>
     </body>
 </html>

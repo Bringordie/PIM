@@ -1,7 +1,3 @@
-/* 
-    Created on : Dec 4, 2019, 11:37:30 AM
-    Author     : Malthe
-*/
 h1 {
     
     text-align: center;
@@ -13,25 +9,6 @@ h2 {
     text-align: center;
     
 }
-
-/*.nameAndInput {
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}*/
-
-/*.nameAndInput {
-    
-    width: 80%;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    flex-direction: column;
-    
-}*/
 
 .backgroundColor {
     background-color: whitesmoke;
@@ -68,29 +45,15 @@ h2 {
    border: 0;
   }
   
-/*  .leftAndRight {
-      
-    background-color: whitesmoke;
-    list-style-type: none;
-    padding: 0%;
-    border-radius: 5px;
-      
-  }*/
-
-.left {
-    
-    float: left;
-    margin-left: 30%;
-    
-}
-
-.right {
-    
-    float: right;
-    margin-right: 30%;
-    
-}
-
+  .mainandminorbinder {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .spaceinbetween {
+      padding: 50px;
+  }
+  
 .buttonAlign {
     margin: 40px;
     text-align: center;

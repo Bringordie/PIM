@@ -22,12 +22,14 @@
         </form>
 
         <div class="editor">
+            <div class="responsevalue">
             <% if (session.getAttribute("resulthits").equals("empty")) { %>
             <p>No product found with this id.</p>
             <%}else if (session.getAttribute("resulthits").equals("gotoempty")){
         } else {%>
             <% if (session.getAttribute("productupdated").equals("Productupdated")) { %>
             <h3>Product has been updated</h3>
+            </div>
             <%} else { %>
             <form action="FrontController" name="editProduct" method="POST">
 
@@ -69,7 +71,8 @@
                     </div>
                     <br>
                     <div class="quantityF">
-                    Edit Quantity: <br />
+                    Edit Quantity: 
+                    <br>
                     <input type="number" min="0" name="Quantity" value="${productarray.getQty()}" onkeydown="return event.keyCode !== 69" step="" required/><br>
                     </div>
                     
@@ -92,9 +95,10 @@
                     </c:forEach>
                 </select>
                 <br> <br>
-
+</div>
                 <input class="apply" type="submit" value="Apply" />
-        </div>
+                <br><br>
+        
             </form>
             <%}%>
             <%}%>

@@ -57,30 +57,30 @@
                     <input type="text" name="PictureName" value="" required />
             </ul>
             
-            <div class="left">
-            Choose Main category: <br />
+                <div class="mainandminorbinder">
+                    Choose Main category:
             <% if (session.getAttribute("mainCategories") != null) { %>
             <select id="maincategory" name="maincategory">
                 <c:forEach var="mainCategories" items="${mainCategories}">
                     <option>${mainCategories.getName()}</option>
                 </c:forEach>
             </select>
-            </div>
             <% } else {%>
             <p>There are no main categories!</p>
             <% }%>
             
-            <div class="right">
-            Choose Minor category: <br />
+                <div class="spaceinbetween">
+                    </div>
+            Choose Minor category:
             <% if (session.getAttribute("minorCategories") != null) { %>
             <select id="minorcategory" name="minorcategory">
                 <c:forEach var="minorCategories" items="${minorCategories}">
                     <option>${minorCategories.getName()}</option>
                 </c:forEach>
             </select>
+                
             </div>
             </div>
-            <br>
             <div class="buttonAlign">
             <input class="button" type="submit" value="Submit" />
             </div>
