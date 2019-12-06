@@ -39,7 +39,7 @@
                         <input type="text" name="MainName" required>
                         
                         
-                        input type="submit" value="Submit">
+                        <input type="submit" value="Submit">
                         <% } else {%>
                         <p>There are no main categories!</p>
                         <% }%>
@@ -73,8 +73,9 @@
                         <input type="text" name="MinorName" required>
                         
                         <div class="buttonposition2">
-                            <input class="button"
-                            input type="submit" value="Submit">
+                            <input class="button">
+                            <input type="submit" value="Submit">
+                        </div>
                         <% } else {%>
                         <p>There are no minor categories!</p>
                         <% }%>
