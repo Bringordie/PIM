@@ -50,9 +50,9 @@ h2 {
     justify-content: center;
   }
   
-  .spaceinbetween {
-      padding: 50px;
-  }
+.spaceinbetween {
+    padding: 10px 45px;
+}
   
 .buttonAlign {
     margin: 40px;

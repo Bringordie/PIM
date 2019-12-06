@@ -78,8 +78,9 @@
                     <option>${minorCategories.getName()}</option>
                 </c:forEach>
             </select>
-                
             </div>
+            <br>
+            <br>
             </div>
             <div class="buttonAlign">
             <input class="button" type="submit" value="Submit" />
