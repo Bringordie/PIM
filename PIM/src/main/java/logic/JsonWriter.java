@@ -12,6 +12,14 @@ import presentation.UploadFiles;
 
 /**
  *
+ * Used for downloading the database of products as a .json document.
+ * We get the entire database into an arraylist of products.
+ * Once that is done we run a for each loop and make a JSONObject where 
+ * we take each content of the database and put it into products.
+ * As .put wants to compress the file it puts these in a random order.
+ * When that is done we stream the file to the user and when that is done 
+ * we delete the file again in the method DownloadJsonFile.
+ * 
  * @author Bringordie - Frederik Braagaard
  */
 public class JsonWriter {

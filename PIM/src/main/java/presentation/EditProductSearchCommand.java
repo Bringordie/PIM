@@ -73,7 +73,6 @@ public class EditProductSearchCommand extends Command {
             }
         }
         
-        
         request.getSession().setAttribute("resulthits", results);
         request.getSession().setAttribute("productarray", search);
         request.getSession().setAttribute("productupdated", "empty");
@@ -82,10 +81,7 @@ public class EditProductSearchCommand extends Command {
         request.getSession().setAttribute("maincategoriesarray", maincategoriesarray);
         request.getSession().setAttribute("minorcategoriesarray", minorcategoriesarray);
         
-        
-       
-      
-      
+
         return"EditProduct"; 
     }
     

@@ -10,7 +10,8 @@ import logic.Products;
 /**
  *
  * Once the .jsp page has found a product and the necessary changes has been 
- * made we grab the attributes and do an update on the product.
+ * made we grab the attributes and do an update on the product. And create
+ * a link between minor and main categories if it hasn't already been made.
  * 
  * @author Bringordie - Frederik Braagaard
  */

@@ -11,7 +11,7 @@ import presentation.gotoCommand.*;
 
 public abstract class Command {
 
-    public DBFacade db = new DBFacade();
+    protected DBFacade db = new DBFacade();
 
     private static HashMap<String, Command> commands;
 

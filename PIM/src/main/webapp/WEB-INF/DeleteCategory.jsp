@@ -7,16 +7,16 @@
         <title>Delete Category</title>
     </head>
     <%@ include file = "../header.jsp" %>
+    <link rel="stylesheet" href="Category.css">
     <body>
-        <h1>Delete a main or a minor category:</h1>
-        <table>
-            <tr>
-                <td>
+        <h3>Delete a main or a minor category:</h3>
+        <div class="fullbinder">
+            <div class="binder">
                     <h3>Delete a main category:</h3>
                     <form name="deleteMainCategory" action="FrontController" method="POST">
                         <input type="hidden" name="cmd" value="deleteMainCategory">
                         <% if (session.getAttribute("mainCategories") != null) { %>
-                        <table width = "50%" border = "1" align = "center">
+                        <table width = "220px" border = "1" align = "center">
                             <thead>
                                 <tr>
                                     <td>Name</td>
@@ -33,17 +33,18 @@
                             </tbody>
                         </table>
                         <br>
-                        <input type="submit" value="Submit">
+                        <input class="apply2" type="submit" value="Submit">
                         <% } else {%>
                         <p>There are no main categories!</p>
                         <% }%>
                     </form>
-                    <br>
+                    </div>
+                    <div class="binder2">
                     <h3>Delete a minor category:</h3>
                     <form name="deleteMinorCategory" action="FrontController" method="POST">
                         <input type="hidden" name="cmd" value="deleteMinorCategory">
                         <% if (session.getAttribute("minorCategories") != null) { %>
-                        <table width = "50%" border = "1" align = "center">
+                        <table width = "220px" border = "1" align = "center">
                             <thead>
                                 <tr>
                                     <td>Name</td>
@@ -60,13 +61,12 @@
                             </tbody>
                         </table>
                         <br>
-                        <input type="submit" value="Submit">
+                        <input class="apply2" type="submit" value="Submit">
                         <% } else {%>
                         <p>There are no minor categories!</p>
                         <% }%>
                     </form>
-                </td>
-            </tr>
-        </table>
+                    </div>
+                    </div>
     </body>
 </html>

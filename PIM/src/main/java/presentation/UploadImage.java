@@ -22,15 +22,17 @@ import javax.servlet.http.*;
 
 /**
  *
- * //TODO
+ * Used for uploading an .JPG pictures.
+ * We take 0-multiple pictures and read and save them to the filepath
+ * property file. Once that is done we tell the user if the upload went 
+ * successfully or if an error has occured.
  * 
  * @author Frederik Braagaard - Bringordie
  */
 @WebServlet(name = "UploadImage", urlPatterns = {"/UploadImage"})
 public class UploadImage extends HttpServlet {
 
-    public void doPost(HttpServletRequest request,
-            HttpServletResponse response)
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         boolean isMultipart = ServletFileUpload.isMultipartContent(

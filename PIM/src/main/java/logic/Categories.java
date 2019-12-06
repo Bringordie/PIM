@@ -24,7 +24,4 @@ public class Categories {
         return getID() + getName();
     }
     
-    
-    
-    
 }

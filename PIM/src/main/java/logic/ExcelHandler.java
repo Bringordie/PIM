@@ -12,6 +12,13 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
+ * 
+ * Used for reading an excel sheet.
+ * This specific reader was choosen because it can understand if an row is empty.
+ * It has pre-determined row of lines on line 39. It then reads through them in 
+ * extractInfoFromCell where it extracts the data where it returns a product
+ * object that is then put into a Products arraylist. Once all is read it 
+ * closes the file again.
  *
  * @author Bringordie - Frederik Braagaard
  */

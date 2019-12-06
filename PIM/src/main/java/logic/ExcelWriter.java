@@ -16,6 +16,14 @@ import presentation.UploadFiles;
 
 /**
  *
+ * Used for downloading an excel document of products from the DB.
+ * First we create the header with the nesissary names.
+ * One that is done we take an arraylist and put all products into it.
+ * Then we skip the first line and writes to the excel sheet line after line.
+ * We create a temp file of it and then download it to the user with 
+ * FileOutputStream and once that is done we delete the file again in 
+ * DownloadExcelFile method in presentation.
+ * 
  * @author Bringordie - Frederik Braagaard
  */
 public class ExcelWriter {
