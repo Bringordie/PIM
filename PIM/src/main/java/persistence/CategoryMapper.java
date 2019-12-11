@@ -17,8 +17,18 @@ import static persistence.DBConnection.getConnection;
 public class CategoryMapper implements CategoryMapperInterface {
 
     /**
-     *
+     * 
+     * Is used for when we want to add a Main Category to the DB via the JSP page.
+     * We first call a different method to check whether the new category already 
+     * exists or not via the category name and then either add it to the DB and 
+     * sends back a confirmation response or we don't add it and sends back a 
+     * confirmation response.
+     * 
      * @author - Malthe
+     * @param category - Takes a string of a main category name.
+     * @return - Returns a string of whether or not the given category name has 
+     * been successfully added to the db.
+     * 
      */
     @Override
     public String addMainCategory(String category, String propertyname) throws ClassNotFoundException, SQLException, IOException, IOException {
@@ -44,8 +54,18 @@ public class CategoryMapper implements CategoryMapperInterface {
     }
 
     /**
-     *
+     * 
+     * Is used for when we want to add a Minor Category to the DB via the JSP page.
+     * We first call a different method to check whether the new category already 
+     * exists or not via the category name and then either add it to the DB and 
+     * sends back a confirmation response or we don't add it and sends back a 
+     * confirmation response.
+     * 
      * @author - Malthe
+     * @param category - Takes a string of a minor category name.
+     * @return - Returns a string of whether or not the given category name has 
+     * been successfully added to the db.
+     * 
      */
     @Override
     public String addMinorCategory(String category, String propertyname) throws ClassNotFoundException, SQLException, IOException {
@@ -69,9 +89,17 @@ public class CategoryMapper implements CategoryMapperInterface {
         return returnvalue;
     }
 
-    /**
-     *
+     /**
+     * 
+     * Is used for when we want to edit an existing Main Category from the DB 
+     * via the JSP page.
+     * We take the ID of the selected category and the new name input of the new 
+     * category and apply it to the DB via executeUpdate().
+     * 
      * @author - Malthe
+     * @param categoryInt - Takes the ID of the selected main category from the JSP page.
+     * @param categoryStr - Takes the new name input written by the user from the JSP page.
+     * 
      */
     @Override
     public void editMainCategory(int categoryInt, String categoryStr, String propertyname) throws ClassNotFoundException, SQLException, IOException {
@@ -82,9 +110,17 @@ public class CategoryMapper implements CategoryMapperInterface {
         statement.executeUpdate();
     }
 
-    /**
-     *
+     /**
+     * 
+     * Is used for when we want to edit an existing Minor Category from the DB 
+     * via the JSP page.
+     * We take the ID of the selected category and the new name input of the new 
+     * category and apply it to the DB via executeUpdate().
+     * 
      * @author - Malthe
+     * @param categoryInt - Takes the ID of the selected minor category from the JSP page.
+     * @param categoryStr - Takes the new name input written by the user from the JSP page.
+     * 
      */
     @Override
     public void editMinorCategory(int categoryInt, String categoryStr, String propertyname) throws ClassNotFoundException, SQLException, IOException {
@@ -339,8 +375,17 @@ public class CategoryMapper implements CategoryMapperInterface {
     }
 
     /**
-     *
+     * 
+     * Is used for when we want to delete an existing Main Category from the DB 
+     * via the JSP page.
+     * We first update every product's published status to 'unpublished' and 
+     * their main category field to NULL which has the related category in 
+     * question. First then do we delete the link between the main category and 
+     * its minor category and finally delete the main category itself via its ID.
+     * 
      * @author - Malthe
+     * @param category - Takes an integer of ID of a selected main category name.
+     * 
      */
     @Override
     public void deleteMainCategory(int category, String propertyname) throws ClassNotFoundException, SQLException, IOException {
@@ -356,9 +401,19 @@ public class CategoryMapper implements CategoryMapperInterface {
 
     }
 
-    /**
-     *
+     /**
+     * 
+     * Is used for when we want to delete an existing Minor Category from the DB 
+     * via the JSP page.
+     * We first update every product's published status to 'unpublished' and 
+     * their minor category field, which has the related category in 
+     * question, to NULL. First then do we delete the link between the minor 
+     * category and its main category and finally delete the minor category 
+     * itself via its ID.
+     * 
      * @author - Malthe
+     * @param category - Takes an integer of ID of a selected main category name.
+     * 
      */
     @Override
     public void deleteMinorCategory(int category, String propertyname) throws ClassNotFoundException, SQLException, IOException {
@@ -374,9 +429,17 @@ public class CategoryMapper implements CategoryMapperInterface {
 
     }
 
-    /**
-     *
+     /**
+     * 
+     * Is used for when we want to check whether a Main Category already exists 
+     * in the DB or not.
+     * 
      * @author - Malthe
+     * @param category - Takes an integer of ID of a selected main category name.
+     * @return - Returns a boolean of either false or true depending on whether 
+     * we already have a main category in the DB with the same name as the given 
+     * 'String category'.
+     * 
      */
     @Override
     public Boolean checkMainCategory(String category, String propertyname) throws ClassNotFoundException, SQLException, IOException {
@@ -400,9 +463,17 @@ public class CategoryMapper implements CategoryMapperInterface {
         return returnvalue;
     }
 
-    /**
-     *
+     /**
+     * 
+     * Is used for when we want to check whether a Minor Category already exists 
+     * in the DB or not.
+     * 
      * @author - Malthe
+     * @param category - Takes an integer of ID of a selected minor category name.
+     * @return - Returns a boolean of either false or true depending on whether 
+     * we already have a minor category in the DB with the same name as the given 
+     * 'String category'.
+     * 
      */
     @Override
     public Boolean checkMinorCategory(String category, String propertyname) throws ClassNotFoundException, SQLException, IOException {
