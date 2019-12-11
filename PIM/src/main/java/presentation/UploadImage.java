@@ -61,26 +61,6 @@ public class UploadImage extends HttpServlet {
                     System.out.println("value: " + value);
                 } else {
                     try {
-                        String itemName = item.getName();
-                        Random generator = new Random();
-                        int r = Math.abs(generator.nextInt());
-
-                        String reg = "[.*]";
-                        String replacingtext = "";
-                        System.out.println("Text before replacing is:-" + itemName);
-                        Pattern pattern = Pattern.compile(reg);
-                        Matcher matcher = pattern.matcher(itemName);
-                        StringBuffer buffer = new StringBuffer();
-
-                        while (matcher.find()) {
-                            matcher.appendReplacement(buffer, replacingtext);
-                        }
-                        int IndexOf = itemName.indexOf(".");
-                        String domainName = itemName.substring(IndexOf);
-                        System.out.println("domainName: " + domainName);
-
-                        String finalimage = buffer.toString() + "_" + r + domainName;
-                        System.out.println("Final Image===" + finalimage);
 
                         InputStream sa = UploadFiles.class.getResourceAsStream("/filepath.properties");
 
@@ -90,7 +70,7 @@ public class UploadImage extends HttpServlet {
                         // assign properties parameters
                         String path = properties.getProperty("picturepath");
 
-                        String fileNameAndPath = path + finalimage;
+                        String fileNameAndPath = path + item.getName();
 
                         File savedFile = new File(fileNameAndPath);
                         item.write(savedFile);

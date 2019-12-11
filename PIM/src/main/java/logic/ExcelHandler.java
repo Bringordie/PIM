@@ -70,8 +70,8 @@ public class ExcelHandler {
        double price = 0;
        int quantity = 0;
        String picturename = "";
-       String minorcategory = "";
-       String maincategory = "";
+       String minorcategory = "empty";
+       String maincategory = "empty";
                
         Cell idCell = cells.get(0);
         if (idCell != null) {

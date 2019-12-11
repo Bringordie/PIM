@@ -521,23 +521,6 @@ public class DBtest {
         assertNotNull(returnvalue);
     }
     
-    //Teknisk feedback
-    @Ignore
-    @Test(expected = SQLException.class)
-    public void chartPublishedStatusDiagramError() throws SQLException, ClassNotFoundException, IOException {
-        dbfacade.addMainCategory("Frugt", DBPROPERTYTEST);
-        dbfacade.addMinorCategory("Økologisk", DBPROPERTYTEST);
-
-        ArrayList<Products> products = new ArrayList();
-        products.add(new Products(34, "Gulerødder øko.", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", false, "1", "1"));
-        products.add(new Products(35, "Solsikkeskud øko.", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", false, "1", "1"));
-        products.add(new Products(55, "Radisemix øko.", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true, "1", "1"));
-        products.add(new Products(500, "Kaki frugter", "Productnamedescription", "productdescription", "companyname", 34, 50, "picturename", true, "1", "1"));
-        dbfacade.addProduct(products, DBPROPERTYTEST);
-        connection.closeConnection();
-        String returnvalue = dbfacade.chartPublishedStatusDiagram("/dberror.properties");
-    }
-
     @Test
     public void getProductCountChart() throws SQLException, ClassNotFoundException, IOException {
         Gson gsonObj = new Gson();
@@ -645,7 +628,7 @@ public class DBtest {
         
         assertEquals("1", dbcall);
     }
-    
+           
 }
 
 

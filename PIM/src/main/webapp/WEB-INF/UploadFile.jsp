@@ -28,7 +28,7 @@
           <div class="binder2">
         <h3>Upload Picture</h3>
         <div class="img-wrapper">
-        <img class="lazyImgThumb" alt="" onerror="this.style.display='none'" style="max-width: 100%;  max-height: 100%;" src="https://www.zamzar.com/images/filetypes/png.png">
+        <img class="lazyImgThumb" alt="" onerror="this.style.display='none'" style="max-width: 100%;  max-height: 100%;" src="https://s3.amazonaws.com/assets.mockflow.com/app/wireframepro/company/C2fbcf12f03a63b0f75732c6c95d3e61e/projects/M8688461e9c03aab1b425ee1a433896611574718915827/images/thumbnails/Mb36c09ff95b4cf327fc29badc4ca252d1526462422660">
         </div>
         Select pictures to upload: 
         <form action = "UploadImage" method = "POST" enctype = "multipart/form-data">

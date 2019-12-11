@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,24 +59,28 @@ public class ProductMapper implements ProductMapperInterface {
                 PictureName = ifElseString(products.getPictureName());
 
                 //Checking minorvalue
-                if (category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname) == 0) {
+                if (products.getMinorCategory() == null) {
+                    //do nothing
+                } else if (category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname) == 0) {
                     int minorIDCreated = category.createMinorIDInDB(products.getMinorCategory(), propertyname);
                     MinorCategory = minorIDCreated;
                 } else if (category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname) > 0) {
                     int reuseIDCreated = category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname);
                     MinorCategory = reuseIDCreated;
-                }
+                } 
                 //Checking mainvalue
-                if (category.getMainValuesFromDBFile(products.getMainCategory(), propertyname) == 0) {
+                if (products.getMainCategory() == null) {
+                    //do nothing
+                } else if (category.getMainValuesFromDBFile(products.getMainCategory(), propertyname) == 0) {
                     int mainIDCreated = category.createMainIDInDB(products.getMainCategory(), propertyname);
                     MainCategory = mainIDCreated;
                 } else if (category.getMainValuesFromDBFile(products.getMainCategory(), propertyname) > 0) {
                     int reuseIDCreated = category.getMainValuesFromDBFile(products.getMainCategory(), propertyname);
                     MainCategory = reuseIDCreated;
-                }
+                } 
 
                 //Requirements for publishing
-                if (ProductName == null || ProductNameDescription == null || ProductDescription == null || CompanyName == null) {
+                if (ProductName == null || ProductNameDescription == null || ProductDescription == null || CompanyName == null || MinorCategory == 0 || MainCategory == 0) {
                     PublishedStatus = false;
                 } else {
                     PublishedStatus = true;
@@ -97,8 +102,16 @@ public class ProductMapper implements ProductMapperInterface {
                     statement.setInt(7, Quantity);
                     statement.setString(8, PictureName);
                     statement.setBoolean(9, PublishedStatus);
+                    if (MinorCategory == 0){
+                        statement.setNull(10, Types.INTEGER);
+                    } else {
                     statement.setInt(10, MinorCategory);
+                    }
+                    if (MainCategory == 0){
+                        statement.setNull(11, Types.INTEGER);
+                    } else {
                     statement.setInt(11, MainCategory);
+                    }
                     statement.executeUpdate();
                 } catch (SQLException e) {
                     System.out.println(e);
@@ -115,23 +128,27 @@ public class ProductMapper implements ProductMapperInterface {
                 PictureName = ifElseString(products.getPictureName());
 
                 //Checking minorvalue
-                if (category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname) == 0) {
+                if (products.getMinorCategory() == null) {
+                    //do nothing
+                } else if (category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname) == 0) {
                     int minorIDCreated = category.createMinorIDInDB(products.getMinorCategory(), propertyname);
                     MinorCategory = minorIDCreated;
                 } else if (category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname) > 0) {
                     int reuseIDCreated = category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname);
                     MinorCategory = reuseIDCreated;
-                }
+                } 
                 //Checking mainvalue
-                if (category.getMainValuesFromDBFile(products.getMainCategory(), propertyname) == 0) {
+                if (products.getMainCategory() == null) {
+                    //do nothing
+                } else if (category.getMainValuesFromDBFile(products.getMainCategory(), propertyname) == 0) {
                     int mainIDCreated = category.createMainIDInDB(products.getMainCategory(), propertyname);
                     MainCategory = mainIDCreated;
                 } else if (category.getMainValuesFromDBFile(products.getMainCategory(), propertyname) > 0) {
                     int reuseIDCreated = category.getMainValuesFromDBFile(products.getMainCategory(), propertyname);
                     MainCategory = reuseIDCreated;
-                }
+                } 
                 //Requirements for publishing
-                if (ProductName == null || ProductNameDescription == null || ProductDescription == null || CompanyName == null) {
+                if (ProductName == null || ProductNameDescription == null || ProductDescription == null || CompanyName == null || MinorCategory == 0 || MainCategory == 0) {
                     PublishedStatus = false;
                 } else {
                     PublishedStatus = true;
@@ -153,8 +170,16 @@ public class ProductMapper implements ProductMapperInterface {
                     statement.setInt(7, Quantity);
                     statement.setString(8, PictureName);
                     statement.setBoolean(9, PublishedStatus);
+                    if (MinorCategory == 0){
+                        statement.setNull(10, Types.INTEGER);
+                    } else {
                     statement.setInt(10, MinorCategory);
+                    }
+                    if (MainCategory == 0){
+                        statement.setNull(11, Types.INTEGER);
+                    } else {
                     statement.setInt(11, MainCategory);
+                    }
                     statement.executeUpdate();
 
                 } catch (ClassNotFoundException | SQLException e) {
@@ -221,26 +246,30 @@ public class ProductMapper implements ProductMapperInterface {
                 Price = products.getPrice();
                 Quantity = products.getQty();
                 PictureName = products.getPictureName();
-
+              
                 //Checking minorvalue
-                if (category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname) == 0) {
+                if (products.getMinorCategory().contains("empty")) {
+                    //do nothing
+                } else if (category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname) == 0) {
                     int minorIDCreated = category.createMinorIDInDB(products.getMinorCategory(), propertyname);
                     MinorCategory = minorIDCreated;
                 } else if (category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname) > 0) {
                     int reuseIDCreated = category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname);
                     MinorCategory = reuseIDCreated;
-                }
+                } 
                 //Checking mainvalue
-                if (category.getMainValuesFromDBFile(products.getMainCategory(), propertyname) == 0) {
+                if (products.getMainCategory().contains("empty")) {
+                    //do nothing
+                } else if (category.getMainValuesFromDBFile(products.getMainCategory(), propertyname) == 0) {
                     int mainIDCreated = category.createMainIDInDB(products.getMainCategory(), propertyname);
                     MainCategory = mainIDCreated;
                 } else if (category.getMainValuesFromDBFile(products.getMainCategory(), propertyname) > 0) {
                     int reuseIDCreated = category.getMainValuesFromDBFile(products.getMainCategory(), propertyname);
                     MainCategory = reuseIDCreated;
-                }
+                } 
 
                 //Requirements for publishing
-                if (ProductName == null || ProductNameDescription == null || ProductDescription == null || CompanyName == null) {
+                if (ProductName == null || ProductNameDescription == null || ProductDescription == null || CompanyName == null || MinorCategory == 0 || MainCategory == 0) {
                     PublishedStatus = false;
                 } else {
                     PublishedStatus = true;
@@ -260,8 +289,16 @@ public class ProductMapper implements ProductMapperInterface {
                     statement.setInt(7, Quantity);
                     statement.setString(8, PictureName);
                     statement.setBoolean(9, PublishedStatus);
+                    if (products.getMinorCategory().contains("empty")){
+                        statement.setNull(10, Types.INTEGER);
+                    } else {
                     statement.setInt(10, MinorCategory);
+                    }
+                    if (products.getMainCategory().contains("empty")){
+                        statement.setNull(11, Types.INTEGER);
+                    } else {
                     statement.setInt(11, MainCategory);
+                    }
                     statement.executeUpdate();
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
@@ -281,23 +318,27 @@ public class ProductMapper implements ProductMapperInterface {
                 PictureName = products.getPictureName();
 
                 //Checking minorvalue
-                if (category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname) == 0) {
+                if (products.getMinorCategory().contains("empty")) {
+                    //do nothing
+                } else if (category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname) == 0) {
                     int minorIDCreated = category.createMinorIDInDB(products.getMinorCategory(), propertyname);
                     MinorCategory = minorIDCreated;
                 } else if (category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname) > 0) {
                     int reuseIDCreated = category.getMinorValuesFromDBFile(products.getMinorCategory(), propertyname);
                     MinorCategory = reuseIDCreated;
-                }
+                } 
                 //Checking mainvalue
-                if (category.getMainValuesFromDBFile(products.getMainCategory(), propertyname) == 0) {
+                if (products.getMainCategory().contains("empty")) {
+                    //do nothing
+                } else if (category.getMainValuesFromDBFile(products.getMainCategory(), propertyname) == 0) {
                     int mainIDCreated = category.createMainIDInDB(products.getMainCategory(), propertyname);
                     MainCategory = mainIDCreated;
                 } else if (category.getMainValuesFromDBFile(products.getMainCategory(), propertyname) > 0) {
                     int reuseIDCreated = category.getMainValuesFromDBFile(products.getMainCategory(), propertyname);
                     MainCategory = reuseIDCreated;
-                }
+                } 
                 //Requirements for publishing
-                if (ProductName == null || ProductNameDescription == null || ProductDescription == null || CompanyName == null) {
+                if (ProductName == null || ProductNameDescription == null || ProductDescription == null || CompanyName == null || MinorCategory == 0 || MainCategory == 0) {
                     PublishedStatus = false;
                 } else {
                     PublishedStatus = true;
@@ -319,8 +360,16 @@ public class ProductMapper implements ProductMapperInterface {
                     statement.setInt(7, Quantity);
                     statement.setString(8, PictureName);
                     statement.setBoolean(9, PublishedStatus);
+                    if (products.getMinorCategory().contains("empty")){
+                        statement.setNull(10, Types.INTEGER);
+                    } else {
                     statement.setInt(10, MinorCategory);
+                    }
+                    if (products.getMainCategory().contains("empty")){
+                        statement.setNull(11, Types.INTEGER);
+                    } else {
                     statement.setInt(11, MainCategory);
+                    }
                     statement.executeUpdate();
 
                 } catch (ClassNotFoundException | SQLException e) {

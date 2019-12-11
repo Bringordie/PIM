@@ -16,7 +16,9 @@
         <h2>Product created!</h2>
         <%} else if (session.getAttribute("returnproductvalue").toString().equals("alreadyexists")) {%>
         <h2>Unable to execute request: Product with this ID already exists.</h2>
-        <%} else {
+        <%} else if (session.getAttribute("returnproductvalue").toString().equals("something went wrong")) {%>
+        <h2> Something went wrong. Please contact IT .</h2>
+            <% } else {
                 }%>
 
         <form action="FrontController" name="addProduct" method="POST">
@@ -46,11 +48,11 @@
                 </li>
                 <li class="form-row">
                     <label for="price">Add Price:</label>
-                    <input type="number" id="price" min="0" step="0.01" name="Price" value="" required onkeydown="return event.keyCode !== 69" step=".01"/>
+                    <input type="number" id="price" min="0" step="0.01" name="Price" value="" required onkeydown="return event.keyCode !== 69"/>
                 </li>
                 <li class="form-row">
                     <label for="quantity">Add Quantity:</label>
-                    <input type="number" id="quantity" min="0" name="Quantity" value="" required onkeydown="return event.keyCode !== 69" step=""/>
+                    <input type="number" id="quantity" min="0" name="Quantity" value="" required onkeydown="return event.keyCode !== 69"/>
                 </li>
                 <li class="form-row">
                     <label for="quantity">Add Picture Name:</label>
