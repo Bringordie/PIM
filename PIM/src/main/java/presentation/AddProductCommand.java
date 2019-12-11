@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import logic.Products;
 
 /**
- *
+ * Once the user has entered the necesarry informations for adding a product
+ * we grab the attributes and add the product to the database. At the same time we create
+ * a link between minor and main categories.
  * @author ClausFindinge - Claus Mikkelsen Findinge
  * @author Bringordie - Frederik Braagaard
  */

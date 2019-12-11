@@ -18,7 +18,7 @@ import presentation.Command;
  * will be hidden untill categories are created.
  * 
  * @author Bringordie - Frederik Braagaard
- * @author Slantefar
+ * @author ClausFindinge - Claus Mikkelsen Findinge
  */
 public class GoToAddProductCommand extends Command {
 

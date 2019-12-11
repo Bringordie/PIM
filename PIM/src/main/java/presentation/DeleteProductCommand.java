@@ -7,9 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * * Once the user has entered the ID of the product he/she wants to delete,
+ * we grab the attribute and delete the product from the database.
  * @author ClausFindinge - Claus Mikkelsen Findinge
  */
+
+
+
 public class DeleteProductCommand extends Command {
 
     @Override

@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import presentation.Command;
 
 /**
- *
- * @author Slantefar
+ * Used for the JSP page DeleteProduct.jsp
+ * @author ClausFindinge - Claus Mikkelsen Findinge
  */
 public class GoToDeleteProductCommand extends Command {
 

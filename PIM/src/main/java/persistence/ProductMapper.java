@@ -365,8 +365,12 @@ public class ProductMapper implements ProductMapperInterface {
     }
 
     /**
-     *
-     * @author - Slantefar
+     * Used for adding a product from enter id, name, namedescription, description, companyname, price, quantity, picturename, 
+     * publishstatus and what main- and minorcategories it belongs to.
+     * @author ClausFindinge - Claus Mikkelsen Findinge
+     * @param products - a list of prdoucts existing in the database
+     * @param propertyname - for db connection
+     * @return returns different messages whether the product has been added to the database or not
      */
     @Override
     public String addProduct(ArrayList<Products> products, String propertyname) throws ClassNotFoundException, SQLException, IOException {
@@ -528,8 +532,11 @@ public class ProductMapper implements ProductMapperInterface {
     }
 
     /**
-     *
-     * @author - Slantefar
+     * Used for deleting a product from it's id.
+     * @author ClausFindinge - Claus Mikkelsen Findinge
+     * @param id - the id of the product you want to delete
+     * @param propertyname - for db connection
+     * @return returns different messages whether the product has been deleted or not.
      */
     @Override
     public String deleteProduct(int id, String propertyname) throws ClassNotFoundException, SQLException, IOException {
