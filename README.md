@@ -1,5 +1,5 @@
 # PIM
 2 sem. Exam project.
 
-## Raport 
+## Rapport 
 Vores rapport kan findes ![her](PIM_Rapport_Latex.pdf)
