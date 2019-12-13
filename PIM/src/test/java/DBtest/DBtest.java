@@ -113,7 +113,20 @@ public class DBtest {
         assertEquals(expected, Integer.parseInt(dbcall));
 
     }
+    
+    @Test
+    public void uploadOfJsonUploadReuseCategory() throws SQLException, ClassNotFoundException, IOException, FileNotFoundException {
+        String fileName = "src/test/java/files/sameminorandmain.json";
+        ArrayList<Products> product = jsonhandler.makeJSonFileIntoArray(fileName);
+        dbfacade.jsonInsertOrUpdateToDB(product, DBPROPERTYTEST);
 
+        int expected = 2;
+        String dbcall = dbextra.getCustomDataFromDB("select COUNT(name) from products;");
+
+        assertEquals(expected, Integer.parseInt(dbcall));
+
+    }
+    
     @Test
     public void updateOfJsonUpload() throws SQLException, ClassNotFoundException, IOException, FileNotFoundException {
         String fileName = "src/test/java/files/singledata.json";
@@ -139,6 +152,35 @@ public class DBtest {
         String description = dbextra.getCustomDataFromDB("select description from products where productid = 8337");
 
         assertNull(description);
+
+    }
+    
+    @Test
+    public void excelReuseCategoryID() throws SQLException, ClassNotFoundException, IOException, IOException {
+        String fileName = "src/test/java/files/categoryidreuse.xlsx";
+        ArrayList<Products> product = excelhandler.extractInfo(fileName);
+        dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
+
+        String minorcategory = dbextra.getCustomDataFromDB("select minorCategory from products where productid = 5000;");
+        String maincategory = dbextra.getCustomDataFromDB("select mainCategory from products where productid = 5000;");
+        
+        assertEquals("1", minorcategory);
+        assertEquals("1", maincategory);
+
+    }
+    
+    @Test
+    public void excelEmptyCategory() throws SQLException, ClassNotFoundException, IOException, IOException {
+        String fileName = "src/test/java/files/nocategory.xlsx";
+        ArrayList<Products> product = excelhandler.extractInfo(fileName);
+        dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
+        dbfacade.excelInsertOrUpdateToDB(product, DBPROPERTYTEST);
+
+        String minorcategory = dbextra.getCustomDataFromDB("select minorCategory from products where productid = 3280;");
+        String maincategory = dbextra.getCustomDataFromDB("select mainCategory from products where productid = 3280;");
+        
+        assertEquals(null, minorcategory);
+        assertEquals(null, maincategory);
 
     }
 
